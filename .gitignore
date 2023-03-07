@@ -1,0 +1,8 @@
+*.o
+*.swp
+obj/
+libft/libft.a
+miniRT
+.vscode
+*a.out
+testlogs
