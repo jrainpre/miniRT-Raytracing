@@ -21,7 +21,9 @@ HEADERS			:= $(addprefix ${HEADDIR}, ${HEADLIST})
 
 SRCSDIR			:= ./src/
 SRCSLIST		:= main.c \
-					matrix_and_vector_operations.c
+					hooks.c \
+					matrix_and_vector_operations.c \
+					render.c
 					
 SRCS			:= $(addprefix ${SRCSDIR}, ${SRCSLIST})
 

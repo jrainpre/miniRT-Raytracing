@@ -10,9 +10,12 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <math.h>
+# include <X11/keysym.h>
+# include <X11/X.h>
 
 /* Project Headers */
 # include "libft.h"
+# include "mlx.h"
 # include "ambient_lighting.h"
 # include "camera.h"
 # include "colors.h"
