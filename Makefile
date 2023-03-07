@@ -6,12 +6,17 @@ DEBUG			:= -g
 
 HEADDIR			:= ./includes/
 HEADLIST		:= miniRT.h \
-					sphere.h \
-					plane.h \
+					ambient_lighting.h \
+					camera.h \
+					colors.h \
 					cylinder.h \
-					vector.h \
-					colors.h
-					
+					image.h \
+					light.h \
+					matrix.h \
+					plane.h \
+					sphere.h \
+					vector.h
+
 HEADERS			:= $(addprefix ${HEADDIR}, ${HEADLIST})
 
 SRCSDIR			:= ./src/

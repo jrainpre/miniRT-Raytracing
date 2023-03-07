@@ -13,12 +13,16 @@
 
 /* Project Headers */
 # include "libft.h"
-# include "sphere.h"
-# include "plane.h"
-# include "cylinder.h"
-# include "vector.h"
+# include "ambient_lighting.h"
+# include "camera.h"
 # include "colors.h"
+# include "cylinder.h"
+# include "image.h"
+# include "light.h"
 # include "matrix.h"
+# include "plane.h"
+# include "sphere.h"
+# include "vector.h"
 
 /* Macros */
 
