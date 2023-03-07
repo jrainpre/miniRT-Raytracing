@@ -15,7 +15,7 @@
 
 typedef struct s_sphere {
 	t_pt orig;
-	float radius;
+	float_t radius;
 	t_color color;
 } t_sphere;
 
