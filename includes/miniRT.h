@@ -13,6 +13,11 @@
 
 /* Project Headers */
 # include "libft.h"
+# include "sphere.h"
+# include "plane.h"
+# include "cylinder.h"
+# include "vector.h"
+# include "colors.h"
 
 /* Macros */
 

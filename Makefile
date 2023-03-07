@@ -5,7 +5,13 @@ FLAGS			:= -Wall -Wextra -Werror
 DEBUG			:= -g
 
 HEADDIR			:= ./includes/
-HEADLIST		:= miniRT.h
+HEADLIST		:= miniRT.h \
+					sphere.h \
+					plane.h \
+					cylinder.h \
+					vector.h \
+					colors.h
+					
 HEADERS			:= $(addprefix ${HEADDIR}, ${HEADLIST})
 
 SRCSDIR			:= ./src/
