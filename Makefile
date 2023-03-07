@@ -15,7 +15,8 @@ HEADLIST		:= miniRT.h \
 HEADERS			:= $(addprefix ${HEADDIR}, ${HEADLIST})
 
 SRCSDIR			:= ./src/
-SRCSLIST		:= main.c
+SRCSLIST		:= main.c \
+					matrix_and_vector_operations.c
 					
 SRCS			:= $(addprefix ${SRCSDIR}, ${SRCSLIST})
 
