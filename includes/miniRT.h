@@ -18,6 +18,7 @@
 # include "cylinder.h"
 # include "vector.h"
 # include "colors.h"
+# include "matrix.h"
 
 /* Macros */
 
@@ -26,5 +27,9 @@
 /* Structs */
 
 /* Functions */
+
+t_pt	mat_mult(t_mat3x3 mat, t_pt pt);
+t_pt	vec_add(t_pt pt1, t_pt pt2);
+t_pt	vec_sub(t_pt pt1, t_pt pt2);
 
 #endif
