@@ -2,8 +2,11 @@
 
 int	main(int argc, char **argv)
 {
+	t_data	data;
+
 	(void)argc;
 	(void)argv;
-	ft_printf("Hello Jonathan\n");
+	if (start_mlx(&data) == -1)
+		return (-1);
 	return (0);
 }
