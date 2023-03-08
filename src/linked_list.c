@@ -81,12 +81,16 @@ void	free_lst(t_lst_ref *lst_ref)
 {
 	int	i;
 	t_lst *temp;
+	t_lst *next;
 
 	i = 0;
 	temp = lst_ref->head;
 	while (temp != NULL)
 	{
-		temp = temp->next;
+		free(temp->content);
+		next = temp->next;
+		free(temp);
+		temp = next;
 		i++;
 	}
 }
