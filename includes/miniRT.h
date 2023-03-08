@@ -22,6 +22,7 @@
 # include "camera.h"
 # include "colors.h"
 # include "cylinder.h"
+# include "function_tests.h"
 # include "image.h"
 # include "light.h"
 # include "linked_list.h"
@@ -55,12 +56,16 @@ typedef struct s_scene
 
 /* Functions */
 
-t_pt	mat_mult(t_mat3x3 mat, t_pt pt);
-t_pt	vec_add(t_pt pt1, t_pt pt2);
-t_pt	vec_sub(t_pt pt1, t_pt pt2);
+t_vec	mat_mult(t_mat3x3 mat, t_vec pt);
+t_vec	vec_add(t_vec vec1, t_vec vec2);
+t_vec	vec_sub(t_vec vec1, t_vec vec2);
+t_vec	vec_mult(t_vec vec, float_t factor);
+t_vec	vec_div(t_vec vec, float_t factor);
+float_t	scalar_prod(t_vec vec1, t_vec vec2);
+t_vec	cross_prod(t_vec vec1, t_vec vec2);
 
-void free_scene(t_scene *scene);
-void init_scene(t_scene *scene);
-void fill_dummy_scene(t_scene *scene);
+void	free_scene(t_scene *scene);
+void	init_scene(t_scene *scene);
+void	fill_dummy_scene(t_scene *scene);
 
 #endif
