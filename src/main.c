@@ -3,10 +3,13 @@
 int	main(int argc, char **argv)
 {
 	t_data	data;
+	t_scene scene;
 
 	(void)argc;
 	(void)argv;
 	if (start_mlx(&data) == -1)
 		return (-1);
+	init_scene(&scene);
+	fill_dummy_scene(&scene);
 	return (0);
 }

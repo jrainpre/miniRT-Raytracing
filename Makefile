@@ -6,14 +6,16 @@ DEBUG			:= -g
 
 HEADDIR			:= ./includes/
 HEADLIST		:= miniRT.h \
-					ambient_lighting.h \
+					ambient_light.h \
 					camera.h \
 					colors.h \
 					cylinder.h \
 					image.h \
 					light.h \
+					linked_list.h \
 					matrix.h \
 					plane.h \
+					scene.h \
 					sphere.h \
 					vector.h
 
@@ -21,9 +23,12 @@ HEADERS			:= $(addprefix ${HEADDIR}, ${HEADLIST})
 
 SRCSDIR			:= ./src/
 SRCSLIST		:= main.c \
+					dummy_scene.c \
 					hooks.c \
+					linked_list.c \
 					matrix_and_vector_operations.c \
-					render.c
+					render.c \
+					scene.c
 					
 SRCS			:= $(addprefix ${SRCSDIR}, ${SRCSLIST})
 
