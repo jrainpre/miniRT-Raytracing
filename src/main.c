@@ -15,6 +15,5 @@ int	main(int argc, char **argv)
 	data.scene = &scene;
 	if (start_mlx(&data) == -1)
 		return (-1);
-
 	return (0);
 }
