@@ -1,7 +1,7 @@
 #ifndef VECTOR_H
-#define VECTOR_H
+# define VECTOR_H
 
-#include <math.h>
+# include <math.h>
 
 typedef struct s_pt
 {
@@ -10,5 +10,7 @@ typedef struct s_pt
 	float_t		z;
 	int			color;
 }			t_pt;
+
+typedef struct s_pt	t_vec;
 
 #endif
