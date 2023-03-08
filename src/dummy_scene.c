@@ -14,5 +14,5 @@ void fill_dummy_scene(t_scene *scene)
 	sphere->orig = (t_pt){.x = 0, .y = 0, .z = 0};
 	sphere->radius = 10;
 	sphere->color = (t_color){.r = 255, .g = 0, .b = 0};
-	ft_add_lst_last(ft_lstnew(sphere), scene->spheres);
+	ft_add_lst_last(ft_lstnew(sphere), &scene->spheres);
 }

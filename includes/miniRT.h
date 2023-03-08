@@ -45,11 +45,11 @@ typedef struct s_scene
 {
 	t_resolution res;
 	t_camera	*cam;
-	t_lst_ref	*lights;
-	t_lst_ref	*ambient_lights;
-	t_lst_ref	*spheres;
-	t_lst_ref	*planes;
-	t_lst_ref	*cylinders;
+	t_lst_ref	lights;
+	t_lst_ref	ambient_lights;
+	t_lst_ref	spheres;
+	t_lst_ref	planes;
+	t_lst_ref	cylinders;
 
 }			t_scene;
 

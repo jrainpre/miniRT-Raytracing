@@ -4,6 +4,7 @@
 # define WIN_W 1280
 # define WIN_H 720
 
+# include "miniRT.h"
 typedef struct s_img
 {
 	void	*mlx_img;
@@ -15,9 +16,10 @@ typedef struct s_img
 
 typedef struct s_data
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-	t_img	img;
+	void			*mlx_ptr;
+	void			*win_ptr;
+	struct s_scene	*scene;
+	t_img			img;
 }			t_data;
 
 int		loop_hook(t_data *data);
