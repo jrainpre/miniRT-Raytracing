@@ -1,8 +1,8 @@
 #ifndef IMAGE_H
 # define IMAGE_H
 
-# define WIN_W 1280
-# define WIN_H 720
+# define WIN_W 1280.0
+# define WIN_H 720.0
 
 # include "miniRT.h"
 typedef struct s_img

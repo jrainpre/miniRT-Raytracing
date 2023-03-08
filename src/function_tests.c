@@ -114,3 +114,69 @@ void	ray_test(void)
 	printf("z: %19.15f\n", res.z);
 	printf("\n");
 }
+
+float_t	deg_to_rad(float_t deg)
+{
+	return (deg * (M_PI / 180.0));
+}
+
+int	hit_sphere(t_sphere sphere, t_ray ray)
+{
+	float_t	discriminant;
+	float_t	p;
+	float_t	q;
+	t_vec	orig_diff;
+
+	orig_diff = vec_sub(ray.orig, sphere.orig);
+	p = 2 * powf(scalar_prod(ray.dir, orig_diff) / scalar_prod(ray.dir, ray.dir), 2);
+	q = scalar_prod(orig_diff, orig_diff) - powf(sphere.radius, 2);
+	discriminant = p - q;
+	return (discriminant > 0);
+}
+
+void	background_test(t_img *img)
+{
+	t_camera	cam;
+	t_ray		ray;
+	t_sphere	sphere;
+	int			i;
+	int			j;
+	float_t		u;
+	float_t		v;
+
+	cam.orig = (t_pt){0, 0, 10, NOCOLOR};
+	cam.orientation = (t_vec){0, 0, -1, NOCOLOR};
+	cam.fov = 130;
+	cam.sensor_height = 2;
+	cam.sensor_width = (WIN_W / WIN_H) * cam.sensor_height;
+	cam.focal_length = cam.sensor_width / 2 * atanf(deg_to_rad(180 / 2.0));
+	cam.vertical = (t_vec){0, cam.sensor_height, 0, NOCOLOR};
+	cam.horizontal = (t_vec){cam.sensor_width, 0, 0, NOCOLOR};
+	cam.lower_left_corner = vec_sub(cam.orig, vec_add(vec_add(vec_div(cam.horizontal, 2), vec_div(cam.vertical, 2)), (t_vec){0, 0, cam.focal_length, NOCOLOR}));
+
+	sphere.orig = (t_pt){0, 0, -50, NOCOLOR};
+	sphere.radius = 40.0;
+	sphere.color = (t_color){0, 255, 0};
+
+	j = 0;
+	while (j < WIN_H)
+	{
+		i = 0;
+		while (i < WIN_W)
+		{
+			u = i / (WIN_W - 1);
+			v = j / (WIN_H - 1);
+			ray.orig = cam.orig;
+			ray.dir = vec_sub(vec_add(vec_add(vec_mult(cam.horizontal, u), vec_mult(cam.vertical, v)), cam.lower_left_corner), cam.orig);
+			//printf("hit_sphere: %d\n", hit_sphere(sphere, ray));
+			if (hit_sphere(sphere, ray))
+				img_pix_put(img, (t_pt){i, j, 0, GREEN});
+			// printf("x: %19.15f\n", ray.dir.x);
+			// printf("y: %19.15f\n", ray.dir.y);
+			// printf("z: %19.15f\n", ray.dir.z);
+			// printf("\n");
+			i++;
+		}
+		j++;
+	}
+}
