@@ -30,6 +30,7 @@ SRCSLIST		:= main.c \
 					hooks.c \
 					linked_list.c \
 					matrix_and_vector_operations.c \
+					rays.c \
 					render.c \
 					scene.c
 					
