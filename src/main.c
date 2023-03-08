@@ -7,6 +7,9 @@ int	main(int argc, char **argv)
 
 	(void)argc;
 	(void)argv;
+	vector_test();
+	if (start_mlx(&data) == -1)
+		return (-1);
 	init_scene(&scene);
 	fill_dummy_scene(&scene);
 	data.scene = &scene;

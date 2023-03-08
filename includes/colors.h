@@ -12,6 +12,7 @@
 # define BLACK	0x00000000
 # define GREY	0x00888888
 # define DGREY	0x00333333
+# define NOCOLOR	0x00000000
 
 typedef struct s_color
 {

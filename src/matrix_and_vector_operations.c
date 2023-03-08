@@ -32,3 +32,49 @@ t_vec	vec_sub(t_vec vec1, t_vec vec2)
 	diff.color = vec1.color;
 	return (diff);
 }
+
+t_vec	vec_mult(t_vec vec, float_t factor)
+{
+	t_vec	prod;
+
+	prod.x = vec.x * factor;
+	prod.y = vec.y * factor;
+	prod.z = vec.z * factor;
+	prod.color = vec.color;
+	return (prod);
+}
+
+t_vec	vec_div(t_vec vec, float_t factor)
+{
+	t_vec	quotient;
+
+	if (factor == 0)
+	{
+		ft_putstr_fd("WARNING: Dividing By 0\n", STDERR_FILENO);
+		return ((t_vec){0, 0, 0, 0});
+	}
+	quotient.x = vec.x / factor;
+	quotient.y = vec.y / factor;
+	quotient.z = vec.z / factor;
+	quotient.color = vec.color;
+	return (quotient);
+}
+
+float_t	scalar_prod(t_vec vec1, t_vec vec2)
+{
+	float_t	prod;
+
+	prod = vec1.x * vec2.x + vec1.y * vec2.y + vec1.z * vec2.z;
+	return (prod);
+}
+
+t_vec	cross_prod(t_vec vec1, t_vec vec2)
+{
+	t_vec	prod;
+
+	prod.x = vec1.y * vec2.z - vec1.z * vec2.y;
+	prod.y = vec1.z * vec2.x - vec1.x * vec2.z;
+	prod.z = vec1.x * vec2.y - vec1.y * vec2.x;
+	prod.color = vec1.color;
+	return (prod);
+}

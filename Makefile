@@ -10,6 +10,7 @@ HEADLIST		:= miniRT.h \
 					camera.h \
 					colors.h \
 					cylinder.h \
+					function_tests.h \
 					image.h \
 					light.h \
 					linked_list.h \
@@ -24,6 +25,7 @@ HEADERS			:= $(addprefix ${HEADDIR}, ${HEADLIST})
 SRCSDIR			:= ./src/
 SRCSLIST		:= main.c \
 					dummy_scene.c \
+					function_tests.c \
 					hooks.c \
 					linked_list.c \
 					matrix_and_vector_operations.c \
