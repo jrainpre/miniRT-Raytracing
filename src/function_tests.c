@@ -7,9 +7,10 @@ void	vector_test(void)
 	t_vec	res;
 	float_t	factor;
 	float_t	scalar_res;
+	float_t	length;
 
-	vec1 = (t_vec){1, 0, 0, NOCOLOR};
-	vec2 = (t_vec){0, 0, 1, NOCOLOR};
+	vec1 = (t_vec){1, 2, 0, NOCOLOR};
+	vec2 = (t_vec){0, 3, 1, NOCOLOR};
 	factor = 2;
 	printf("vec1\n");
 	printf("x: %19.15f\n", vec1.x);
@@ -61,6 +62,18 @@ void	vector_test(void)
 
 	res = cross_prod(vec1, vec2);
 	printf("vec1 x vec2\n");
+	printf("x: %19.15f\n", res.x);
+	printf("y: %19.15f\n", res.y);
+	printf("z: %19.15f\n", res.z);
+	printf("\n");
+
+	length = vec_length(vec1);
+	printf("|vec1|\n");
+	printf("length: %19.15f\n", length);
+	printf("\n");
+
+	res = unit_vec(vec1);
+	printf("unit vector of vec1\n");
 	printf("x: %19.15f\n", res.x);
 	printf("y: %19.15f\n", res.y);
 	printf("z: %19.15f\n", res.z);

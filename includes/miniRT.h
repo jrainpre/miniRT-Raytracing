@@ -63,6 +63,9 @@ t_vec	vec_mult(t_vec vec, float_t factor);
 t_vec	vec_div(t_vec vec, float_t factor);
 float_t	scalar_prod(t_vec vec1, t_vec vec2);
 t_vec	cross_prod(t_vec vec1, t_vec vec2);
+float_t	vec_length(t_vec vec);
+t_vec	unit_vec(t_vec vec);
+int		vec_cmp(t_vec vec1, t_vec vec2);
 
 void	free_scene(t_scene *scene);
 void	init_scene(t_scene *scene);

@@ -78,3 +78,36 @@ t_vec	cross_prod(t_vec vec1, t_vec vec2)
 	prod.color = vec1.color;
 	return (prod);
 }
+
+float_t	vec_length(t_vec vec)
+{
+	float_t	length;
+
+	length = sqrtf(scalar_prod(vec, vec));
+	return (length);
+}
+
+t_vec	unit_vec(t_vec vec)
+{
+	t_vec	unit;
+	t_vec	null_vec;
+
+	null_vec = (t_vec){0, 0, 0, 0};
+	if (vec_cmp(vec, null_vec) == 0)
+		return (null_vec);
+	unit = vec_div(vec, vec_length(vec));
+	return (unit);
+}
+
+int		vec_cmp(t_vec vec1, t_vec vec2)
+{
+	if (vec1.x != vec2.x)
+		return (1);
+	if (vec1.y != vec2.y)
+		return (1);
+	if (vec1.z != vec2.z)
+		return (1);
+	if (vec1.color != vec2.color)
+		return (1);
+	return (0);
+}
