@@ -28,6 +28,7 @@
 # include "linked_list.h"
 # include "matrix.h"
 # include "plane.h"
+# include "ray.h"
 # include "scene.h"
 # include "sphere.h"
 # include "vector.h"

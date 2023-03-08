@@ -16,6 +16,7 @@ HEADLIST		:= miniRT.h \
 					linked_list.h \
 					matrix.h \
 					plane.h \
+					ray.h \
 					scene.h \
 					sphere.h \
 					vector.h
