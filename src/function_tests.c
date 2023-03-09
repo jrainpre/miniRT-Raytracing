@@ -148,7 +148,7 @@ void	background_test(t_img *img)
 
 	cam.orig = (t_pt){0, 0, 10, NOCOLOR};
 	cam.orientation = (t_vec){0, 0, -1, NOCOLOR};
-	cam.fov = 0;
+	cam.fov = 70;
 	cam.sensor_height = 2;
 	cam.sensor_width = (WIN_W / WIN_H) * cam.sensor_height;
 	cam.focal_length = (cam.sensor_width / 2) / tanf(deg_to_rad(cam.fov / 2.0));

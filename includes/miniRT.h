@@ -69,8 +69,13 @@ t_vec	unit_vec(t_vec vec);
 int		vec_cmp(t_vec vec1, t_vec vec2);
 t_pt	ray_point_at(t_ray ray, float_t t);
 
-void	free_scene(t_scene *scene);
-void	init_scene(t_scene *scene);
+void	*free_scene_null(t_scene *scene);
+t_scene	*init_scene(void);
 void	fill_dummy_scene(t_scene *scene);
+
+t_data	*init_data(void);
+void	*free_data_null(t_data *data);
+void	*malloc_or_print_error(size_t size);
+void	*free_null(void *ptr);
 
 #endif

@@ -24,8 +24,7 @@ int	close_app(t_data *data)
 	data->win_ptr = NULL;
 	mlx_destroy_image(data->mlx_ptr, data->img.mlx_img);
 	mlx_destroy_display(data->mlx_ptr);
-	free(data->mlx_ptr);
-	free_scene(data->scene);
+	data = free_data_null(data);
 	exit(0);
 	return (0);
 }
