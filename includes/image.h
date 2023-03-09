@@ -31,7 +31,7 @@ int		start_mlx(t_data *data);
 void	img_pix_put(t_img *img, t_pt pt);
 void	render_background(t_img *img, int color);
 float_t	deg_to_rad(float_t deg);
-int		hit_sphere(t_sphere sphere, t_ray ray);
+int		hit_sphere(t_sphere *sphere, t_ray ray);
 void	render_scene(t_data *data);
 
 #endif
