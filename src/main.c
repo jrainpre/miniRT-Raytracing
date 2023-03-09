@@ -2,18 +2,18 @@
 
 int	main(int argc, char **argv)
 {
-	t_data	data;
-	t_scene scene;
+	t_data	*data;
 
 	(void)argc;
 	(void)argv;
-	vector_test();
-	if (start_mlx(&data) == -1)
-		return (-1);
-	init_scene(&scene);
-	fill_dummy_scene(&scene);
-	data.scene = &scene;
-	if (start_mlx(&data) == -1)
+	data = init_data();
+	if (data == NULL)
+		return (1);
+	data->scene = init_scene();
+	if (data->scene == NULL)
+		return (1);
+	fill_dummy_scene(data->scene);
+	if (start_mlx(data) == -1)
 		return (-1);
 	return (0);
 }

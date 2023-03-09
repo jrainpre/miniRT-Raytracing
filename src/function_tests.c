@@ -79,3 +79,38 @@ void	vector_test(void)
 	printf("z: %19.15f\n", res.z);
 	printf("\n");
 }
+
+void	ray_test(void)
+{
+	t_ray	ray;
+	t_vec	dir;
+	t_pt	res;
+	float_t	t;
+
+	dir = (t_vec){1, 0, 0, NOCOLOR};
+	ray.orig = (t_pt){100, 0, 0, NOCOLOR};
+	ray.dir = dir;
+	t = -100;
+
+	printf("ray.orig\n");
+	printf("x: %19.15f\n", ray.orig.x);
+	printf("y: %19.15f\n", ray.orig.y);
+	printf("z: %19.15f\n", ray.orig.z);
+	printf("\n");
+
+	printf("ray.dir\n");
+	printf("x: %19.15f\n", ray.dir.x);
+	printf("y: %19.15f\n", ray.dir.y);
+	printf("z: %19.15f\n", ray.dir.z);
+	printf("\n");
+
+	printf("t: %19.15f\n", t);
+	printf("\n");
+
+	res = ray_point_at(ray, t);
+	printf("P(t) = ray.orig + t * ray.dir\n");
+	printf("x: %19.15f\n", res.x);
+	printf("y: %19.15f\n", res.y);
+	printf("z: %19.15f\n", res.z);
+	printf("\n");
+}

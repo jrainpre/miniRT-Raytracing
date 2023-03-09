@@ -1,10 +1,12 @@
 #ifndef IMAGE_H
 # define IMAGE_H
 
-# define WIN_W 1280
-# define WIN_H 720
+# define WIN_W 1280.0
+# define WIN_H 720.0
 
-# include "miniRT.h"
+# include "sphere.h"
+# include "ray.h"
+
 typedef struct s_img
 {
 	void	*mlx_img;
@@ -28,5 +30,8 @@ int		close_app(t_data *data);
 int		start_mlx(t_data *data);
 void	img_pix_put(t_img *img, t_pt pt);
 void	render_background(t_img *img, int color);
+float_t	deg_to_rad(float_t deg);
+int		hit_sphere(t_sphere *sphere, t_ray ray);
+void	render_scene(t_data *data);
 
 #endif
