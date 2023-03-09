@@ -3,7 +3,6 @@
 void init_scene(t_scene *scene)
 {
 	scene->res = (t_resolution){.x = 0, .y = 0};
-
 	scene->cam = NULL;
 	scene->lights.head = NULL;
 	scene->lights.last = NULL;
