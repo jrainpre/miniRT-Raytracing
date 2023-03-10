@@ -14,7 +14,9 @@ int	fill_dummy_scene(t_data *data)
 	scene->ambient_light = init_ambient_light(scene->ambient_light);
 	if (scene->ambient_light == NULL)
 		return (-1);
-	if (add_sphere(scene->objects, "sp    0.0,0.0,-100.0    50    10,0,255") == -1)
+	if (add_sphere(scene->objects, "sp    0.0,0.0,-100.0    50    129,0,0") == -1)
+		return (-1);
+	if (add_sphere(scene->objects, "sp    -30,0.0,-50.0    3    80,80,80") == -1)
 		return (-1);
 	return (1);
 }
@@ -53,45 +55,7 @@ int	add_sphere(t_lst_ref *objects, char *line)
 	color = free_arr_null(color);
 	ft_add_lst_last(ft_lstnew(sphere), objects);
 	ft_lstlast(objects->head)->type = SPHERE;
-	printf("line: \"%s\"\n", line);
-	printf("orig.x: \"%19.15f\"\n", sphere->orig.x);
-	printf("orig.y: \"%19.15f\"\n", sphere->orig.y);
-	printf("orig.z: \"%19.15f\"\n", sphere->orig.z);
-	printf("radius: \"%19.15f\"\n", sphere->radius);
-	printf("color.x: \"%19.15f\"\n", sphere->color.x);
-	printf("color.y: \"%19.15f\"\n", sphere->color.y);
-	printf("color.z: \"%19.15f\"\n", sphere->color.z);
-	printf("color.a: \"%19.15f\"\n", sphere->color.a);
 	return (0);
-}
-
-t_camera	*init_camera(t_camera *cam, t_resolution win)
-{
-	cam = malloc_or_print_error(sizeof (t_camera));
-	if (cam == NULL)
-		return (NULL);
-	cam->orig = (t_pt3){0, 0, 10};
-	cam->orientation = (t_vec3){0, 0, -1};
-	cam->fov = 70;
-	cam->sensor_height = 2;
-	cam->sensor_width = ((float_t)win.width / (float_t)win.height) * cam->sensor_height;
-	cam->focal_length = (cam->sensor_width / 2) / tanf(deg_to_rad(cam->fov / 2.0));
-	cam->vertical = (t_vec3){0, -cam->sensor_height, 0};
-	cam->horizontal = (t_vec3){cam->sensor_width, 0, 0};
-	cam->lower_left_corner = vec_add(vec_add(vec_add(cam->orig, (t_vec3){0, 0, -cam->focal_length}), vec_div(cam->horizontal, -2)), vec_div(cam->vertical, -2));
-	cam->upper_left_corner = vec_add(vec_add(vec_add(cam->orig, vec_mult(cam->orientation, cam->focal_length)), vec_div(cam->horizontal, -2)), vec_div(cam->vertical, -2));
-	return (cam);
-}
-
-t_light	*init_light(t_light *light)
-{
-	light = malloc_or_print_error(sizeof (t_light));
-	if (light == NULL)
-		return (NULL);
-	light->orig = (t_pt3){100, 100, 0};
-	light->color = (t_color){1.0, 1.0, 1.0, 1.0};
-	light->ratio = 0.6;
-	return (light);
 }
 
 t_ambient_light	*init_ambient_light(t_ambient_light *ambient_light)

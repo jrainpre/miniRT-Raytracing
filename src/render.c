@@ -108,7 +108,7 @@ void	render_scene(t_data *data)
 	runner = data->scene->objects->head;
 	while (runner)
 	{
-		j = 0;;
+		j = 0;
 		while (j < data->win.height)
 		{
 			i = 0;
@@ -119,12 +119,32 @@ void	render_scene(t_data *data)
 				ray.orig = cam->orig;
 				ray.dir = vec_sub(vec_add(vec_add(vec_mult(cam->horizontal, u), vec_mult(cam->vertical, v)), cam->upper_left_corner), cam->orig);
 				if (runner->type == SPHERE)
+				{
 					if (hit_sphere(runner->content, ray, data->scene->light) != -1)
 						img_pix_put(data, i, j, hit_sphere(runner->content, ray, data->scene->light));
+				}
 				i++;
 			}
 			j++;
 		}
 		runner = runner->next;
+	}
+}
+
+void	render_background(t_data *data, int color)
+{
+	int	i;
+	int	j;
+
+	j = 0;
+	while (j < data->win.height)
+	{
+		i = 0;
+		while (i < data->win.width)
+		{
+			img_pix_put(data, i, j, color);
+			i++;
+		}
+		j++;
 	}
 }
