@@ -104,3 +104,34 @@ int		vec_cmp(t_vec3 vec1, t_vec3 vec2)
 		return (1);
 	return (0);
 }
+
+t_vec4 vec4_mult(t_vec4 vec, float_t factor)
+{
+	t_vec4	prod;
+
+	prod.x = vec.x * factor;
+	prod.y = vec.y * factor;
+	prod.z = vec.z * factor;
+	prod.a = vec.a * factor;
+	return (prod);
+}
+
+float_t clamp(float_t value, float_t min, float_t max)
+{
+	if (value < min)
+		return (min);
+	if (value > max)
+		return (max);
+	return (value);
+}
+
+t_vec4 vec4_clamp(t_vec4 vec, float_t min, float_t max)
+{
+	t_vec4	clamped;
+
+	clamped.x = clamp(vec.x, min, max);
+	clamped.y = clamp(vec.y, min, max);
+	clamped.z = clamp(vec.z, min, max);
+	clamped.a = clamp(vec.a, min, max);
+	return (clamped);
+}

@@ -14,7 +14,7 @@ int	fill_dummy_scene(t_data *data)
 	scene->ambient_light = init_ambient_light(scene->ambient_light);
 	if (scene->ambient_light == NULL)
 		return (-1);
-	if (add_sphere(scene->objects, (t_pt3){0, 0, -100}, 40.0f, (t_color){0, 255, 0, 1}) == -1)
+	if (add_sphere(scene->objects, (t_pt3){0, 0, -100}, 40.0f, (t_color){0, 1, 0, 1}) == -1)
 		return (-1);
 	return (0);
 }

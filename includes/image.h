@@ -5,6 +5,7 @@
 # define WIN_H 720.0
 
 # include "sphere.h"
+# include "light.h"
 # include "ray.h"
 
 typedef struct s_resolution
@@ -38,7 +39,7 @@ int		start_mlx(t_data *data);
 void	img_pix_put(t_data *data, int x, int y, int color);
 void	render_background(t_img *img, int color);
 float_t	deg_to_rad(float_t deg);
-int		hit_sphere(t_sphere *sphere, t_ray ray);
+int		hit_sphere(t_sphere *sphere, t_ray ray, t_light *light);
 void	render_scene(t_data *data);
 
 #endif

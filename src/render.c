@@ -17,20 +17,80 @@ float_t	deg_to_rad(float_t deg)
 	return (deg * (M_PI / 180.0));
 }
 
-int	hit_sphere(t_sphere *sphere, t_ray ray)
+int light_shade_sphere(t_sphere *sphere, t_light *light, float_t distance_t, t_ray ray)
 {
+	t_vec3 hit_point;
+	float_t angle;
+	int color;
+
+	hit_point = hit_point_sphere(distance_t, ray);
+
+	angle = get_light_angle(hit_point, sphere, light);
+	color = get_color_sphere(sphere, light, hit_point);
+	return (color);
+}
+
+t_vec3 hit_point_sphere(float_t distance_t, t_ray ray)
+{
+	t_vec3 hit_point;
+	
+	hit_point = vec_add(vec_mult(ray.dir, distance_t), ray.orig);
+	return (hit_point);
+}
+
+float_t get_light_angle(t_vec3 hit_point, t_sphere *sphere, t_light *light)
+{
+	t_vec3 unit_light;
+	t_vec3 normal_hit_point;
+	t_vec3 unit_normal_hit_point;
+	float_t angle;
+
+	normal_hit_point = vec_sub(hit_point, sphere->orig);
+	unit_normal_hit_point = unit_vec3(normal_hit_point);
+	unit_light = unit_vec3(light->orig);
+	unit_light = vec_mult(unit_light, -1.0f);
+	angle = scalar_prod(unit_normal_hit_point, unit_light);
+	angle = fmax(angle, 0.0f);
+	return (angle);
+}
+
+int get_color_sphere(t_sphere *sphere, t_light *light, t_vec3 hit_point)
+{
+	float_t angle;
+	t_color color;
+
+	angle = get_light_angle(hit_point, sphere, light);
+	color = vec4_mult(sphere->color, angle);
+	color = vec4_clamp(color, 0.0f, 1.0f);
+	return (color_conversion(color));
+}
+
+void calc_distant_t(t_sphere_hit_calc *calc)
+{
+	float_t t1;
+	float_t t2;
+	float_t smallest_t;
+
+	t1 = (-calc->b - sqrt(calc->discriminant)) / (2.0f * calc->a);
+	t2 = (-calc->b + sqrt(calc->discriminant)) / (2.0f * calc->a);
+	smallest_t = fmin(t1, t2);
+	calc->distance_t = smallest_t;
+}
+
+int hit_sphere(t_sphere *sphere, t_ray ray, t_light *light)
+{
+	t_sphere_hit_calc calc;	
 	t_vec3	orig_diff;
-	float_t	a;
-	float_t	b;
-	float_t	c;
-	float_t	discriminant;
 
 	orig_diff = vec_sub(ray.orig, sphere->orig);
-	a = scalar_prod(ray.dir, ray.dir);
-	b = 2.0 * scalar_prod(orig_diff, ray.dir);
-	c = scalar_prod(orig_diff, orig_diff) - sphere->radius * sphere->radius;
-	discriminant = b * b - 4 * a * c;
-	return (discriminant > 0);
+	calc.a = scalar_prod(ray.dir, ray.dir);
+	calc.b = 2.0 * scalar_prod(orig_diff, ray.dir);
+	calc.c = scalar_prod(orig_diff, orig_diff) - sphere->radius * sphere->radius;
+	calc.discriminant = calc.b * calc.b - 4 * calc.a * calc.c;
+	if (calc.discriminant < 0)
+		return (-1);
+	calc_distant_t(&calc);
+	return (light_shade_sphere(sphere, light, calc.distance_t, ray));
 }
 
 void	render_scene(t_data *data)
@@ -45,8 +105,8 @@ void	render_scene(t_data *data)
 
 	cam = data->scene->cam;
 	runner = data->scene->objects->head;
-	while (runner)
-	{
+	// while (runner)
+	// {
 		j = 0;
 		while (j < data->win.height)
 		{
@@ -58,12 +118,12 @@ void	render_scene(t_data *data)
 				ray.orig = cam->orig;
 				ray.dir = vec_sub(vec_add(vec_add(vec_mult(cam->horizontal, u), vec_mult(cam->vertical, v)), cam->lower_left_corner), cam->orig);
 				if (runner->type == SPHERE)
-					if (hit_sphere(runner->content, ray))
-						img_pix_put(data, i, j, GREEN);
+						if (hit_sphere(runner->content, ray, data->scene->light) != -1)
+				img_pix_put(data, i, j, hit_sphere(runner->content, ray, data->scene->light));
 				i++;
 			}
 			j++;
 		}
-		runner = runner->next;
-	}
+		// runner = runner->next;
+	// }
 }
