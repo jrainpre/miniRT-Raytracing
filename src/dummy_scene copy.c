@@ -16,7 +16,7 @@ int	fill_dummy_scene(t_data *data)
 		return (-1);
 	if (add_sphere(scene->objects, "sp    3.1415,2.0000001,-100.23    50    10,0,255") == -1)
 		return (-1);
-	return (1);
+	return (0);
 }
 
 int	add_sphere(t_lst_ref *objects, char *line)
