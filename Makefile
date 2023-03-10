@@ -29,6 +29,7 @@ SRCSLIST		:= main.c \
 					data.c \
 					dummy_scene.c \
 					free.c \
+					ft_atof.c \
 					function_tests.c \
 					hooks.c \
 					linked_list.c \

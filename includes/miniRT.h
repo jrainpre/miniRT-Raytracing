@@ -69,11 +69,13 @@ t_camera		*init_camera(t_camera *cam, t_resolution res);
 t_light			*init_light(t_light *light);
 t_ambient_light	*init_ambient_light(t_ambient_light *ambient_light);
 int				fill_dummy_scene(t_data *data);
-int				add_sphere(t_lst_ref *objects, t_pt3 orig, float_t r, t_color col);
+int				add_sphere(t_lst_ref *objects, char *line);
 
 t_data	*init_data(void);
 void	*free_data_null(t_data *data);
 void	*malloc_or_print_error(size_t size);
 void	*free_null(void *ptr);
+void	*free_arr_null(char **arr);
+double	ft_atof(const char *str);
 
 #endif
