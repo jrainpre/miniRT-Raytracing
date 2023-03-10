@@ -72,7 +72,7 @@ void	render_scene(t_data *data)
 			ray.orig = cam->orig;
 			ray.dir = vec_sub(vec_add(vec_add(vec_mult(cam->horizontal, u), vec_mult(cam->vertical, v)), cam->lower_left_corner), cam->orig);
 			if (hit_sphere(sphere, ray))
-				img_pix_put(&data->img, i, j, GREEN);
+				img_pix_put(data->img, i, j, GREEN);
 			i++;
 		}
 		j++;

@@ -21,7 +21,7 @@ typedef struct s_data
 	void			*mlx_ptr;
 	void			*win_ptr;
 	struct s_scene	*scene;
-	t_img			img;
+	t_img			*img;
 }			t_data;
 
 int		loop_hook(t_data *data);

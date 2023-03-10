@@ -14,6 +14,9 @@ int	main(int argc, char **argv)
 		return (1);
 	fill_dummy_scene(data->scene);
 	if (start_mlx(data) == -1)
+	{
+		data = free_data_null(data);
 		return (-1);
+	}
 	return (0);
 }
