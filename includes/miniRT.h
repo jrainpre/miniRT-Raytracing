@@ -45,9 +45,11 @@ typedef struct s_resolution
 }			t_resolution;
 typedef struct s_scene
 {
-	t_resolution res;
-	t_camera	*cam;
-	t_lst_ref	*objects;
+	t_resolution	res;
+	t_camera		*cam;
+	t_light			*light;
+	t_ambient_light	*ambient_light;
+	t_lst_ref		*objects;
 }			t_scene;
 
 /* Functions */
@@ -64,10 +66,13 @@ t_vec3	unit_vec3(t_vec3 vec);
 int		vec_cmp(t_vec3 vec1, t_vec3 vec2);
 t_pt3	ray_point_at(t_ray ray, float_t t);
 
-void	*free_scene_null(t_scene *scene);
-t_scene	*init_scene(void);
-void	fill_dummy_scene(t_scene *scene);
-void	add_sphere(t_lst_ref *objects, t_pt3 orig, float_t r, t_color col);
+void			*free_scene_null(t_scene *scene);
+t_scene			*init_scene(void);
+t_camera		*init_camera(t_camera *cam);
+t_light			*init_light(t_light *light);
+t_ambient_light	*init_ambient_light(t_ambient_light *ambient_light);
+int				fill_dummy_scene(t_scene *scene);
+int				add_sphere(t_lst_ref *objects, t_pt3 orig, float_t r, t_color col);
 
 t_data	*init_data(void);
 void	*free_data_null(t_data *data);

@@ -21,6 +21,8 @@ void	*free_scene_null(t_scene *scene)
 {
 	scene->cam = free_null(scene->cam);
 	scene->objects = free_lst_null(scene->objects);
+	scene->light = free_null(scene->light);
+	scene->ambient_light = free_null(scene->ambient_light);
 	scene = free_null(scene);
 	return (scene);
 }

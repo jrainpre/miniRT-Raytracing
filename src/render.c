@@ -58,23 +58,30 @@ void	render_scene(t_data *data)
 	int			j;
 	float_t		u;
 	float_t		v;
+	t_lst		*runner;
 
 	sphere = data->scene->objects->head->content;
 	cam = data->scene->cam;
-	j = 0;
-	while (j < WIN_H)
+	runner = data->scene->objects->head;
+	while (runner)
 	{
-		i = 0;
-		while (i < WIN_W)
+		j = 0;
+		while (j < WIN_H)
 		{
-			u = i / (WIN_W - 1);
-			v = j / (WIN_H - 1);
-			ray.orig = cam->orig;
-			ray.dir = vec_sub(vec_add(vec_add(vec_mult(cam->horizontal, u), vec_mult(cam->vertical, v)), cam->lower_left_corner), cam->orig);
-			if (hit_sphere(sphere, ray))
-				img_pix_put(data->img, i, j, GREEN);
-			i++;
+			i = 0;
+			while (i < WIN_W)
+			{
+				u = i / (WIN_W - 1);
+				v = j / (WIN_H - 1);
+				ray.orig = cam->orig;
+				ray.dir = vec_sub(vec_add(vec_add(vec_mult(cam->horizontal, u), vec_mult(cam->vertical, v)), cam->lower_left_corner), cam->orig);
+				if (runner->type == SPHERE)
+					if (hit_sphere(sphere, ray))
+						img_pix_put(data->img, i, j, GREEN);
+				i++;
+			}
+			j++;
 		}
-		j++;
+		runner = runner->next;
 	}
 }
