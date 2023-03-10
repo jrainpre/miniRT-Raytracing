@@ -23,6 +23,7 @@ typedef struct s_camera {
 	t_vec3	horizontal;
 	t_vec3	vertical;
 	t_vec3	lower_left_corner;
+	t_vec3	upper_left_corner;
 }	t_camera;
 
 #endif

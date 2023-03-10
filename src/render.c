@@ -27,6 +27,7 @@ int light_shade_sphere(t_sphere *sphere, t_light *light, float_t distance_t, t_r
 
 	angle = get_light_angle(hit_point, sphere, light);
 	color = get_color_sphere(sphere, light, hit_point);
+	(void)angle;
 	return (color);
 }
 
@@ -48,7 +49,7 @@ float_t get_light_angle(t_vec3 hit_point, t_sphere *sphere, t_light *light)
 	normal_hit_point = vec_sub(hit_point, sphere->orig);
 	unit_normal_hit_point = unit_vec3(normal_hit_point);
 	unit_light = unit_vec3(light->orig);
-	unit_light = vec_mult(unit_light, -1.0f);
+	unit_light = vec_mult(unit_light, 1.0f);
 	angle = scalar_prod(unit_normal_hit_point, unit_light);
 	angle = fmax(angle, 0.0f);
 	return (angle);
@@ -105,9 +106,9 @@ void	render_scene(t_data *data)
 
 	cam = data->scene->cam;
 	runner = data->scene->objects->head;
-	// while (runner)
-	// {
-		j = 0;
+	while (runner)
+	{
+		j = 0;;
 		while (j < data->win.height)
 		{
 			i = 0;
@@ -116,14 +117,14 @@ void	render_scene(t_data *data)
 				u = (float_t)i / (data->win.width - 1);
 				v = (float_t)j / (data->win.height - 1);
 				ray.orig = cam->orig;
-				ray.dir = vec_sub(vec_add(vec_add(vec_mult(cam->horizontal, u), vec_mult(cam->vertical, v)), cam->lower_left_corner), cam->orig);
+				ray.dir = vec_sub(vec_add(vec_add(vec_mult(cam->horizontal, u), vec_mult(cam->vertical, v)), cam->upper_left_corner), cam->orig);
 				if (runner->type == SPHERE)
-						if (hit_sphere(runner->content, ray, data->scene->light) != -1)
-				img_pix_put(data, i, j, hit_sphere(runner->content, ray, data->scene->light));
+					if (hit_sphere(runner->content, ray, data->scene->light) != -1)
+						img_pix_put(data, i, j, hit_sphere(runner->content, ray, data->scene->light));
 				i++;
 			}
 			j++;
 		}
-		// runner = runner->next;
-	// }
+		runner = runner->next;
+	}
 }
