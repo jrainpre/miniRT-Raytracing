@@ -4,7 +4,6 @@ int	loop_hook(t_data *data)
 {
 	if (data->win_ptr == NULL)
 		return (1);
-	render_background(data->img, DGREY);
 	render_scene(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 		data->img->mlx_img, 0, 0);
@@ -36,7 +35,7 @@ int	start_mlx(t_data *data)
 		ft_putstr_fd("Failed to set up the connection to the X server\n", 2);
 	if (data->mlx_ptr == NULL)
 		return (-1);
-	data->win_ptr = mlx_new_window(data->mlx_ptr, WIN_W, WIN_H, "miniRT");
+	data->win_ptr = mlx_new_window(data->mlx_ptr, data->win.width, data->win.height, "miniRT");
 	if (data->win_ptr == NULL)
 		ft_putstr_fd("Failed to create a new window\n", 2);
 	if (data->win_ptr == NULL)
@@ -44,7 +43,7 @@ int	start_mlx(t_data *data)
 	data->img = malloc_or_print_error(sizeof (t_img));
 	if (data->img == NULL)
 		return (-1);
-	data->img->mlx_img = mlx_new_image(data->mlx_ptr, WIN_W, WIN_H);
+	data->img->mlx_img = mlx_new_image(data->mlx_ptr, data->win.width, data->win.height);
 	data->img->addr = mlx_get_data_addr(data->img->mlx_img, &data->img->bpp,
 			&data->img->line_len, &data->img->endian);
 	mlx_loop_hook(data->mlx_ptr, loop_hook, data);
