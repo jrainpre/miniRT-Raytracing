@@ -11,8 +11,17 @@ int	main(int argc, char **argv)
 		return (1);
 	data->scene = init_scene();
 	if (data->scene == NULL)
+	{
+		data->scene = free_scene_null(data->scene);
+		data = free_data_null(data);
 		return (1);
-	fill_dummy_scene(data->scene);
+	}
+	if (fill_dummy_scene(data->scene) == -1)
+	{
+		data->scene = free_scene_null(data->scene);
+		data = free_data_null(data);
+		return (1);
+	}
 	if (start_mlx(data) == -1)
 	{
 		data = free_data_null(data);

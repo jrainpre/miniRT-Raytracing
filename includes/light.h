@@ -10,13 +10,13 @@ L -40.0,50.0,0.0 0.6 10,0,255
 ∗ (unused in mandatory part)R,G,B colors in range [0-255]: 10, 0, 255
 */
 
-#include "colors.h"
-#include "vector.h"
+# include "colors.h"
+# include "vector.h"
 
 typedef struct s_light {
-	t_pt3 orig;
-	float_t ratio;
-	t_color color;
-} t_light;
+	t_pt3	orig;
+	float_t	ratio;
+	t_color	color;
+}		t_light;
 
 #endif
