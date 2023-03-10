@@ -25,6 +25,7 @@ HEADERS			:= $(addprefix ${HEADDIR}, ${HEADLIST})
 
 SRCSDIR			:= ./src/
 SRCSLIST		:= main.c \
+					colors.c \
 					data.c \
 					dummy_scene.c \
 					free.c \

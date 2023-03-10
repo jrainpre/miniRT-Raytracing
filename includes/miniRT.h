@@ -59,6 +59,9 @@ float_t	vec_length(t_vec3 vec);
 t_vec3	unit_vec3(t_vec3 vec);
 int		vec_cmp(t_vec3 vec1, t_vec3 vec2);
 t_pt3	ray_point_at(t_ray ray, float_t t);
+t_vec4 vec4_mult(t_vec4 vec, float_t factor);
+float_t clamp(float_t value, float_t min, float_t max);
+t_vec4 vec4_clamp(t_vec4 vec, float_t min, float_t max);
 
 void			*free_scene_null(t_scene *scene);
 t_scene			*init_scene(void);

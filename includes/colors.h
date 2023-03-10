@@ -18,4 +18,7 @@
 
 typedef struct s_vec4	t_color;
 
+int color_conversion(t_color color);
+
+
 #endif
