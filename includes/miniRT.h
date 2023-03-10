@@ -47,12 +47,7 @@ typedef struct s_scene
 {
 	t_resolution res;
 	t_camera	*cam;
-	t_lst_ref	lights;
-	t_lst_ref	ambient_lights;
-	t_lst_ref	spheres;
-	t_lst_ref	planes;
-	t_lst_ref	cylinders;
-
+	t_lst_ref	*objects;
 }			t_scene;
 
 /* Functions */
@@ -72,6 +67,7 @@ t_pt3	ray_point_at(t_ray ray, float_t t);
 void	*free_scene_null(t_scene *scene);
 t_scene	*init_scene(void);
 void	fill_dummy_scene(t_scene *scene);
+void	add_sphere(t_lst_ref *objects, t_pt3 orig, float_t r, t_color col);
 
 t_data	*init_data(void);
 void	*free_data_null(t_data *data);

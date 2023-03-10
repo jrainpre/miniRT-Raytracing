@@ -1,5 +1,4 @@
-
-#include "linked_list.h"
+#include "miniRT.h"
 
 t_lst	*ft_lstlast(t_lst *lst)
 {
@@ -77,20 +76,22 @@ void	clear_lst(t_lst_ref *lst_ref)
 	}
 }
 
-void	free_lst(t_lst_ref *lst_ref)
+void	*free_lst_null(t_lst_ref *lst_ref)
 {
-	int	i;
-	t_lst *temp;
-	t_lst *next;
+	int		i;
+	t_lst	*temp;
+	t_lst	*next;
 
 	i = 0;
 	temp = lst_ref->head;
 	while (temp != NULL)
 	{
-		free(temp->content);
+		temp->content = free_null(temp->content);
 		next = temp->next;
-		free(temp);
+		temp = free_null(temp);
 		temp = next;
 		i++;
 	}
+	lst_ref = free_null(lst_ref);
+	return (lst_ref);
 }

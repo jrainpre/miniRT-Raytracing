@@ -59,7 +59,7 @@ void	render_scene(t_data *data)
 	float_t		u;
 	float_t		v;
 
-	sphere = data->scene->spheres.head->content;
+	sphere = data->scene->objects->head->content;
 	cam = data->scene->cam;
 	j = 0;
 	while (j < WIN_H)

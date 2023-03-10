@@ -2,9 +2,7 @@
 
 void	fill_dummy_scene(t_scene *scene)
 {
-	t_sphere	*sphere;
-
-	scene->res = (t_resolution){.x = 1920, .y = 1080};
+	scene->res = (t_resolution){.x = 1280, .y = 720};
 
 	//camera
 	scene->cam = malloc_or_print_error(sizeof (t_camera));
@@ -21,12 +19,20 @@ void	fill_dummy_scene(t_scene *scene)
 	scene->cam->lower_left_corner = vec_sub(scene->cam->orig, vec_add(vec_add(vec_div(scene->cam->horizontal, 2), vec_div(scene->cam->vertical, 2)), (t_vec3){0, 0, scene->cam->focal_length}));
 
 	//spheres
-	sphere = malloc_or_print_error(sizeof(t_sphere));
+	add_sphere(scene->objects, (t_pt3){0, 0, -100}, 20.0f, (t_color){0, 255, 0, 1});
+}
+
+void	add_sphere(t_lst_ref *objects, t_pt3 orig, float_t r, t_color col)
+{
+	t_sphere	*sphere;
+
+	sphere = malloc_or_print_error(sizeof (t_sphere));
 	if (sphere == NULL)
 		return ;
-	sphere->orig = (t_pt3){0, 0, -100};
-	sphere->radius = 40.0;
-	sphere->color = (t_color){0, 255, 0, 1};
+	sphere->orig = orig;
+	sphere->radius = r;
+	sphere->color = col;
 
-	ft_add_lst_last(ft_lstnew(sphere), &scene->spheres);
+	ft_add_lst_last(ft_lstnew(sphere), objects);
+	ft_lstlast(objects->head)->type = SPHERE;
 }
