@@ -35,7 +35,7 @@ float_t	deg_to_rad(float_t deg)
 
 int	hit_sphere(t_sphere *sphere, t_ray ray)
 {
-	t_vec	orig_diff;
+	t_vec3	orig_diff;
 	float_t	a;
 	float_t	b;
 	float_t	c;

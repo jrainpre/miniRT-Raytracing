@@ -2,15 +2,15 @@
 
 void	vector_test(void)
 {
-	t_vec	vec1;
-	t_vec	vec2;
-	t_vec	res;
+	t_vec3	vec1;
+	t_vec3	vec2;
+	t_vec3	res;
 	float_t	factor;
 	float_t	scalar_res;
 	float_t	length;
 
-	vec1 = (t_vec){1, 2, 0};
-	vec2 = (t_vec){0, 3, 1};
+	vec1 = (t_vec3){1, 2, 0};
+	vec2 = (t_vec3){0, 3, 1};
 	factor = 2;
 	printf("vec1\n");
 	printf("x: %19.15f\n", vec1.x);
@@ -72,7 +72,7 @@ void	vector_test(void)
 	printf("length: %19.15f\n", length);
 	printf("\n");
 
-	res = unit_vec(vec1);
+	res = unit_vec3(vec1);
 	printf("unit vector of vec1\n");
 	printf("x: %19.15f\n", res.x);
 	printf("y: %19.15f\n", res.y);
@@ -83,12 +83,12 @@ void	vector_test(void)
 void	ray_test(void)
 {
 	t_ray	ray;
-	t_vec	dir;
-	t_pt	res;
+	t_vec3	dir;
+	t_pt3	res;
 	float_t	t;
 
-	dir = (t_vec){1, 0, 0};
-	ray.orig = (t_pt){100, 0, 0};
+	dir = (t_vec3){1, 0, 0};
+	ray.orig = (t_pt3){100, 0, 0};
 	ray.dir = dir;
 	t = -100;
 

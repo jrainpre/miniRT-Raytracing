@@ -14,8 +14,8 @@ pl 0.0,0.0,-10.0 0.0,1.0,0.0 0,0,225
 #include "colors.h"
 
 typedef struct s_plane {
-	t_pt point;
-	t_pt normal_vec;
+	t_pt3 point;
+	t_pt3 normal_vec;
 	t_color color;
 } t_plane;
 
