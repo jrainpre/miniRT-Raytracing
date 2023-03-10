@@ -8,7 +8,6 @@ typedef struct s_pt
 	float_t		x;
 	float_t		y;
 	float_t		z;
-	int			color;
 }			t_pt;
 
 typedef struct s_pt	t_vec;

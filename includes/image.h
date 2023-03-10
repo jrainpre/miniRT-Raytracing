@@ -28,7 +28,7 @@ int		loop_hook(t_data *data);
 int		key_hook1(int keysym, t_data *data);
 int		close_app(t_data *data);
 int		start_mlx(t_data *data);
-void	img_pix_put(t_img *img, t_pt pt);
+void	img_pix_put(t_img *img, int x, int y, int color);
 void	render_background(t_img *img, int color);
 float_t	deg_to_rad(float_t deg);
 int		hit_sphere(t_sphere *sphere, t_ray ray);

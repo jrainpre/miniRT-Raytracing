@@ -9,8 +9,8 @@ void	vector_test(void)
 	float_t	scalar_res;
 	float_t	length;
 
-	vec1 = (t_vec){1, 2, 0, NOCOLOR};
-	vec2 = (t_vec){0, 3, 1, NOCOLOR};
+	vec1 = (t_vec){1, 2, 0};
+	vec2 = (t_vec){0, 3, 1};
 	factor = 2;
 	printf("vec1\n");
 	printf("x: %19.15f\n", vec1.x);
@@ -87,8 +87,8 @@ void	ray_test(void)
 	t_pt	res;
 	float_t	t;
 
-	dir = (t_vec){1, 0, 0, NOCOLOR};
-	ray.orig = (t_pt){100, 0, 0, NOCOLOR};
+	dir = (t_vec){1, 0, 0};
+	ray.orig = (t_pt){100, 0, 0};
 	ray.dir = dir;
 	t = -100;
 
