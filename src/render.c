@@ -1,17 +1,13 @@
 #include "miniRT.h"
 
-void	img_pix_put(t_img *img, t_pt pt)
+void	img_pix_put(t_img *img, int x, int y, int color)
 {
 	char	*pixel;
-	int		x;
-	int		y;
 
-	x = round(pt.x);
-	y = round(pt.y);
 	if (x < 0 || x >= WIN_W || y < 0 || y >= WIN_H)
 		return ;
 	pixel = img->addr + y * img->line_len + x * (img->bpp / 8);
-	*(int *)pixel = pt.color;
+	*(int *)pixel = color;
 }
 
 void	render_background(t_img *img, int color)
@@ -25,7 +21,7 @@ void	render_background(t_img *img, int color)
 		j = 0;
 		while (j < WIN_W)
 		{
-			img_pix_put(img, (t_pt){j, i, 0, color});
+			img_pix_put(img, j, i, color);
 			j++;
 		}
 		i++;
@@ -39,7 +35,7 @@ float_t	deg_to_rad(float_t deg)
 
 int	hit_sphere(t_sphere *sphere, t_ray ray)
 {
-	t_vec	orig_diff;
+	t_vec3	orig_diff;
 	float_t	a;
 	float_t	b;
 	float_t	c;
@@ -76,7 +72,7 @@ void	render_scene(t_data *data)
 			ray.orig = cam->orig;
 			ray.dir = vec_sub(vec_add(vec_add(vec_mult(cam->horizontal, u), vec_mult(cam->vertical, v)), cam->lower_left_corner), cam->orig);
 			if (hit_sphere(sphere, ray))
-				img_pix_put(&data->img, (t_pt){i, j, 0, GREEN});
+				img_pix_put(data->img, i, j, GREEN);
 			i++;
 		}
 		j++;

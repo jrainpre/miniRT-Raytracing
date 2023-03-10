@@ -17,8 +17,8 @@ cy 50.0,0.0,20.6 0.0,0.0,1.0 14.2 21.42 10,0,255
 #include "colors.h"
 
 typedef struct s_cylinder {
-	t_pt orig;
-	t_pt axis;
+	t_pt3 orig;
+	t_pt3 axis;
 	float_t radius;
 	float_t height;
 	t_color color;

@@ -14,7 +14,7 @@ L -40.0,50.0,0.0 0.6 10,0,255
 #include "vector.h"
 
 typedef struct s_light {
-	t_pt orig;
+	t_pt3 orig;
 	float_t ratio;
 	t_color color;
 } t_light;

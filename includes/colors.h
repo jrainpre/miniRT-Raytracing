@@ -1,6 +1,8 @@
 #ifndef COLORS_H
 # define COLORS_H
 
+# include "vector.h"
+
 # define RED	0x00FF0000
 # define DRED	0x00660000
 # define GREEN	0x0000FF00
@@ -14,11 +16,6 @@
 # define DGREY	0x00333333
 # define NOCOLOR	0x00000000
 
-typedef struct s_color
-{
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
-}			t_color;
+typedef struct s_vec4	t_color;
 
 #endif

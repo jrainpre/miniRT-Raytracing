@@ -14,15 +14,15 @@ C -50.0,0,20 0,0,1 70
 #include "vector.h"
 
 typedef struct s_camera {
-	t_pt	orig;
-	t_vec	orientation;
+	t_pt3	orig;
+	t_vec3	orientation;
 	float_t	fov;
 	float_t	sensor_width;
 	float_t	sensor_height;
 	float_t	focal_length;
-	t_vec	horizontal;
-	t_vec	vertical;
-	t_vec	lower_left_corner;
+	t_vec3	horizontal;
+	t_vec3	vertical;
+	t_vec3	lower_left_corner;
 }	t_camera;
 
 #endif

@@ -57,17 +57,17 @@ typedef struct s_scene
 
 /* Functions */
 
-t_vec	mat_mult(t_mat3x3 mat, t_vec pt);
-t_vec	vec_add(t_vec vec1, t_vec vec2);
-t_vec	vec_sub(t_vec vec1, t_vec vec2);
-t_vec	vec_mult(t_vec vec, float_t factor);
-t_vec	vec_div(t_vec vec, float_t factor);
-float_t	scalar_prod(t_vec vec1, t_vec vec2);
-t_vec	cross_prod(t_vec vec1, t_vec vec2);
-float_t	vec_length(t_vec vec);
-t_vec	unit_vec(t_vec vec);
-int		vec_cmp(t_vec vec1, t_vec vec2);
-t_pt	ray_point_at(t_ray ray, float_t t);
+t_vec3	mat_mult(t_mat3x3 mat, t_vec3 pt);
+t_vec3	vec_add(t_vec3 vec1, t_vec3 vec2);
+t_vec3	vec_sub(t_vec3 vec1, t_vec3 vec2);
+t_vec3	vec_mult(t_vec3 vec, float_t factor);
+t_vec3	vec_div(t_vec3 vec, float_t factor);
+float_t	scalar_prod(t_vec3 vec1, t_vec3 vec2);
+t_vec3	cross_prod(t_vec3 vec1, t_vec3 vec2);
+float_t	vec_length(t_vec3 vec);
+t_vec3	unit_vec3(t_vec3 vec);
+int		vec_cmp(t_vec3 vec1, t_vec3 vec2);
+t_pt3	ray_point_at(t_ray ray, float_t t);
 
 void	*free_scene_null(t_scene *scene);
 t_scene	*init_scene(void);

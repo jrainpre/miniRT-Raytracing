@@ -3,14 +3,21 @@
 
 # include <math.h>
 
-typedef struct s_pt
+typedef struct s_pt3
 {
 	float_t		x;
 	float_t		y;
 	float_t		z;
-	int			color;
-}			t_pt;
+}			t_pt3;
 
-typedef struct s_pt	t_vec;
+typedef struct s_pt3	t_vec3;
+
+typedef struct s_vec4
+{
+	float_t		x;
+	float_t		y;
+	float_t		z;
+	float_t		a;
+}			t_vec4;
 
 #endif
