@@ -14,6 +14,20 @@ int	key_hook1(int keysym, t_data *data)
 {
 	if (keysym == XK_Escape)
 		close_app(data);
+	if (keysym == XK_Left)
+	{
+		data->scene->cam->orig = vec_add(data->scene->cam->orig, (t_vec3){-100, 0, 0});
+		data->scene->cam->lower_left_corner = vec_sub(data->scene->cam->orig, vec_add(vec_add(vec_div(data->scene->cam->horizontal, 2), vec_div(data->scene->cam->vertical, 2)), (t_vec3){0, 0, data->scene->cam->focal_length}));
+	}
+	if (keysym == XK_Right)
+		data->scene->cam->orig = vec_add(data->scene->cam->orig, (t_vec3){100, 0, 0});
+	if (keysym == XK_Up)
+		data->scene->cam->orig = vec_add(data->scene->cam->orig, (t_vec3){0, 100, 0});
+	if (keysym == XK_Down)
+		data->scene->cam->orig = vec_add(data->scene->cam->orig, (t_vec3){0, -100, 0});
+	printf("x: %19.3f\n", data->scene->cam->orig.x);
+	printf("y: %19.3f\n", data->scene->cam->orig.y);
+	printf("z: %19.3f\n", data->scene->cam->orig.z);
 	return (0);
 }
 
