@@ -11,6 +11,7 @@ t_data	*init_data(void)
 	data->win_ptr = NULL;
 	data->scene = NULL;
 	data->img = NULL;
+	data->win = (t_resolution){1280, 720};
 	return (data);
 }
 

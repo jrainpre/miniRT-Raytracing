@@ -38,14 +38,8 @@
 /* Global Variables */
 
 /* Structs */
-typedef struct s_resolution
-{
-	int	x;
-	int	y;
-}			t_resolution;
 typedef struct s_scene
 {
-	t_resolution	res;
 	t_camera		*cam;
 	t_light			*light;
 	t_ambient_light	*ambient_light;
@@ -68,10 +62,10 @@ t_pt3	ray_point_at(t_ray ray, float_t t);
 
 void			*free_scene_null(t_scene *scene);
 t_scene			*init_scene(void);
-t_camera		*init_camera(t_camera *cam);
+t_camera		*init_camera(t_camera *cam, t_resolution res);
 t_light			*init_light(t_light *light);
 t_ambient_light	*init_ambient_light(t_ambient_light *ambient_light);
-int				fill_dummy_scene(t_scene *scene);
+int				fill_dummy_scene(t_data *data);
 int				add_sphere(t_lst_ref *objects, t_pt3 orig, float_t r, t_color col);
 
 t_data	*init_data(void);

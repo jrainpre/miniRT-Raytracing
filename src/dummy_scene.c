@@ -1,9 +1,11 @@
 #include "miniRT.h"
 
-int	fill_dummy_scene(t_scene *scene)
+int	fill_dummy_scene(t_data *data)
 {
-	scene->res = (t_resolution){.x = 1280, .y = 720};
-	scene->cam = init_camera(scene->cam);
+	t_scene	*scene;
+
+	scene = data->scene;
+	scene->cam = init_camera(scene->cam, data->win);
 	if (scene->cam == NULL)
 		return (-1);
 	scene->light = init_light(scene->light);
@@ -12,7 +14,7 @@ int	fill_dummy_scene(t_scene *scene)
 	scene->ambient_light = init_ambient_light(scene->ambient_light);
 	if (scene->ambient_light == NULL)
 		return (-1);
-	if (add_sphere(scene->objects, (t_pt3){0, 0, -100}, 20.0f, (t_color){0, 255, 0, 1}) == -1)
+	if (add_sphere(scene->objects, (t_pt3){0, 0, -100}, 40.0f, (t_color){0, 255, 0, 1}) == -1)
 		return (-1);
 	return (0);
 }
@@ -33,7 +35,7 @@ int	add_sphere(t_lst_ref *objects, t_pt3 orig, float_t r, t_color col)
 	return (0);
 }
 
-t_camera	*init_camera(t_camera *cam)
+t_camera	*init_camera(t_camera *cam, t_resolution win)
 {
 	cam = malloc_or_print_error(sizeof (t_camera));
 	if (cam == NULL)
@@ -42,7 +44,7 @@ t_camera	*init_camera(t_camera *cam)
 	cam->orientation = (t_vec3){0, 0, -1};
 	cam->fov = 70;
 	cam->sensor_height = 2;
-	cam->sensor_width = (WIN_W / WIN_H) * cam->sensor_height;
+	cam->sensor_width = ((float_t)win.width / (float_t)win.height) * cam->sensor_height;
 	cam->focal_length = (cam->sensor_width / 2) / tanf(deg_to_rad(cam->fov / 2.0));
 	cam->vertical = (t_vec3){0, cam->sensor_height, 0};
 	cam->horizontal = (t_vec3){cam->sensor_width, 0, 0};

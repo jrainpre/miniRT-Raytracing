@@ -7,7 +7,6 @@ t_scene	*init_scene(void)
 	scene = malloc_or_print_error(sizeof (t_scene));
 	if (scene == NULL)
 		return (NULL);
-	scene->res = (t_resolution){.x = 0, .y = 0};
 	scene->cam = NULL;
 	scene->objects = malloc_or_print_error(sizeof (t_lst_ref));
 	if (scene->objects == NULL)
