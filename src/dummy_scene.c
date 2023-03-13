@@ -18,5 +18,7 @@ int	fill_dummy_scene(t_data *data)
 		return (-1);
 	if (add_sphere(scene->objects, "sp    -30,0.0,-50.0    3    80,80,80") == -1)
 		return (-1);
+	if (add_plane(scene->objects, "pl 0.0,0.0,-10.0 0.0,1.0,0.0 0,0,225") == -1)
+		return (-1);
 	return (1);
 }

@@ -114,3 +114,22 @@ void	ray_test(void)
 	printf("z: %19.15f\n", res.z);
 	printf("\n");
 }
+
+void	print_pt3_or_vec3(char *title, t_pt3 pt)
+{
+	printf("%s\n", title);
+	printf("x: %19.15f\n", pt.x);
+	printf("y: %19.15f\n", pt.y);
+	printf("z: %19.15f\n", pt.z);
+	printf("\n");
+}
+
+void	print_color(char *title, t_color color)
+{
+	printf("%s\n", title);
+	printf("x: %19.15f\n", color.x);
+	printf("y: %19.15f\n", color.y);
+	printf("z: %19.15f\n", color.z);
+	printf("a: %19.15f\n", color.a);
+	printf("\n");
+}

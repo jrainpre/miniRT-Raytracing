@@ -43,5 +43,8 @@ int	add_plane(t_lst_ref *objects, char *line)
 	color = free_arr_null(color);
 	ft_add_lst_last(ft_lstnew(plane), objects);
 	ft_lstlast(objects->head)->type = PLANE;
+	print_pt3_or_vec3("plane->point", plane->point);
+	print_pt3_or_vec3("plane->normal_vec", plane->normal_vec);
+	print_color("plane->color", plane->color);
 	return (0);
 }
