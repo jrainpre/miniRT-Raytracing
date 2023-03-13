@@ -29,7 +29,7 @@ t_camera	*init_camera(t_resolution win, char *line)
 	cam->orig = get_vec_from_str_arr(orig);
 	cam->orientation = get_vec_from_str_arr(orientation);
 	cam->fov = ft_atof(parameters[3]);
-	cam->sensor_height = 2;
+	cam->sensor_height = 0.024;
 	cam->sensor_width = ((float_t)win.width / (float_t)win.height) * cam->sensor_height;
 	cam->focal_length = (cam->sensor_width / 2) / tanf(deg_to_rad(cam->fov / 2.0));
 	cam->vertical = (t_vec3){0, -cam->sensor_height, 0};
