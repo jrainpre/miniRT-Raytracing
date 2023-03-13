@@ -127,9 +127,9 @@ void	print_vec3(char *title, t_vec3 vec)
 void	print_color(char *title, t_color color)
 {
 	printf("%s\n", title);
-	printf("x: %10.4f\n", color.x);
-	printf("y: %10.4f\n", color.y);
-	printf("z: %10.4f\n", color.z);
+	printf("x: %10.4f\n", color.r);
+	printf("y: %10.4f\n", color.g);
+	printf("z: %10.4f\n", color.b);
 	printf("a: %10.4f\n", color.a);
 	printf("\n");
 }
