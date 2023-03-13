@@ -115,21 +115,47 @@ void	ray_test(void)
 	printf("\n");
 }
 
-void	print_pt3_or_vec3(char *title, t_pt3 pt)
+void	print_vec3(char *title, t_vec3 vec)
 {
 	printf("%s\n", title);
-	printf("x: %19.15f\n", pt.x);
-	printf("y: %19.15f\n", pt.y);
-	printf("z: %19.15f\n", pt.z);
+	printf("x: %10.4f\n", vec.x);
+	printf("y: %10.4f\n", vec.y);
+	printf("z: %10.4f\n", vec.z);
 	printf("\n");
 }
 
 void	print_color(char *title, t_color color)
 {
 	printf("%s\n", title);
-	printf("x: %19.15f\n", color.x);
-	printf("y: %19.15f\n", color.y);
-	printf("z: %19.15f\n", color.z);
-	printf("a: %19.15f\n", color.a);
+	printf("x: %10.4f\n", color.x);
+	printf("y: %10.4f\n", color.y);
+	printf("z: %10.4f\n", color.z);
+	printf("a: %10.4f\n", color.a);
 	printf("\n");
+}
+
+void	print_object(void *object, t_object_type type)
+{
+	t_sphere	*sphere;
+	t_plane		*plane;
+	t_cylinder	*cylinder;
+
+	if (type == SPHERE)
+	{
+		sphere = (t_sphere *)object;
+		print_vec3("sphere->orig", sphere->orig);
+		printf("sphere->radius\nr: %10.4f\n\n", sphere->radius);
+		print_color("sphere->color", sphere->color);
+	}
+	else if (type == CYLINDER)
+	{
+		cylinder = (t_cylinder *)object;
+	}
+	else if (type == PLANE)
+	{
+		plane = (t_plane *)object;
+		print_vec3("plane->point", plane->point);
+		print_vec3("plane->normal_vec", plane->normal_vec);
+		print_color("plane->color", plane->color);
+	}
 }

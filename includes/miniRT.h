@@ -74,6 +74,7 @@ int				fill_dummy_scene(t_data *data);
 int				add_sphere(t_lst_ref *objects, char *line);
 int				add_plane(t_lst_ref *objects, char *line);
 t_color			get_color_from_str_arr(char **str);
+t_vec3			get_vec_from_str_arr(char **str);
 
 t_data	*init_data(void);
 void	*free_data_null(t_data *data);

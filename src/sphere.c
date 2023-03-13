@@ -26,7 +26,7 @@ int	add_sphere(t_lst_ref *objects, char *line)
 	sphere = malloc_or_print_error(sizeof (t_sphere));
 	if (sphere == NULL)
 		return (-1);
-	sphere->orig = (t_pt3){ft_atof(orig[0]), ft_atof(orig[1]), ft_atof(orig[2])};
+	sphere->orig = get_vec_from_str_arr(orig);
 	sphere->radius = ft_atof(parameters[2]) / 2;
 	sphere->color = get_color_from_str_arr(color);
 	parameters = free_arr_null(parameters);
@@ -34,5 +34,6 @@ int	add_sphere(t_lst_ref *objects, char *line)
 	color = free_arr_null(color);
 	ft_add_lst_last(ft_lstnew(sphere), objects);
 	ft_lstlast(objects->head)->type = SPHERE;
+	print_object(sphere, SPHERE);
 	return (0);
 }

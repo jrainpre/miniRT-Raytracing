@@ -42,7 +42,8 @@ SRCSLIST		:= main.c \
 					rays.c \
 					render.c \
 					scene.c \
-					sphere.c
+					sphere.c \
+					vector_helpers.c
 					
 SRCS			:= $(addprefix ${SRCSDIR}, ${SRCSLIST})
 
