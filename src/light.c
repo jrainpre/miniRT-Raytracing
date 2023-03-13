@@ -7,7 +7,7 @@ t_light	*init_light(t_light *light)
 		return (NULL);
 	light->orig = (t_pt3){100, 100, 50};
 	light->color = (t_color){1.0, 1.0, 1.0, 1.0};
-	light->ratio = 0.6;
+	light->ratio = 1;
 	return (light);
 }
 

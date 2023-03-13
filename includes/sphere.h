@@ -14,6 +14,7 @@
 # include "sphere.h"
 # include "light.h"
 # include "ray.h"
+# include "miniRT.h"
 
 
 typedef struct s_sphere {
@@ -30,11 +31,6 @@ typedef struct s_sphere_hit_calc {
 	float_t distance_t;
 } t_sphere_hit_calc;
 
-int calc_distant_t(t_sphere_hit_calc *calc);
-int get_color_sphere(t_sphere *sphere, t_light *light, t_vec3 hit_point);
-float_t get_light_angle(t_vec3 hit_point, t_sphere *sphere, t_light *light);
-t_vec3 hit_point_sphere(float_t distance_t, t_ray ray);
-int light_shade_sphere(t_sphere *sphere, t_light *light, float_t distance_t, t_ray ray);
 
 
 

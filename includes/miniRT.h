@@ -59,11 +59,10 @@ float_t	vec_length(t_vec3 vec);
 t_vec3	unit_vec3(t_vec3 vec);
 int		vec_cmp(t_vec3 vec1, t_vec3 vec2);
 t_pt3	ray_point_at(t_ray ray, float_t t);
-t_vec4 vec4_mult(t_vec4 vec, float_t factor);
 float_t clamp(float_t value, float_t min, float_t max);
-t_vec4 vec4_clamp(t_vec4 vec, float_t min, float_t max);
 t_vec3	rotate_x(t_vec3 vec, float_t angle);
 t_vec3	rotate_y(t_vec3 vec, float_t angle);
+float_t vec3_distance(t_vec3 vec1, t_vec3 vec2);
 
 void			*free_scene_null(t_scene *scene);
 t_scene			*init_scene(void);
@@ -87,5 +86,13 @@ void	*malloc_or_print_error(size_t size);
 void	*free_null(void *ptr);
 void	*free_arr_null(char **arr);
 double	ft_atof(const char *str);
+
+int light_shade_sphere(t_sphere *sphere, t_scene *scene, float_t distance_t, t_ray ray);
+t_vec3 hit_point_sphere(float_t distance_t, t_ray ray);
+float_t get_light_angle(t_vec3 hit_point, t_sphere *sphere, t_scene *scene);
+int get_color_sphere(t_sphere *sphere, t_scene *scene, t_vec3 hit_point);
+int calc_distant_t(t_sphere_hit_calc *calc);
+int hit_sphere(t_sphere *sphere, t_ray ray, t_scene *scene);
+
 
 #endif
