@@ -8,6 +8,7 @@ double	ft_atof(const char *str)
 	int		sign;
 	int		decimal_digits;
 
+	// FIX BUG: -0.5 is not converted correctly!
 	num = ft_atoi(str);
 	i = 0;
 	while (str[i] != '.' && str[i] != '\0')

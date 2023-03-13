@@ -16,13 +16,17 @@ int	key_hook1(int keysym, t_data *data)
 	if (keysym == XK_Escape)
 		close_app(data);
 	if (keysym == XK_Left)
-		translate_camera(data->scene->cam, (t_vec3){-1, 0, 0});
+		translate_camera(data->scene->cam, (t_vec3){-0.1, 0, 0});
 	if (keysym == XK_Right)
-		translate_camera(data->scene->cam, (t_vec3){1, 0, 0});
+		translate_camera(data->scene->cam, (t_vec3){0.1, 0, 0});
 	if (keysym == XK_Up)
-		translate_camera(data->scene->cam, (t_vec3){0, 1, 0});
+		translate_camera(data->scene->cam, (t_vec3){0, 0.1, 0});
 	if (keysym == XK_Down)
-		translate_camera(data->scene->cam, (t_vec3){0, -1, 0});
+		translate_camera(data->scene->cam, (t_vec3){0, -0.1, 0});
+	if (keysym == XK_q)
+		rotate_y_camera(data->scene->cam, M_PI_4);
+	if (keysym == XK_e)
+		rotate_y_camera(data->scene->cam, -M_PI_4);
 	if (keysym == XK_a)
 		translate_light(data->scene->light, (t_vec3){-10, 0, 0});
 	if (keysym == XK_d)

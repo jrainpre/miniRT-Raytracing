@@ -48,7 +48,7 @@ typedef struct s_scene
 
 /* Functions */
 
-t_vec3	mat_mult(t_mat3x3 mat, t_vec3 pt);
+t_vec3	mat_mult(t_mat3x3 mat, t_vec3 vec);
 t_vec3	vec_add(t_vec3 vec1, t_vec3 vec2);
 t_vec3	vec_sub(t_vec3 vec1, t_vec3 vec2);
 t_vec3	vec_mult(t_vec3 vec, float_t factor);
@@ -62,16 +62,24 @@ t_pt3	ray_point_at(t_ray ray, float_t t);
 t_vec4 vec4_mult(t_vec4 vec, float_t factor);
 float_t clamp(float_t value, float_t min, float_t max);
 t_vec4 vec4_clamp(t_vec4 vec, float_t min, float_t max);
+t_vec3	rotate_x(t_vec3 vec, float_t angle);
+t_vec3	rotate_y(t_vec3 vec, float_t angle);
 
 void			*free_scene_null(t_scene *scene);
 t_scene			*init_scene(void);
-t_camera		*init_camera(t_camera *cam, t_resolution res);
+t_camera		*init_camera(t_resolution res, char *line);
+t_vec3			calc_upper_left_corner(t_camera *cam);
 void            translate_camera(t_camera *cam, t_vec3 vec);
+void			rotate_y_camera(t_camera *cam, float_t angle);
 t_light			*init_light(t_light *light);
 void			translate_light(t_light *light, t_vec3 vec);
 t_ambient_light	*init_ambient_light(t_ambient_light *ambient_light);
 int				fill_dummy_scene(t_data *data);
 int				add_sphere(t_lst_ref *objects, char *line);
+int				add_plane(t_lst_ref *objects, char *line);
+int				add_cylinder(t_lst_ref *objects, char *line);
+t_color			get_color_from_str_arr(char **str);
+t_vec3			get_vec_from_str_arr(char **str);
 
 t_data	*init_data(void);
 void	*free_data_null(t_data *data);
