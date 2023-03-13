@@ -28,6 +28,7 @@ SRCSLIST		:= main.c \
 					ambient_light.c \
 					camera.c \
 					colors.c \
+					cylinder.c \
 					data.c \
 					dummy_scene.c \
 					free.c \

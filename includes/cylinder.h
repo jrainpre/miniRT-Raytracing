@@ -1,5 +1,5 @@
 #ifndef CYLINDER_H
-#define CYLINDER_H
+# define CYLINDER_H
 /*
 ◦ Cylinder:
 cy 50.0,0.0,20.6 0.0,0.0,1.0 14.2 21.42 10,0,255
@@ -12,16 +12,16 @@ cy 50.0,0.0,20.6 0.0,0.0,1.0 14.2 21.42 10,0,255
 ∗ R,G,B colors in range [0,255]: 10, 0, 255
 */
 
-#include <math.h>
-#include "vector.h"
-#include "colors.h"
+# include <math.h>
+# include "vector.h"
+# include "colors.h"
 
 typedef struct s_cylinder {
-	t_pt3 orig;
-	t_pt3 axis;
-	float_t radius;
-	float_t height;
-	t_color color;
-} t_cylinder;
+	t_pt3	orig;
+	t_vec3	axis;
+	float_t	radius;
+	float_t	height;
+	t_color	color;
+}	t_cylinder;
 
 #endif

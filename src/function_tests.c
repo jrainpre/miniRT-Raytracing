@@ -150,6 +150,11 @@ void	print_object(void *object, t_object_type type)
 	else if (type == CYLINDER)
 	{
 		cylinder = (t_cylinder *)object;
+		print_vec3("cylinder->orig", cylinder->orig);
+		print_vec3("cylinder->axis", cylinder->axis);
+		printf("cylinder->radius\nr: %10.4f\n\n", cylinder->radius);
+		printf("cylinder->height\nr: %10.4f\n\n", cylinder->height);
+		print_color("cylinder->color", cylinder->color);
 	}
 	else if (type == PLANE)
 	{

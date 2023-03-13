@@ -20,5 +20,7 @@ int	fill_dummy_scene(t_data *data)
 		return (-1);
 	if (add_plane(scene->objects, "pl 0.0,0.0,-10.0 0.0,1.0,0.0 0,0,225") == -1)
 		return (-1);
+	if (add_cylinder(scene->objects, "cy   50.0,0.0,20.6  0.0,0.0,1.0 14.2   21.42   10,0,255") == -1)
+		return (-1);
 	return (1);
 }

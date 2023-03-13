@@ -35,11 +35,12 @@ int	add_plane(t_lst_ref *objects, char *line)
 	plane = malloc_or_print_error(sizeof (t_plane));
 	if (plane == NULL)
 		return (-1);
-	plane->point = (t_pt3){ft_atof(point[0]), ft_atof(point[1]), ft_atof(point[2])};
-	plane->normal_vec = (t_vec3){ft_atof(normal_vec[0]), ft_atof(normal_vec[1]), ft_atof(normal_vec[2])};
+	plane->point = get_vec_from_str_arr(point);
+	plane->normal_vec = get_vec_from_str_arr(normal_vec);
 	plane->color = get_color_from_str_arr(color);
 	parameters = free_arr_null(parameters);
 	point = free_arr_null(point);
+	normal_vec = free_arr_null(normal_vec);
 	color = free_arr_null(color);
 	ft_add_lst_last(ft_lstnew(plane), objects);
 	ft_lstlast(objects->head)->type = PLANE;

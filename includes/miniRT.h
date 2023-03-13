@@ -73,6 +73,7 @@ t_ambient_light	*init_ambient_light(t_ambient_light *ambient_light);
 int				fill_dummy_scene(t_data *data);
 int				add_sphere(t_lst_ref *objects, char *line);
 int				add_plane(t_lst_ref *objects, char *line);
+int				add_cylinder(t_lst_ref *objects, char *line);
 t_color			get_color_from_str_arr(char **str);
 t_vec3			get_vec_from_str_arr(char **str);
 
