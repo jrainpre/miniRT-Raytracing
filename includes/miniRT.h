@@ -62,11 +62,15 @@ t_pt3	ray_point_at(t_ray ray, float_t t);
 t_vec4 vec4_mult(t_vec4 vec, float_t factor);
 float_t clamp(float_t value, float_t min, float_t max);
 t_vec4 vec4_clamp(t_vec4 vec, float_t min, float_t max);
+t_vec3	rotate_x(t_vec3 vec, float_t angle);
+t_vec3	rotate_y(t_vec3 vec, float_t angle);
 
 void			*free_scene_null(t_scene *scene);
 t_scene			*init_scene(void);
 t_camera		*init_camera(t_resolution res, char *line);
+t_vec3			calc_upper_left_corner(t_camera *cam);
 void            translate_camera(t_camera *cam, t_vec3 vec);
+void			rotate_y_camera(t_camera *cam, float_t angle);
 t_light			*init_light(t_light *light);
 void			translate_light(t_light *light, t_vec3 vec);
 t_ambient_light	*init_ambient_light(t_ambient_light *ambient_light);

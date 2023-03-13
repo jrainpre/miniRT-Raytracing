@@ -5,7 +5,7 @@ int	fill_dummy_scene(t_data *data)
 	t_scene	*scene;
 
 	scene = data->scene;
-	scene->cam = init_camera(data->win, "C 0.0,0.0,1    0,0,-1    70");
+	scene->cam = init_camera(data->win, "C 0.0,0.0,0    0,0,-1    70");
 	if (scene->cam == NULL)
 		return (-1);
 	scene->light = init_light(scene->light);
@@ -14,7 +14,13 @@ int	fill_dummy_scene(t_data *data)
 	scene->ambient_light = init_ambient_light(scene->ambient_light);
 	if (scene->ambient_light == NULL)
 		return (-1);
-	if (add_sphere(scene->objects, "sp    0.0,0.0,0.0    0.10    129,0,0") == -1)
+	if (add_sphere(scene->objects, "sp    0.0,0.0,-1    0.30    129,0,0") == -1)
+		return (-1);
+	if (add_sphere(scene->objects, "sp    -1,0.0,-1    0.30    0,129,0") == -1)
+		return (-1);
+	if (add_sphere(scene->objects, "sp    -1,0.0,0    0.30    129,129,0") == -1)
+		return (-1);
+	if (add_sphere(scene->objects, "sp    -1,0.0,1    0.30    0,129,129") == -1)
 		return (-1);
 	if (add_plane(scene->objects, "pl 0.0,0.0,-10.0 0.0,1.0,0.0 0,0,225") == -1)
 		return (-1);

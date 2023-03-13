@@ -16,6 +16,8 @@ C -50.0,0,20 0,0,1 70
 typedef struct s_camera {
 	t_pt3	orig;
 	t_vec3	orientation;
+	float_t	rot_y_angle;
+	float_t	rot_x_angle;
 	float_t	fov;
 	float_t	sensor_width;
 	float_t	sensor_height;
