@@ -66,7 +66,7 @@ int get_color_sphere(t_sphere *sphere, t_light *light, t_vec3 hit_point)
 	return (color_conversion(color));
 }
 
-void calc_distant_t(t_sphere_hit_calc *calc)
+int calc_distant_t(t_sphere_hit_calc *calc)
 {
 	float_t t1;
 	float_t t2;
@@ -76,6 +76,9 @@ void calc_distant_t(t_sphere_hit_calc *calc)
 	t2 = (-calc->b + sqrt(calc->discriminant)) / (2.0f * calc->a);
 	smallest_t = fmin(t1, t2);
 	calc->distance_t = smallest_t;
+	if (calc->distance_t < 0)
+		return (-1);
+	return (0);
 }
 
 int hit_sphere(t_sphere *sphere, t_ray ray, t_light *light)
@@ -90,7 +93,8 @@ int hit_sphere(t_sphere *sphere, t_ray ray, t_light *light)
 	calc.discriminant = calc.b * calc.b - 4 * calc.a * calc.c;
 	if (calc.discriminant < 0)
 		return (-1);
-	calc_distant_t(&calc);
+	if (calc_distant_t(&calc) == -1)
+		return (-1);
 	return (light_shade_sphere(sphere, light, calc.distance_t, ray));
 }
 
