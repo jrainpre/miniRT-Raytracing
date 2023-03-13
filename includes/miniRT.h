@@ -48,7 +48,7 @@ typedef struct s_scene
 
 /* Functions */
 
-t_vec3	mat_mult(t_mat3x3 mat, t_vec3 pt);
+t_vec3	mat_mult(t_mat3x3 mat, t_vec3 vec);
 t_vec3	vec_add(t_vec3 vec1, t_vec3 vec2);
 t_vec3	vec_sub(t_vec3 vec1, t_vec3 vec2);
 t_vec3	vec_mult(t_vec3 vec, float_t factor);
@@ -65,7 +65,7 @@ t_vec4 vec4_clamp(t_vec4 vec, float_t min, float_t max);
 
 void			*free_scene_null(t_scene *scene);
 t_scene			*init_scene(void);
-t_camera		*init_camera(t_camera *cam, t_resolution res);
+t_camera		*init_camera(t_resolution res, char *line);
 void            translate_camera(t_camera *cam, t_vec3 vec);
 t_light			*init_light(t_light *light);
 void			translate_light(t_light *light, t_vec3 vec);

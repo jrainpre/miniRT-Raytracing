@@ -7,7 +7,10 @@ typedef enum e_object_type
 {
 	SPHERE,
 	CYLINDER,
-	PLANE
+	PLANE,
+	CAMERA,
+	LIGHT,
+	AMBIENT_LIGHT
 }	t_object_type;
 typedef struct s_lst
 {

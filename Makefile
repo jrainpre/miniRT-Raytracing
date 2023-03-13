@@ -39,6 +39,7 @@ SRCSLIST		:= main.c \
 					linked_list.c \
 					malloc_safe.c \
 					matrix_and_vector_operations.c \
+					matrix.c \
 					plane.c \
 					rays.c \
 					render.c \

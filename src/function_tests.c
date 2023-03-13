@@ -139,6 +139,7 @@ void	print_object(void *object, t_object_type type)
 	t_sphere	*sphere;
 	t_plane		*plane;
 	t_cylinder	*cylinder;
+	t_camera	*cam;
 
 	if (type == SPHERE)
 	{
@@ -162,5 +163,18 @@ void	print_object(void *object, t_object_type type)
 		print_vec3("plane->point", plane->point);
 		print_vec3("plane->normal_vec", plane->normal_vec);
 		print_color("plane->color", plane->color);
+	}
+	else if (type == CAMERA)
+	{
+		cam = (t_camera *)object;
+		print_vec3("cam->orig", cam->orig);
+		print_vec3("cam->orientation", cam->orientation);
+		printf("cam->fov\nr: %10.4f\n\n", cam->fov);
+		printf("cam->sensor_height\nr: %10.4f\n\n", cam->sensor_height);
+		printf("cam->sensor_width\nr: %10.4f\n\n", cam->sensor_width);
+		printf("cam->focal_length\nr: %10.4f\n\n", cam->focal_length);
+		print_vec3("cam->vertical", cam->vertical);
+		print_vec3("cam->horizontal", cam->horizontal);
+		print_vec3("cam->upper_left_corner", cam->upper_left_corner);
 	}
 }

@@ -5,7 +5,7 @@ int	fill_dummy_scene(t_data *data)
 	t_scene	*scene;
 
 	scene = data->scene;
-	scene->cam = init_camera(scene->cam, data->win);
+	scene->cam = init_camera(data->win, "C 0.0,0.0,10.0    0,0,-1    70");
 	if (scene->cam == NULL)
 		return (-1);
 	scene->light = init_light(scene->light);
