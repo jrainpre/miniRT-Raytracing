@@ -1,5 +1,5 @@
 #ifndef PLANE_H
-#define PLANE_H
+# define PLANE_H
 /*
 ◦ Plane:
 pl 0.0,0.0,-10.0 0.0,1.0,0.0 0,0,225
@@ -9,15 +9,15 @@ pl 0.0,0.0,-10.0 0.0,1.0,0.0 0,0,225
 ∗ R,G,B colors in range [0-255]: 0,0,225
 */
 
-#include <math.h>
-#include "vector.h"
-#include "colors.h"
+# include <math.h>
+# include "vector.h"
+# include "colors.h"
 
 typedef struct s_plane {
-	t_pt3 point;
-	t_pt3 normal_vec;
-	t_color color;
-} t_plane;
+	t_pt3	point;
+	t_vec3	normal_vec;
+	t_color	color;
+}	t_plane;
 
 
 

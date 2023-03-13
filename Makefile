@@ -25,6 +25,7 @@ HEADERS			:= $(addprefix ${HEADDIR}, ${HEADLIST})
 
 SRCSDIR			:= ./src/
 SRCSLIST		:= main.c \
+					ambient_light.c \
 					camera.c \
 					colors.c \
 					data.c \
@@ -37,9 +38,11 @@ SRCSLIST		:= main.c \
 					linked_list.c \
 					malloc_safe.c \
 					matrix_and_vector_operations.c \
+					plane.c \
 					rays.c \
 					render.c \
-					scene.c
+					scene.c \
+					sphere.c
 					
 SRCS			:= $(addprefix ${SRCSDIR}, ${SRCSLIST})
 
