@@ -42,10 +42,13 @@ SRCSLIST		:= main.c \
 					matrix.c \
 					plane.c \
 					rays.c \
+					read_file.c \
 					render.c \
 					scene.c \
 					sphere.c \
 					validate_ambient_light.c \
+					validate_arguments.c \
+					validate_file.c \
 					vector_helpers.c
 					
 SRCS			:= $(addprefix ${SRCSDIR}, ${SRCSLIST})
@@ -113,11 +116,11 @@ fclean:			clean
 re:				fclean all
 
 test:			all
-				./${NAME} testscene01.rt
+				./${NAME} scenes/testscene01.rt
 
 val:			all
 				valgrind \
 				--leak-check=full \
 				--show-leak-kinds=all \
 				--track-origins=yes \
-				./${NAME}
+				./${NAME} scenes/testscene01.rt
