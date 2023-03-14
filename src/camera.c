@@ -39,6 +39,10 @@ t_camera	*init_camera(t_resolution win, char *line)
 	cam->vertical = rotate_x(rotate_y(cam->vertical, cam->rot_y_angle), cam->rot_x_angle);
 	cam->horizontal = (t_vec3){-cam->sensor_width, 0, 0};
 	cam->horizontal = rotate_x(rotate_y(cam->horizontal, cam->rot_y_angle), cam->rot_x_angle);
+	cam->left = (t_vec3){1, 0, 0};
+	cam->left = rotate_x(rotate_y(cam->left, cam->rot_y_angle), cam->rot_x_angle);
+	cam->up = (t_vec3){0, 1, 0};
+	cam->up = rotate_x(rotate_y(cam->up, cam->rot_y_angle), cam->rot_x_angle);
 	cam->upper_left_corner = calc_upper_left_corner(cam);
 	parameters = free_arr_null(parameters);
 	orig = free_arr_null(orig);
@@ -71,6 +75,9 @@ void	translate_camera(t_camera *cam, t_vec3 vec)
 void	rotate_y_camera(t_camera *cam, float_t angle)
 {
 	cam->orientation = rotate_y(cam->orientation, angle);
+	cam->left = rotate_y(cam->left, angle);
+	cam->up = rotate_y(cam->up, angle);
+	// Check if I really have to rotate left and up
 	cam->horizontal = rotate_y(cam->horizontal, angle);
 	cam->vertical = rotate_y(cam->vertical, angle);
 	cam->upper_left_corner = calc_upper_left_corner(cam);
@@ -80,6 +87,9 @@ void	rotate_y_camera(t_camera *cam, float_t angle)
 void	rotate_x_camera(t_camera *cam, float_t angle)
 {
 	cam->orientation = rotate_x(cam->orientation, angle);
+	cam->left = rotate_x(cam->left, angle);
+	cam->up = rotate_x(cam->up, angle);
+	// Check if I really have to rotate left and up
 	cam->horizontal = rotate_x(cam->horizontal, angle);
 	cam->vertical = rotate_x(cam->vertical, angle);
 	cam->upper_left_corner = calc_upper_left_corner(cam);
@@ -94,4 +104,24 @@ void	dolly_in(t_camera *cam, float_t meters)
 void	dolly_out(t_camera *cam, float_t meters)
 {
 	translate_camera(cam, vec_mult(cam->orientation, -meters));
+}
+
+void	truck_left(t_camera *cam, float_t meters)
+{
+	translate_camera(cam, vec_mult(cam->left, meters));
+}
+
+void	truck_right(t_camera *cam, float_t meters)
+{
+	translate_camera(cam, vec_mult(cam->left, -meters));
+}
+
+void	pedestal_up(t_camera *cam, float_t meters)
+{
+	translate_camera(cam, vec_mult((t_vec3){0, 1, 0}, meters));
+}
+
+void	pedestal_down(t_camera *cam, float_t meters)
+{
+	translate_camera(cam, vec_mult((t_vec3){0, 1, 0}, -meters));
 }

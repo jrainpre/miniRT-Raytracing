@@ -169,6 +169,8 @@ void	print_object(void *object, t_object_type type)
 		cam = (t_camera *)object;
 		print_vec3("cam->orig", cam->orig);
 		print_vec3("cam->orientation", cam->orientation);
+		print_vec3("cam->left", cam->left);
+		print_vec3("cam->up", cam->up);
 		printf("cam->fov\nr: %10.4f\n\n", cam->fov);
 		printf("cam->sensor_height\nr: %10.4f\n\n", cam->sensor_height);
 		printf("cam->sensor_width\nr: %10.4f\n\n", cam->sensor_width);

@@ -17,13 +17,13 @@ int	key_hook1(int keysym, t_data *data)
 	if (keysym == XK_Escape)
 		close_app(data);
 	if (keysym == XK_Left)
-		translate_camera(data->scene->cam, (t_vec3){-0.1, 0, 0});
+		truck_left(data->scene->cam, 0.1);
 	if (keysym == XK_Right)
-		translate_camera(data->scene->cam, (t_vec3){0.1, 0, 0});
+		truck_right(data->scene->cam, 0.1);
 	if (keysym == XK_Up)
-		translate_camera(data->scene->cam, (t_vec3){0, 0.1, 0});
+		pedestal_up(data->scene->cam, 0.1);
 	if (keysym == XK_Down)
-		translate_camera(data->scene->cam, (t_vec3){0, -0.1, 0});
+		pedestal_down(data->scene->cam, 0.1);
 	if (keysym == XK_i)
 		dolly_in(data->scene->cam, 0.1);
 	if (keysym == XK_o)
