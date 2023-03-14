@@ -69,7 +69,7 @@ t_vec3 get_reflection_vec(t_vec3 hit_point, t_sphere *sphere, t_scene *scene)
 	return (reflection);
 }
 
-t_color get_refelctive_color(t_scene *scene, t_sphere *sphere, t_color act_color, t_vec3 hit_point)
+t_color get_spectecular_color(t_scene *scene, t_sphere *sphere, t_color act_color, t_vec3 hit_point)
 {
 	t_vec3 reflection;
 	t_vec3 to_camera;
@@ -82,31 +82,70 @@ t_color get_refelctive_color(t_scene *scene, t_sphere *sphere, t_color act_color
 	angle = scalar_prod(to_camera, reflection);
 	angle = clamp(angle, 0.0f, 1.0f);
 	angle = pow(angle, 10);
-	act_color = color_mult(act_color, 1.0 - angle * 0.5);
-	act_color = color_add(color_mult(scene->light->color, angle * 0.5), act_color);
+	act_color = color_mult(act_color, 1.0 - angle);
+	act_color = color_add(color_mult(scene->light->color, angle), act_color);
 	act_color = color_clamp(act_color, 0.0f, 1.0f);
-
 	return (act_color);
 }
 
-int get_color_sphere(t_sphere *sphere, t_scene *scene, t_vec3 hit_point)
+
+t_color get_diffuse_color(t_scene *scene, t_sphere *sphere, t_color act_color, t_vec3 hit_point)
 {
 	float_t angle;
-	t_color color;
-	t_color ambient;
-
 
 	angle = get_light_angle(hit_point, sphere, scene);
-	color = color_mult(sphere->color, angle);
-	color = color_clamp(color, 0.0f, 1.0f);
+	act_color = color_mult(act_color, angle);
+	act_color = color_clamp(act_color, 0.0f, 1.0f);
+	return (act_color);
+}
+
+t_color get_ambient_color(t_scene *scene, t_sphere *sphere, t_color act_color)
+{
+	t_color ambient;
+
 	ambient = color_mix(sphere->color, scene->ambient_light->color);
 	ambient = color_mult(ambient, scene->ambient_light->ratio);
-	color = color_add(color, ambient);
-
-	color = get_refelctive_color(scene, sphere, color, hit_point);
-
-	return (color_conversion(color));
+	act_color = color_add(act_color, ambient);
+	act_color = color_clamp(act_color, 0.0f, 1.0f);
+	return (act_color);
 }
+
+
+
+int get_color_sphere(t_sphere *sphere, t_scene *scene, t_vec3 hit_point)
+{
+	t_color ambient;
+	t_color diffuse;
+	t_color specular;
+	t_color result;
+
+	ambient = get_ambient_color(scene, sphere, sphere->color);
+	diffuse = get_diffuse_color(scene, sphere, sphere->color, hit_point);
+	specular = get_spectecular_color(scene, sphere, sphere->color, hit_point);
+	result = color_add(ambient, diffuse);
+	result = color_add(result, specular);
+	// result = color_clamp(result, 0.0f, 1.0f);
+	return (color_conversion(result));
+}
+
+// int get_color_sphere(t_sphere *sphere, t_scene *scene, t_vec3 hit_point)
+// {
+// 	float_t angle;
+// 	t_color color;
+// 	t_color ambient;
+
+
+// 	angle = get_light_angle(hit_point, sphere, scene);
+// 	color = color_mult(sphere->color, angle);
+// 	color = color_clamp(color, 0.0f, 1.0f);
+// 	ambient = color_mix(sphere->color, scene->ambient_light->color);
+// 	ambient = color_mult(ambient, scene->ambient_light->ratio);
+// 	color = color_add(color, ambient);
+
+// 	color = get_refelctive_color(scene, sphere, color, hit_point);
+
+// 	return (color_conversion(color));
+// }
 
 int calc_distant_t(t_sphere_hit_calc *calc)
 {
