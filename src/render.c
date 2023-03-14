@@ -52,11 +52,49 @@ float_t get_light_angle(t_vec3 hit_point, t_sphere *sphere, t_scene *scene)
 	return (angle);
 }
 
+t_vec3 get_reflection_vec(t_vec3 hit_point, t_sphere *sphere, t_scene *scene)
+{
+	t_vec3 unit_normal_hit_point;
+	t_vec3 b;
+	t_vec3 reflection;
+	t_vec3 to_light;
+
+	//R = 2*n*dot_product(n,L) - L   // When L goes from the vertex to the light source
+
+	to_light = vec_sub(scene->light->orig, hit_point);
+	to_light = unit_vec3(to_light);
+	unit_normal_hit_point = unit_vec3(vec_sub(hit_point, sphere->orig));
+	b = vec_mult(unit_normal_hit_point, 2 * scalar_prod(unit_normal_hit_point, to_light));
+	reflection = vec_sub(b, to_light);
+	return (reflection);
+}
+
+t_color get_refelctive_color(t_scene *scene, t_sphere *sphere, t_color act_color, t_vec3 hit_point)
+{
+	t_vec3 reflection;
+	t_vec3 to_camera;
+	t_vec3 to_light;
+	float_t angle;
+
+	reflection = unit_vec3(get_reflection_vec(hit_point, sphere, scene));
+	to_camera = unit_vec3(vec_sub(scene->cam->orig, hit_point));
+	to_light = unit_vec3(vec_sub(scene->light->orig, hit_point));
+	angle = scalar_prod(to_camera, reflection);
+	angle = clamp(angle, 0.0f, 1.0f);
+	angle = pow(angle, 10);
+	act_color = color_mult(act_color, 1.0 - angle * 0.5);
+	act_color = color_add(color_mult(scene->light->color, angle * 0.5), act_color);
+	act_color = color_clamp(act_color, 0.0f, 1.0f);
+
+	return (act_color);
+}
+
 int get_color_sphere(t_sphere *sphere, t_scene *scene, t_vec3 hit_point)
 {
 	float_t angle;
 	t_color color;
 	t_color ambient;
+
 
 	angle = get_light_angle(hit_point, sphere, scene);
 	color = color_mult(sphere->color, angle);
@@ -64,7 +102,9 @@ int get_color_sphere(t_sphere *sphere, t_scene *scene, t_vec3 hit_point)
 	ambient = color_mix(sphere->color, scene->ambient_light->color);
 	ambient = color_mult(ambient, scene->ambient_light->ratio);
 	color = color_add(color, ambient);
-	color = color_clamp(color, 0.0f, 1.0f);
+
+	color = get_refelctive_color(scene, sphere, color, hit_point);
+
 	return (color_conversion(color));
 }
 
