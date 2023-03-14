@@ -210,3 +210,24 @@ void	test_mat_dot_prod(void)
 	printf("%10.4f %10.4f %10.4f\n", d.c1r3, d.c2r3, d.c3r3);
 	printf("\n");
 }
+
+void	test_valid_ambient_lights(void)
+{
+	char	*s1 = "A 0.2 255,255,255\n";
+	char	*s2 = "A 0.2 255,255,255\n";
+	char	*s3 = "A    0.2 255,255,255";
+	char	*s4 = "As    0.2 255,255,255\n";
+	char	*s5 = "A    -0.2 255,255,255\n";
+	char	*s6 = "A    -0.2 ,255,255\n";
+	char	*s7 = "A    -0.2 , 255,255\n";
+	char	*s8 = "    A    0.2 5,255,255\n";
+
+	printf("\"%s\"\n%d\n\n", s1, is_valid_ambient_light(s1));
+	printf("\"%s\"\n%d\n\n", s2, is_valid_ambient_light(s2));
+	printf("\"%s\"\n%d\n\n", s3, is_valid_ambient_light(s3));
+	printf("\"%s\"\n%d\n\n", s4, is_valid_ambient_light(s4));
+	printf("\"%s\"\n%d\n\n", s5, is_valid_ambient_light(s5));
+	printf("\"%s\"\n%d\n\n", s6, is_valid_ambient_light(s6));
+	printf("\"%s\"\n%d\n\n", s7, is_valid_ambient_light(s7));
+	printf("\"%s\"\n%d\n\n", s8, is_valid_ambient_light(s8));
+}

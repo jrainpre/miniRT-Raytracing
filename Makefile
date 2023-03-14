@@ -45,6 +45,7 @@ SRCSLIST		:= main.c \
 					render.c \
 					scene.c \
 					sphere.c \
+					validate_ambient_light.c \
 					vector_helpers.c
 					
 SRCS			:= $(addprefix ${SRCSDIR}, ${SRCSLIST})
