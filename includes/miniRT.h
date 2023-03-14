@@ -22,6 +22,7 @@
 # include "camera.h"
 # include "colors.h"
 # include "cylinder.h"
+# include "deterministic_finite_automaton.h"
 # include "function_tests.h"
 # include "image.h"
 # include "light.h"
