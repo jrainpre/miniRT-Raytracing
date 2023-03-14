@@ -11,6 +11,12 @@ int	main(int argc, char **argv)
 	data = init_data();
 	if (data == NULL)
 		return (1);
+	data->scene_arr = read_file(argv[1]);
+	if (data->scene_arr == NULL)
+	{
+		data = free_data_null(data);
+		return (1);
+	}
 	data->scene = init_scene();
 	if (data->scene == NULL)
 	{

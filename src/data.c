@@ -10,6 +10,7 @@ t_data	*init_data(void)
 	data->mlx_ptr = NULL;
 	data->win_ptr = NULL;
 	data->scene = NULL;
+	data->scene_arr = NULL;
 	data->img = NULL;
 	data->win = (t_resolution){1280, 720};
 	return (data);
@@ -20,6 +21,7 @@ void	*free_data_null(t_data *data)
 	data->mlx_ptr = free_null(data->mlx_ptr);
 	data->img = free_null(data->img);
 	data->scene = free_scene_null(data->scene);
+	data->scene_arr = free_arr_null(data->scene_arr);
 	data = free_null(data);
 	return (data);
 }

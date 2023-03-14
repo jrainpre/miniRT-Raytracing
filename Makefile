@@ -116,11 +116,11 @@ fclean:			clean
 re:				fclean all
 
 test:			all
-				./${NAME} testscene01.rt
+				./${NAME} scenes/testscene01.rt
 
 val:			all
 				valgrind \
 				--leak-check=full \
 				--show-leak-kinds=all \
 				--track-origins=yes \
-				./${NAME}
+				./${NAME} scenes/testscene01.rt

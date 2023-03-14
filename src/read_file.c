@@ -20,7 +20,11 @@ char	**read_file(char *file)
 	{
 		line = get_next_line(fd);
 		if (line != NULL)
+		{
+			free_null(line);
+			line = "";
 			lines++;
+		}
 	}
 	if (close(fd) == -1)
 	{
@@ -37,12 +41,11 @@ char	**read_file(char *file)
 		exit(1);
 	}
 	i = 0;
-	while (i < lines)
+	while (i <= lines)
 	{
 		scene_arr[i] = get_next_line(fd);
 		i++;
 	}
-	scene_arr[i] = NULL;
 	if (close(fd) == -1)
 	{
 		perror("close");

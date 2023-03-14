@@ -28,6 +28,7 @@ typedef struct s_data
 	void			*mlx_ptr;
 	void			*win_ptr;
 	struct s_scene	*scene;
+	char			**scene_arr;
 	t_img			*img;
 	t_resolution	win;
 }			t_data;
