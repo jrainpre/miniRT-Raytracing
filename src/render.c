@@ -126,6 +126,25 @@ int get_color_sphere(t_sphere *sphere, t_scene *scene, t_vec3 hit_point)
 	return (color_conversion(result));
 }
 
+// int get_color_sphere(t_sphere *sphere, t_scene *scene, t_vec3 hit_point)
+// {
+// 	float_t angle;
+// 	t_color color;
+// 	t_color ambient;
+
+
+// 	angle = get_light_angle(hit_point, sphere, scene);
+// 	color = color_mult(sphere->color, angle);
+// 	color = color_clamp(color, 0.0f, 1.0f);
+// 	ambient = color_mix(sphere->color, scene->ambient_light->color);
+// 	ambient = color_mult(ambient, scene->ambient_light->ratio);
+// 	color = color_add(color, ambient);
+
+// 	color = get_refelctive_color(scene, sphere, color, hit_point);
+
+// 	return (color_conversion(color));
+// }
+
 int calc_distant_t(t_sphere_hit_calc *calc)
 {
 	float_t t1;
