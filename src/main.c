@@ -6,7 +6,8 @@ int	main(int argc, char **argv)
 
 	(void)argc;
 	(void)argv;
-	test_valid_ambient_lights();
+	if (!arguments_valid(argc, argv))
+		return (1);
 	data = init_data();
 	if (data == NULL)
 		return (1);
