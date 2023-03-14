@@ -77,7 +77,6 @@ void	rotate_y_camera(t_camera *cam, float_t angle)
 	cam->orientation = rotate_y(cam->orientation, angle);
 	cam->left = rotate_y(cam->left, angle);
 	cam->up = rotate_y(cam->up, angle);
-	// Check if I really have to rotate left and up
 	cam->horizontal = rotate_y(cam->horizontal, angle);
 	cam->vertical = rotate_y(cam->vertical, angle);
 	cam->upper_left_corner = calc_upper_left_corner(cam);
@@ -90,6 +89,25 @@ void	rotate_x_camera(t_camera *cam, float_t angle)
 	cam->left = rotate_x(cam->left, angle);
 	cam->up = rotate_x(cam->up, angle);
 	// Check if I really have to rotate left and up
+	cam->horizontal = rotate_x(cam->horizontal, angle);
+	cam->vertical = rotate_x(cam->vertical, angle);
+	cam->upper_left_corner = calc_upper_left_corner(cam);
+	print_object(cam, CAMERA);
+}
+
+void	tilt_down(t_camera *cam, float_t angle)
+{
+	t_mat3x3	state;
+
+	state = (t_mat3x3){
+		cam->left.x, cam->up.x, cam->orientation.x,
+		cam->left.y, cam->up.y, cam->orientation.y,
+		cam->left.z, cam->up.z, cam->orientation.z
+	};
+	cam->orientation = mat_mult(state, rotate_x((t_vec3){0, 0, 1}, angle));
+	cam->left = mat_mult(state, rotate_x((t_vec3){1, 0, 0}, angle));
+	cam->up = mat_mult(state, rotate_x((t_vec3){0, 1, 0}, angle));
+	// ALSO CHANGE HORIZONTAL, VERTICAL AND UPPER_LEFT_CORNER HERE
 	cam->horizontal = rotate_x(cam->horizontal, angle);
 	cam->vertical = rotate_x(cam->vertical, angle);
 	cam->upper_left_corner = calc_upper_left_corner(cam);
@@ -124,4 +142,14 @@ void	pedestal_up(t_camera *cam, float_t meters)
 void	pedestal_down(t_camera *cam, float_t meters)
 {
 	translate_camera(cam, vec_mult((t_vec3){0, 1, 0}, -meters));
+}
+
+void	pan_left(t_camera *cam, float_t angle)
+{
+	rotate_y_camera(cam, angle);
+}
+
+void	pan_right(t_camera *cam, float_t angle)
+{
+	rotate_y_camera(cam, -angle);
 }

@@ -29,9 +29,9 @@ int	key_hook1(int keysym, t_data *data)
 	if (keysym == XK_o)
 		dolly_out(data->scene->cam, 0.1);
 	if (keysym == XK_q)
-		rotate_y_camera(data->scene->cam, M_PI_4);
+		pan_left(data->scene->cam, M_PI_4 / 2);
 	if (keysym == XK_e)
-		rotate_y_camera(data->scene->cam, -M_PI_4);
+		pan_right(data->scene->cam, M_PI_4 / 2);
 	if (keysym == XK_r)
 		rotate_x_camera(data->scene->cam, M_PI_4 / 16);
 	if (keysym == XK_f)

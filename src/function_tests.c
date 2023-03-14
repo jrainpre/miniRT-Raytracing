@@ -180,3 +180,33 @@ void	print_object(void *object, t_object_type type)
 		print_vec3("cam->upper_left_corner", cam->upper_left_corner);
 	}
 }
+
+void	test_mat_dot_prod(void)
+{
+	t_mat3x3	a;
+	t_mat3x3	b;
+	t_mat3x3	c;
+	t_mat3x3	d;
+
+	a = (t_mat3x3){
+		1, 0, 0,
+		0, 1, 0,
+		0, 0, 1
+	};
+	b = (t_mat3x3){
+		1, 4, 7,
+		2, 5, 8,
+		3, 6, 9
+	};
+	c = (t_mat3x3){
+		-9, -6, -3,
+		-8, -5, -2,
+		-7, -4, -1
+	};
+	d = mat3x3_dot_prod(b, c);
+	printf("d = b * c\n");
+	printf("%10.4f %10.4f %10.4f\n", d.c1r1, d.c2r1, d.c3r1);
+	printf("%10.4f %10.4f %10.4f\n", d.c1r2, d.c2r2, d.c3r2);
+	printf("%10.4f %10.4f %10.4f\n", d.c1r3, d.c2r3, d.c3r3);
+	printf("\n");
+}
