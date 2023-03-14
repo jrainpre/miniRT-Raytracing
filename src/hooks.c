@@ -13,6 +13,7 @@ int	loop_hook(t_data *data)
 
 int	key_hook1(int keysym, t_data *data)
 {
+	printf("%x\n", keysym);
 	if (keysym == XK_Escape)
 		close_app(data);
 	if (keysym == XK_Left)
@@ -23,6 +24,10 @@ int	key_hook1(int keysym, t_data *data)
 		translate_camera(data->scene->cam, (t_vec3){0, 0.1, 0});
 	if (keysym == XK_Down)
 		translate_camera(data->scene->cam, (t_vec3){0, -0.1, 0});
+	if (keysym == XK_i)
+		dolly_in(data->scene->cam, 0.1);
+	if (keysym == XK_o)
+		dolly_out(data->scene->cam, 0.1);
 	if (keysym == XK_q)
 		rotate_y_camera(data->scene->cam, M_PI_4);
 	if (keysym == XK_e)

@@ -85,3 +85,13 @@ void	rotate_x_camera(t_camera *cam, float_t angle)
 	cam->upper_left_corner = calc_upper_left_corner(cam);
 	print_object(cam, CAMERA);
 }
+
+void	dolly_in(t_camera *cam, float_t meters)
+{
+	translate_camera(cam, vec_mult(cam->orientation, meters));
+}
+
+void	dolly_out(t_camera *cam, float_t meters)
+{
+	translate_camera(cam, vec_mult(cam->orientation, -meters));
+}

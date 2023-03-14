@@ -71,6 +71,8 @@ t_vec3			calc_upper_left_corner(t_camera *cam);
 void            translate_camera(t_camera *cam, t_vec3 vec);
 void			rotate_y_camera(t_camera *cam, float_t angle);
 void			rotate_x_camera(t_camera *cam, float_t angle);
+void			dolly_in(t_camera *cam, float_t meters);
+void			dolly_out(t_camera *cam, float_t meters);
 t_light			*init_light(char *line);
 void			translate_light(t_light *light, t_vec3 vec);
 t_ambient_light	*init_ambient_light(char *line);
