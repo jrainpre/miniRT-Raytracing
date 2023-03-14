@@ -21,3 +21,14 @@ t_vec3	rotate_y(t_vec3 vec, float_t angle)
 		-sin(angle), 0, cos(angle)};
 	return (mat_mult(rot_y, vec));
 }
+
+t_mat3x3	get_rot_x(float_t angle)
+{
+	t_mat3x3	rot_x;
+
+	rot_x = (t_mat3x3){
+		1, 0, 0,
+		0, cos(angle), -sin(angle),
+		0, sin(angle), cos(angle)};
+	return (rot_x);
+}

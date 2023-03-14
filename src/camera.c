@@ -95,23 +95,34 @@ void	rotate_x_camera(t_camera *cam, float_t angle)
 	print_object(cam, CAMERA);
 }
 
-void	tilt_down(t_camera *cam, float_t angle)
+void	rotate_camera_around_left_axis(t_camera *cam, float_t angle)
 {
-	t_mat3x3	state;
+	t_mat3x3	old_state;
+	t_mat3x3	new_state;
 
-	state = (t_mat3x3){
+	old_state = (t_mat3x3){
 		cam->left.x, cam->up.x, cam->orientation.x,
 		cam->left.y, cam->up.y, cam->orientation.y,
 		cam->left.z, cam->up.z, cam->orientation.z
 	};
-	cam->orientation = mat_mult(state, rotate_x((t_vec3){0, 0, 1}, angle));
-	cam->left = mat_mult(state, rotate_x((t_vec3){1, 0, 0}, angle));
-	cam->up = mat_mult(state, rotate_x((t_vec3){0, 1, 0}, angle));
-	// ALSO CHANGE HORIZONTAL, VERTICAL AND UPPER_LEFT_CORNER HERE
-	cam->horizontal = rotate_x(cam->horizontal, angle);
-	cam->vertical = rotate_x(cam->vertical, angle);
+	new_state = mat3x3_dot_prod(old_state, get_rot_x(angle));
+	cam->orientation = mat_mult(new_state, (t_vec3){0, 0, 1});
+	cam->left = mat_mult(new_state, (t_vec3){1, 0, 0});
+	cam->up = mat_mult(new_state, (t_vec3){0, 1, 0});
+	cam->vertical = mat_mult(new_state, (t_vec3){0, -cam->sensor_height, 0});
+	cam->horizontal = mat_mult(new_state, (t_vec3){-cam->sensor_width, 0, 0});
 	cam->upper_left_corner = calc_upper_left_corner(cam);
 	print_object(cam, CAMERA);
+}
+
+void	tilt_down(t_camera *cam, float_t angle)
+{
+	rotate_camera_around_left_axis(cam, angle);
+}
+
+void	tilt_up(t_camera *cam, float_t angle)
+{
+	rotate_camera_around_left_axis(cam, -angle);
 }
 
 void	dolly_in(t_camera *cam, float_t meters)
