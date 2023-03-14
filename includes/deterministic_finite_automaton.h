@@ -20,4 +20,7 @@ typedef enum e_a_state
 	A_REJECT
 }	t_a_state;
 
+int			is_valid_ambient_light(char *line);
+t_a_state	ambient_light_transition(t_a_state state, char c);
+
 #endif

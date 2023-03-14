@@ -110,6 +110,4 @@ int calc_distant_t(t_sphere_hit_calc *calc);
 int hit_sphere(t_sphere *sphere, t_ray ray, t_scene *scene);
 t_color get_refelctive_color(t_scene *scene, t_sphere *sphere, t_color act_color, t_vec3 hit_point);
 
-
-
 #endif
