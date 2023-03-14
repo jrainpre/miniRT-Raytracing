@@ -8,10 +8,10 @@ int	fill_dummy_scene(t_data *data)
 	scene->cam = init_camera(data->win, "C 0.0,0.0,0    0,0,-1    70");
 	if (scene->cam == NULL)
 		return (-1);
-	scene->light = init_light(scene->light);
+	scene->light = init_light("L  100,100,50  1.0  255,255,255");
 	if (scene->light == NULL)
 		return (-1);
-	scene->ambient_light = init_ambient_light(scene->ambient_light);
+	scene->ambient_light = init_ambient_light("A 0.4 0,0,0");
 	if (scene->ambient_light == NULL)
 		return (-1);
 	if (add_sphere(scene->objects, "sp    0.0,0.0,-1    0.30    129,0,0") == -1)

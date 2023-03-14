@@ -1,13 +1,37 @@
 #include "miniRT.h"
 
-t_light	*init_light(t_light *light)
+t_light	*init_light(char *line)
 {
+	t_light	*light;
+	char	**parameters;
+	char	**orig;
+	char	**color;
+
+	parameters = ft_split(line, ' ');
+	if (parameters == NULL)
+		return (NULL);
+	orig = ft_split(parameters[1], ',');
+	if (orig == NULL)
+	{
+		parameters = free_arr_null(parameters);
+		return (NULL);
+	}
+	color = ft_split(parameters[3], ',');
+	if (color == NULL)
+	{
+		parameters = free_arr_null(parameters);
+		orig = free_arr_null(orig);
+		return (NULL);
+	}
 	light = malloc_or_print_error(sizeof (t_light));
 	if (light == NULL)
 		return (NULL);
-	light->orig = (t_pt3){100, 100, 50};
-	light->color = (t_color){1.0, 1.0, 1.0, 1.0};
-	light->ratio = 1;
+	light->orig = get_vec_from_str_arr(orig);
+	light->ratio = ft_atof(parameters[2]);
+	light->color = get_color_from_str_arr(color);
+	parameters = free_arr_null(parameters);
+	orig = free_arr_null(orig);
+	color = free_arr_null(color);
 	return (light);
 }
 

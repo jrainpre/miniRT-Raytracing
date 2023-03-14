@@ -13,20 +13,29 @@ int	loop_hook(t_data *data)
 
 int	key_hook1(int keysym, t_data *data)
 {
+	printf("%x\n", keysym);
 	if (keysym == XK_Escape)
 		close_app(data);
 	if (keysym == XK_Left)
-		translate_camera(data->scene->cam, (t_vec3){-0.1, 0, 0});
+		truck_left(data->scene->cam, 0.1);
 	if (keysym == XK_Right)
-		translate_camera(data->scene->cam, (t_vec3){0.1, 0, 0});
+		truck_right(data->scene->cam, 0.1);
 	if (keysym == XK_Up)
-		translate_camera(data->scene->cam, (t_vec3){0, 0.1, 0});
+		pedestal_up(data->scene->cam, 0.1);
 	if (keysym == XK_Down)
-		translate_camera(data->scene->cam, (t_vec3){0, -0.1, 0});
+		pedestal_down(data->scene->cam, 0.1);
+	if (keysym == XK_i)
+		dolly_in(data->scene->cam, 0.1);
+	if (keysym == XK_o)
+		dolly_out(data->scene->cam, 0.1);
 	if (keysym == XK_q)
 		rotate_y_camera(data->scene->cam, M_PI_4);
 	if (keysym == XK_e)
 		rotate_y_camera(data->scene->cam, -M_PI_4);
+	if (keysym == XK_r)
+		rotate_x_camera(data->scene->cam, M_PI_4 / 16);
+	if (keysym == XK_f)
+		rotate_x_camera(data->scene->cam, -M_PI_4 / 16);
 	if (keysym == XK_a)
 		translate_light(data->scene->light, (t_vec3){-10, 0, 0});
 	if (keysym == XK_d)
