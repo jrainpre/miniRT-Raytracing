@@ -48,21 +48,22 @@ typedef struct s_scene
 
 /* Functions */
 
-t_vec3	mat_mult(t_mat3x3 mat, t_vec3 vec);
-t_vec3	vec_add(t_vec3 vec1, t_vec3 vec2);
-t_vec3	vec_sub(t_vec3 vec1, t_vec3 vec2);
-t_vec3	vec_mult(t_vec3 vec, float_t factor);
-t_vec3	vec_div(t_vec3 vec, float_t factor);
-float_t	scalar_prod(t_vec3 vec1, t_vec3 vec2);
-t_vec3	cross_prod(t_vec3 vec1, t_vec3 vec2);
-float_t	vec_length(t_vec3 vec);
-t_vec3	unit_vec3(t_vec3 vec);
-int		vec_cmp(t_vec3 vec1, t_vec3 vec2);
-t_pt3	ray_point_at(t_ray ray, float_t t);
-float_t clamp(float_t value, float_t min, float_t max);
-t_vec3	rotate_x(t_vec3 vec, float_t angle);
-t_vec3	rotate_y(t_vec3 vec, float_t angle);
-float_t vec3_distance(t_vec3 vec1, t_vec3 vec2);
+t_vec3			mat_mult(t_mat3x3 mat, t_vec3 vec);
+t_mat3x3		mat3x3_dot_prod(t_mat3x3 a, t_mat3x3 b);
+t_vec3			vec_add(t_vec3 vec1, t_vec3 vec2);
+t_vec3			vec_sub(t_vec3 vec1, t_vec3 vec2);
+t_vec3			vec_mult(t_vec3 vec, float_t factor);
+t_vec3			vec_div(t_vec3 vec, float_t factor);
+float_t			scalar_prod(t_vec3 vec1, t_vec3 vec2);
+t_vec3			cross_prod(t_vec3 vec1, t_vec3 vec2);
+float_t			vec_length(t_vec3 vec);
+t_vec3			unit_vec3(t_vec3 vec);
+int				vec_cmp(t_vec3 vec1, t_vec3 vec2);
+t_pt3			ray_point_at(t_ray ray, float_t t);
+float_t 		clamp(float_t value, float_t min, float_t max);
+t_vec3			rotate_x(t_vec3 vec, float_t angle);
+t_vec3			rotate_y(t_vec3 vec, float_t angle);
+float_t 		vec3_distance(t_vec3 vec1, t_vec3 vec2);
 
 void			*free_scene_null(t_scene *scene);
 t_scene			*init_scene(void);
@@ -77,6 +78,8 @@ void			truck_left(t_camera *cam, float_t meters);
 void			truck_right(t_camera *cam, float_t meters);
 void			pedestal_up(t_camera *cam, float_t meters);
 void			pedestal_down(t_camera *cam, float_t meters);
+void			pan_left(t_camera *cam, float_t angle);
+void			pan_right(t_camera *cam, float_t angle);
 t_light			*init_light(char *line);
 void			translate_light(t_light *light, t_vec3 vec);
 t_ambient_light	*init_ambient_light(char *line);

@@ -10,6 +10,22 @@ t_vec3	mat_mult(t_mat3x3 mat, t_vec3 vec)
 	return (res);
 }
 
+t_mat3x3	mat3x3_dot_prod(t_mat3x3 a, t_mat3x3 b)
+{
+	t_mat3x3	res;
+
+	res.c1r1 = b.c1r1 * a.c1r1 + b.c1r2 * a.c2r1 + b.c1r3 * a.c3r1;
+	res.c1r2 = b.c1r1 * a.c1r2 + b.c1r2 * a.c2r2 + b.c1r3 * a.c3r2;
+	res.c1r3 = b.c1r1 * a.c1r3 + b.c1r2 * a.c2r3 + b.c1r3 * a.c3r3;
+	res.c2r1 = b.c2r1 * a.c1r1 + b.c2r2 * a.c2r1 + b.c2r3 * a.c3r1;
+	res.c2r2 = b.c2r1 * a.c1r2 + b.c2r2 * a.c2r2 + b.c2r3 * a.c3r2;
+	res.c2r3 = b.c2r1 * a.c1r3 + b.c2r2 * a.c2r3 + b.c2r3 * a.c3r3;
+	res.c3r1 = b.c3r1 * a.c1r1 + b.c3r2 * a.c2r1 + b.c3r3 * a.c3r1;
+	res.c3r2 = b.c3r1 * a.c1r2 + b.c3r2 * a.c2r2 + b.c3r3 * a.c3r2;
+	res.c3r3 = b.c3r1 * a.c1r3 + b.c3r2 * a.c2r3 + b.c3r3 * a.c3r3;
+	return (res);
+}
+
 t_vec3	vec_add(t_vec3 vec1, t_vec3 vec2)
 {
 	t_vec3	sum;
