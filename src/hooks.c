@@ -27,6 +27,10 @@ int	key_hook1(int keysym, t_data *data)
 		rotate_y_camera(data->scene->cam, M_PI_4);
 	if (keysym == XK_e)
 		rotate_y_camera(data->scene->cam, -M_PI_4);
+	if (keysym == XK_r)
+		rotate_x_camera(data->scene->cam, M_PI_4 / 16);
+	if (keysym == XK_f)
+		rotate_x_camera(data->scene->cam, -M_PI_4 / 16);
 	if (keysym == XK_a)
 		translate_light(data->scene->light, (t_vec3){-10, 0, 0});
 	if (keysym == XK_d)

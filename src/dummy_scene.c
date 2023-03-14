@@ -8,7 +8,7 @@ int	fill_dummy_scene(t_data *data)
 	scene->cam = init_camera(data->win, "C 0.0,0.0,0    0,0,-1    70");
 	if (scene->cam == NULL)
 		return (-1);
-	scene->light = init_light(scene->light);
+	scene->light = init_light("L  100,100,50  1.0  255,255,255");
 	if (scene->light == NULL)
 		return (-1);
 	scene->ambient_light = init_ambient_light(scene->ambient_light);

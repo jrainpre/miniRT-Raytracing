@@ -76,3 +76,12 @@ void	rotate_y_camera(t_camera *cam, float_t angle)
 	cam->upper_left_corner = calc_upper_left_corner(cam);
 	print_object(cam, CAMERA);
 }
+
+void	rotate_x_camera(t_camera *cam, float_t angle)
+{
+	cam->orientation = rotate_x(cam->orientation, angle);
+	cam->horizontal = rotate_x(cam->horizontal, angle);
+	cam->vertical = rotate_x(cam->vertical, angle);
+	cam->upper_left_corner = calc_upper_left_corner(cam);
+	print_object(cam, CAMERA);
+}
