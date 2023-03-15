@@ -29,7 +29,7 @@ t_color color_mix(t_color obj_color, t_color light_color);
 t_color color_mult(t_color vec, float_t factor);
 t_color color_clamp(t_color vec, float_t min, float_t max);
 t_color color_add(t_color vec1, t_color vec2);
-t_color color_mult_vec(t_color vec1, t_color vec2);
+t_color color_mult_color(t_color color1, t_color color2);
 t_color color_add_factor(t_color vec, float_t factor);
 t_color mix_light(t_color act_color, t_color obj_color, t_color light_color, float_t ratio);
 
