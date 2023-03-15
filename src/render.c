@@ -74,16 +74,17 @@ t_color get_spectecular_color(t_scene *scene, t_sphere *sphere, t_color act_colo
 	t_vec3 to_camera;
 	t_vec3 to_light;
 	float_t angle;
-
+	float_t factor;
+	
 	reflection = unit_vec3(get_reflection_vec(hit_point, sphere, scene));
 	to_camera = unit_vec3(vec_sub(scene->cam->orig, hit_point));
 	to_light = unit_vec3(vec_sub(scene->light->orig, hit_point));
 	angle = scalar_prod(to_camera, reflection);
 	angle = clamp(angle, 0.0f, 1.0f);
-	angle = pow(angle, 40);
-	act_color = color_mult_color(sphere->color, scene->light->color);
-	act_color = color_mult(act_color, scene->light->ratio);
-	act_color = color_mult(act_color, angle);
+	float_t refctivness = 90;
+	angle = pow(angle, refctivness);
+	factor = refctivness / 256;
+	act_color = color_mult((t_color){1.0, 1.0, 1.0, 1.0}, angle * factor * scene->light->ratio);
 	act_color = color_clamp(act_color, 0.0f, 1.0f);
 	return (act_color);
 }
