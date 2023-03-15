@@ -74,5 +74,6 @@ int			is_valid_light(char *line);
 int			is_valid_plane(char *line);
 int			is_valid_sphere(char *line);
 t_a_state	ambient_light_transition(t_a_state state, char c);
+t_s_state	sphere_transition(t_s_state state, char c);
 
 #endif
