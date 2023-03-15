@@ -1,16 +1,16 @@
 #include "miniRT.h"
 
-int color_conversion(t_color color)
+int	color_conversion(t_color color)
 {
-	int r;
-	int g;
-	int b;
-	int a;
+	int	r;
+	int	g;
+	int	b;
+	int	a;
 
-	r = color.r * 254.0f;
-	g = color.g * 254.0f;
-	b = color.b * 254.0f;
-	a = color.a * 254.0f;
+	r = color.r * 255.0f;
+	g = color.g * 255.0f;
+	b = color.b * 255.0f;
+	a = (1 - color.a) * 255.0f;
 	return (a << 24 | r << 16 | g << 8 | b);
 }
 
@@ -25,17 +25,17 @@ t_color	get_color_from_str_arr(char **str)
 	return (color);
 }
 
-t_color color_mix(t_color obj_color, t_color light_color)
+t_color	color_mix(t_color obj_color, t_color light_color)
 {
 	t_color	mix;
-	
-		mix.r = (obj_color.r + light_color.r) / 2;
-		mix.g = (obj_color.g + light_color.g) / 2;
-		mix.b = (obj_color.b + light_color.b) / 2;
+
+	mix.r = (obj_color.r + light_color.r) / 2;
+	mix.g = (obj_color.g + light_color.g) / 2;
+	mix.b = (obj_color.b + light_color.b) / 2;
 	return (mix);
 }
 
-t_color color_mult(t_color color, float_t factor)
+t_color	color_mult(t_color color, float_t factor)
 {
 	t_color	prod;
 
@@ -46,7 +46,7 @@ t_color color_mult(t_color color, float_t factor)
 	return (prod);
 }
 
-t_color color_clamp(t_color color, float_t min, float_t max)
+t_color	color_clamp(t_color color, float_t min, float_t max)
 {
 	t_color	clamped;
 
@@ -57,7 +57,7 @@ t_color color_clamp(t_color color, float_t min, float_t max)
 	return (clamped);
 }
 
-t_color color_add(t_color color1, t_color color2)
+t_color	color_add(t_color color1, t_color color2)
 {
 	t_color	sum;
 
@@ -68,7 +68,7 @@ t_color color_add(t_color color1, t_color color2)
 	return (sum);
 }
 
-t_color color_mult_color(t_color color1, t_color color2)
+t_color	color_mult_color(t_color color1, t_color color2)
 {
 	t_color	prod;
 
@@ -79,7 +79,7 @@ t_color color_mult_color(t_color color1, t_color color2)
 	return (prod);
 }
 
-t_color color_add_factor(t_color color, float_t factor)
+t_color	color_add_factor(t_color color, float_t factor)
 {
 	t_color	sum;
 
@@ -90,9 +90,10 @@ t_color color_add_factor(t_color color, float_t factor)
 	return (sum);
 }
 
-t_color mix_light(t_color act_color, t_color obj_color, t_color light_color, float_t ratio)
+t_color	mix_light(t_color act_color, t_color obj_color, t_color light_color,
+		float_t ratio)
 {
-	t_color mix;
+	t_color	mix;
 
 	mix = color_mix(obj_color, light_color);
 	mix = color_mult(mix, ratio);
