@@ -2,16 +2,16 @@
 
 int color_conversion(t_color color)
 {
-	u_int8_t r;
-	u_int8_t g;
-	u_int8_t b;
-	u_int8_t a;
+	int r;
+	int g;
+	int b;
+	int a;
 
-	r = (u_int8_t)(color.r * 255.0f);
-	g = (u_int8_t)(color.g * 255.0f);
-	b = (u_int8_t)(color.b * 255.0f);
-	a = (u_int8_t)(color.a * 255.0f);
-	return (a << 24 | b << 16 | g << 8 | r);
+	r = color.r * 254.0f;
+	g = color.g * 254.0f;
+	b = color.b * 254.0f;
+	a = color.a * 254.0f;
+	return (a << 24 | r << 16 | g << 8 | b);
 }
 
 t_color	get_color_from_str_arr(char **str)
