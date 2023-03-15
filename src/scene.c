@@ -18,6 +18,8 @@ t_scene	*init_scene(void)
 
 void	*free_scene_null(t_scene *scene)
 {
+	if (scene == NULL)
+		return (NULL);
 	scene->cam = free_null(scene->cam);
 	scene->objects = free_lst_null(scene->objects);
 	scene->light = free_null(scene->light);

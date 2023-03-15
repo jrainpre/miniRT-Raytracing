@@ -113,6 +113,6 @@ int	is_valid_ambient_light(char *line)
 	}
 	if (state == A_ACCEPT)
 		return (1);
-	ft_putstr_fd("Error\n", STDERR_FILENO);
+	ft_putstr_fd("Error\nAmbient light could not be parsed\n", STDERR_FILENO);
 	return (0);
 }

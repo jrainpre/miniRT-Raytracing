@@ -48,7 +48,12 @@ SRCSLIST		:= main.c \
 					sphere.c \
 					validate_ambient_light.c \
 					validate_arguments.c \
-					validate_file.c \
+					validate_camera.c \
+					validate_cylinder.c \
+					validate_light.c \
+					validate_plane.c \
+					validate_scene.c \
+					validate_sphere.c \
 					vector_helpers.c
 					
 SRCS			:= $(addprefix ${SRCSDIR}, ${SRCSLIST})
