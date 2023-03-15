@@ -20,8 +20,27 @@ typedef enum e_a_state
 	A_REJECT
 }	t_a_state;
 
-int			is_valid_file(int fd);
+typedef enum e_line_state
+{
+	LINE_START,
+	LINE_AMBIENT_LIGHT,
+	LINE_CAMERA,
+	LINE_LIGHT,
+	LINE_SPHERE,
+	LINE_PLANE,
+	LINE_CYLINDER,
+	LINE_NEW_LINE,
+	LINE_ACCEPT,
+	LINE_REJECT
+}	t_line_state;
+
+int			is_valid_scene(char **scene_arr);
 int			is_valid_ambient_light(char *line);
+int			is_valid_camera(char *line);
+int			is_valid_cylinder(char *line);
+int			is_valid_light(char *line);
+int			is_valid_plane(char *line);
+int			is_valid_sphere(char *line);
 t_a_state	ambient_light_transition(t_a_state state, char c);
 
 #endif

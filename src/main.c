@@ -17,6 +17,11 @@ int	main(int argc, char **argv)
 		data = free_data_null(data);
 		return (1);
 	}
+	if (!is_valid_scene(data->scene_arr))
+	{
+		data = free_data_null(data);
+		return (1);
+	}
 	data->scene = init_scene();
 	if (data->scene == NULL)
 	{
