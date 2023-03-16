@@ -104,6 +104,7 @@ double			ft_atof(const char *str);
 char			**read_file(char *file);
 int				arguments_valid(int argc, char **argv);
 int				is_valid_ratio(float_t ratio);
+int				is_valid_color(t_color color);
 
 int light_shade_sphere(t_sphere *sphere, t_scene *scene, float_t distance_t, t_ray ray);
 t_vec3 hit_point_sphere(float_t distance_t, t_ray ray);

@@ -205,15 +205,12 @@ int	is_valid_light(char *line)
 	while (line[i])
 	{
 		state = light_transition(state, line[i]);
-		printf("%d\n", state);
-
 		if (state == L_REJECT)
 			break ;
 		i++;
 	}
 	if (state == L_ACCEPT || state == L_SPACE_4 || state == L_BLUE)
 		return (1);
-	printf("%d\n", state);
 	ft_putstr_fd("Error\nLight could not be parsed\n", STDERR_FILENO);
 	return (0);
 }
