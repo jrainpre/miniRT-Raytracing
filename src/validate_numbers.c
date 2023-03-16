@@ -10,3 +10,32 @@ int	is_valid_ratio(float_t ratio)
 	}
 	return (1);
 }
+
+int	is_valid_color(t_color color)
+{
+	if (color.r < 0 || 1 < color.r)
+	{
+		ft_putstr_fd("Error\n", STDERR_FILENO);
+		ft_putstr_fd("Red expected to be between 0 and 255\n", STDERR_FILENO);
+		return (0);
+	}
+	if (color.g < 0 || 1 < color.g)
+	{
+		ft_putstr_fd("Error\n", STDERR_FILENO);
+		ft_putstr_fd("Green expected to be between 0 and 255\n", STDERR_FILENO);
+		return (0);
+	}
+	if (color.b < 0 || 1 < color.b)
+	{
+		ft_putstr_fd("Error\n", STDERR_FILENO);
+		ft_putstr_fd("Blue expected to be between 0 and 255\n", STDERR_FILENO);
+		return (0);
+	}
+	if (color.a < 0 || 1 < color.a)
+	{
+		ft_putstr_fd("Error\n", STDERR_FILENO);
+		ft_putstr_fd("Alpha expected to be between 0 and 255\n", STDERR_FILENO);
+		return (0);
+	}
+	return (1);
+}

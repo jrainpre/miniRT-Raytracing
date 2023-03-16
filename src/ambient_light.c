@@ -27,6 +27,13 @@ t_ambient_light	*init_ambient_light(char *line)
 		return (NULL);
 	}
 	ambient_light->color = get_color_from_str_arr(color);
+	if (!is_valid_color(ambient_light->color))
+	{
+		ambient_light = free_null(ambient_light);
+		parameters = free_arr_null(parameters);
+		color = free_arr_null(color);
+		return (NULL);
+	}
 	parameters = free_arr_null(parameters);
 	color = free_arr_null(color);
 	return (ambient_light);
