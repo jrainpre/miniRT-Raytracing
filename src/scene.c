@@ -8,6 +8,8 @@ t_scene	*init_scene(void)
 	if (scene == NULL)
 		return (NULL);
 	scene->cam = NULL;
+	scene->ambient_light = NULL;
+	scene->light = NULL;
 	scene->objects = malloc_or_print_error(sizeof (t_lst_ref));
 	if (scene->objects == NULL)
 		return (NULL);

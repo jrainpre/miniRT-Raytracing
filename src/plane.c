@@ -37,7 +37,25 @@ int	add_plane(t_lst_ref *objects, char *line)
 		return (-1);
 	plane->point = get_vec_from_str_arr(point);
 	plane->normal_vec = get_vec_from_str_arr(normal_vec);
+	if (!is_normalized(plane->normal_vec))
+	{
+		plane = free_null(plane);
+		parameters = free_arr_null(parameters);
+		point = free_arr_null(point);
+		normal_vec = free_arr_null(normal_vec);
+		color = free_arr_null(color);
+		return (-1);
+	}
 	plane->color = get_color_from_str_arr(color);
+	if (!is_valid_color(plane->color))
+	{
+		plane = free_null(plane);
+		parameters = free_arr_null(parameters);
+		point = free_arr_null(point);
+		normal_vec = free_arr_null(normal_vec);
+		color = free_arr_null(color);
+		return (-1);
+	}
 	parameters = free_arr_null(parameters);
 	point = free_arr_null(point);
 	normal_vec = free_arr_null(normal_vec);

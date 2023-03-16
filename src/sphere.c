@@ -29,6 +29,14 @@ int	add_sphere(t_lst_ref *objects, char *line)
 	sphere->orig = get_vec_from_str_arr(orig);
 	sphere->radius = ft_atof(parameters[2]) / 2;
 	sphere->color = get_color_from_str_arr(color);
+	if (!is_valid_color(sphere->color))
+	{
+		sphere = free_null(sphere);
+		parameters = free_arr_null(parameters);
+		orig = free_arr_null(orig);
+		color = free_arr_null(color);
+		return (-1);
+	}
 	parameters = free_arr_null(parameters);
 	orig = free_arr_null(orig);
 	color = free_arr_null(color);

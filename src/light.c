@@ -28,7 +28,23 @@ t_light	*init_light(char *line)
 		return (NULL);
 	light->orig = get_vec_from_str_arr(orig);
 	light->ratio = ft_atof(parameters[2]);
+	if (!is_valid_ratio(light->ratio))
+	{
+		light = free_null(light);
+		parameters = free_arr_null(parameters);
+		orig = free_arr_null(orig);
+		color = free_arr_null(color);
+		return (NULL);
+	}
 	light->color = get_color_from_str_arr(color);
+	if (!is_valid_color(light->color))
+	{
+		light = free_null(light);
+		parameters = free_arr_null(parameters);
+		orig = free_arr_null(orig);
+		color = free_arr_null(color);
+		return (NULL);
+	}
 	parameters = free_arr_null(parameters);
 	orig = free_arr_null(orig);
 	color = free_arr_null(color);

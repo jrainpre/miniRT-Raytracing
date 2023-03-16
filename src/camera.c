@@ -28,7 +28,14 @@ t_camera	*init_camera(t_resolution win, char *line)
 		return (NULL);
 	cam->orig = get_vec_from_str_arr(orig);
 	cam->orientation = get_vec_from_str_arr(orientation);
-	// check if orientation vector is normalized!
+	if (!is_normalized(cam->orientation))
+	{
+		cam = free_null(cam);
+		parameters = free_arr_null(parameters);
+		orig = free_arr_null(orig);
+		orientation = free_arr_null(orientation);
+		return (NULL);
+	}
 	cam->rot_y_angle = acosf(cam->orientation.z);
 	cam->rot_x_angle = asinf(-cam->orientation.y);
 	cam->fov = ft_atof(parameters[3]);

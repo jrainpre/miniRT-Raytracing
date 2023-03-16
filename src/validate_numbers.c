@@ -39,3 +39,14 @@ int	is_valid_color(t_color color)
 	}
 	return (1);
 }
+
+int	is_normalized(t_vec3 vec)
+{
+	if (fabsf(vec_length(vec) - 1.0f) > FLT_EPSILON)
+	{
+		ft_putstr_fd("Error\n", STDERR_FILENO);
+		ft_putstr_fd("Vector expected to be normalized\n", STDERR_FILENO);
+		return (0);
+	}
+	return (1);
+}
