@@ -12,5 +12,6 @@ void	print_vec3(char *title, t_vec3 vec);
 void	print_object(void *object, t_object_type type);
 void	test_mat_dot_prod(void);
 void	test_valid_ambient_lights(void);
+void	test_ft_atof(void);
 
 #endif
