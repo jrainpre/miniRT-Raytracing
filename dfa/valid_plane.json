@@ -4,10 +4,10 @@
 		"transitions": {
 			"start": {
 				" ": "start",
-				"c": "s0"
+				"p": "s0"
 			},
 			"s0": {
-				"y": "s14"
+				"l": "s14"
 			},
 			"s1": {
 				"0": "s3",
@@ -25,10 +25,6 @@
 			"s8": {
 				"0": "s8",
 				",": "s15"
-			},
-			"s6": {
-				"0": "s44",
-				" ": "s6"
 			},
 			"s9": {
 				"0": "s9",
@@ -93,20 +89,8 @@
 				" ": "s23",
 				"-": "s38"
 			},
-			"s24": {
-				"0": "s24",
-				".": "s25",
-				" ": "s6"
-			},
-			"s25": {
-				"0": "s26"
-			},
-			"s26": {
-				"0": "s26",
-				" ": "s6"
-			},
 			"s37": {
-				"0": "s24",
+				"0": "s9",
 				" ": "s37"
 			},
 			"s34": {
@@ -167,22 +151,6 @@
 			},
 			"s43": {
 				"0": "s20"
-			},
-			"s44": {
-				"0": "s44",
-				".": "s45",
-				" ": "s47"
-			},
-			"s45": {
-				"0": "s46"
-			},
-			"s46": {
-				"0": "s46",
-				" ": "s47"
-			},
-			"s47": {
-				"0": "s9",
-				" ": "s47"
 			}
 		},
 		"startState": "start",
@@ -197,245 +165,205 @@
 		"s0": {
 			"top": 435,
 			"left": 0,
-			"displayId": "CY_IDENTIFIER_1"
+			"displayId": "P_IDENTIFIER_1"
 		},
 		"s14": {
 			"top": 515,
 			"left": 0,
-			"displayId": "CY_IDENTIFIER_2"
+			"displayId": "P_IDENTIFIER_2"
 		},
 		"s1": {
 			"top": 66,
 			"left": 31,
-			"displayId": "CY_SPACE_1"
+			"displayId": "P_SPACE_1"
 		},
 		"s3": {
 			"top": 74,
 			"left": 253,
-			"displayId": "CY_ORIG_X_BEFORE_DECIMAL"
+			"displayId": "P_ORIG_X_BEFORE_DECIMAL"
 		},
 		"s41": {
 			"top": 14,
 			"left": 177,
-			"displayId": "CY_ORIG_X_SIGN"
+			"displayId": "P_ORIG_X_SIGN"
 		},
 		"s5": {
 			"top": 172,
 			"left": 257,
-			"displayId": "CY_ORIG_X_DECIMAL"
+			"displayId": "P_ORIG_X_DECIMAL"
 		},
 		"s15": {
 			"top": 177,
 			"left": 501,
-			"displayId": "CY_COMMA_1"
+			"displayId": "P_COMMA_1"
 		},
 		"s8": {
 			"top": 303,
 			"left": 240,
-			"displayId": "CY_ORIG_X_AFTER_DECIMAL"
-		},
-		"s6": {
-			"top": 184,
-			"left": 1964,
-			"displayId": "CY_SPACE_4"
-		},
-		"s44": {
-			"top": 426,
-			"left": 1755,
-			"displayId": "CY_HEIGHT_BEFORE_DECIMAL"
+			"displayId": "P_ORIG_X_AFTER_DECIMAL"
 		},
 		"s9": {
 			"top": 81,
 			"left": 2211,
-			"displayId": "CY_RED"
+			"displayId": "P_RED"
 		},
 		"s10": {
 			"top": 183,
 			"left": 2189,
-			"displayId": "CY_COMMA_5"
+			"displayId": "P_COMMA_5"
 		},
 		"s4": {
 			"top": 305,
 			"left": 2279,
-			"displayId": "CY_GREEN"
+			"displayId": "P_GREEN"
 		},
 		"s11": {
 			"top": 411,
 			"left": 2288,
-			"displayId": "CY_COMMA_6"
+			"displayId": "P_COMMA_6"
 		},
 		"s7": {
 			"isAccept": true,
 			"top": 531,
 			"left": 2408,
-			"displayId": "CY_BLUE"
+			"displayId": "P_BLUE"
 		},
 		"s13": {
 			"isAccept": true,
 			"top": 290,
 			"left": 2610,
-			"displayId": "CY_SPACE_6"
+			"displayId": "P_SPACE_4"
 		},
 		"s12": {
 			"isAccept": true,
 			"top": 532,
 			"left": 2650,
-			"displayId": "CY_ACCEPT"
+			"displayId": "P_ACCEPT"
 		},
 		"s16": {
 			"top": 72,
 			"left": 716,
-			"displayId": "CY_ORIG_Y_BEFORE_DECIMAL"
+			"displayId": "P_ORIG_Y_BEFORE_DECIMAL"
 		},
 		"s42": {
 			"top": 16,
 			"left": 561,
-			"displayId": "CY_ORIG_Y_SIGN"
+			"displayId": "P_ORIG_Y_SIGN"
 		},
 		"s17": {
 			"top": 166,
 			"left": 729,
-			"displayId": "CY_ORIG_Y_DECIMAL"
+			"displayId": "P_ORIG_Y_DECIMAL"
 		},
 		"s19": {
 			"top": 169,
 			"left": 975,
-			"displayId": "CY_COMMA_2"
+			"displayId": "P_COMMA_2"
 		},
 		"s18": {
 			"top": 299,
 			"left": 724,
-			"displayId": "CY_ORIG_Y_AFTER_DECIMAL"
+			"displayId": "P_ORIG_Y_AFTER_DECIMAL"
 		},
 		"s20": {
 			"top": 81,
 			"left": 1237,
-			"displayId": "CY_ORIG_Z_BEFORE_DECIMAL"
+			"displayId": "P_ORIG_Z_BEFORE_DECIMAL"
 		},
 		"s43": {
 			"top": 16,
 			"left": 1091,
-			"displayId": "CY_ORIG_Z_SIGN"
+			"displayId": "P_ORIG_Z_SIGN"
 		},
 		"s21": {
 			"top": 183,
 			"left": 1202,
-			"displayId": "CY_ORIG_Z_DECIMAL"
+			"displayId": "P_ORIG_Z_DECIMAL"
 		},
 		"s23": {
 			"top": 185,
 			"left": 1471,
-			"displayId": "CY_SPACE_2"
+			"displayId": "P_SPACE_2"
 		},
 		"s22": {
 			"top": 310,
 			"left": 1206,
-			"displayId": "CY_ORIG_Z_AFTER_DECIMAL"
+			"displayId": "P_ORIG_Z_AFTER_DECIMAL"
 		},
 		"s2": {
 			"top": 431,
 			"left": 233,
-			"displayId": "CY_AXIS_X_BEFORE_DECIMAL"
+			"displayId": "P_NORMAL_X_BEFORE_DECIMAL"
 		},
 		"s38": {
 			"top": 370,
 			"left": 235,
-			"displayId": "CY_AXIS_X_SIGN"
-		},
-		"s24": {
-			"top": 77,
-			"left": 1683,
-			"displayId": "CY_DIAMETER_BEFORE_DECIMAL"
-		},
-		"s25": {
-			"top": 183,
-			"left": 1682,
-			"displayId": "CY_DIAMETER_DECIMAL"
-		},
-		"s26": {
-			"top": 312,
-			"left": 1680,
-			"displayId": "CY_DIAMETER_AFTER_DECIMAL"
+			"displayId": "P_NORMAL_X_SIGN"
 		},
 		"s37": {
 			"top": 510,
 			"left": 1474,
-			"displayId": "CY_SPACE_3"
+			"displayId": "P_SPACE_3"
 		},
 		"s34": {
 			"top": 426,
 			"left": 1205,
-			"displayId": "CY_AXIS_Z_BEFORE_DECIMAL"
+			"displayId": "P_NORMAL_Z_BEFORE_DECIMAL"
 		},
 		"s35": {
 			"top": 510,
 			"left": 1202,
-			"displayId": "CY_AXIS_Z_DECIMAL"
+			"displayId": "P_NORMAL_Z_DECIMAL"
 		},
 		"s36": {
 			"top": 598,
 			"left": 1205,
-			"displayId": "CY_AXIS_Z_AFTER_DECIMAL"
+			"displayId": "P_NORMAL_Z_AFTER_DECIMAL"
 		},
 		"s27": {
 			"top": 515,
 			"left": 231,
-			"displayId": "CY_AXIS_X_DECIMAL"
+			"displayId": "P_NORMAL_X_DECIMAL"
 		},
 		"s29": {
 			"top": 515,
 			"left": 506,
-			"displayId": "CY_COMMA_3"
+			"displayId": "P_COMMA_3"
 		},
 		"s28": {
 			"top": 600,
 			"left": 225,
-			"displayId": "CY_AXIS_X_AFTER_DECIMAL"
+			"displayId": "P_NORMAL_X_AFTER_DECIMAL"
 		},
 		"s30": {
 			"top": 419,
 			"left": 723,
-			"displayId": "CY_AXIS_Y_BEFORE_DECIMAL"
+			"displayId": "P_NORMAL_Y_BEFORE_DECIMAL"
 		},
 		"s39": {
 			"top": 363,
 			"left": 724,
-			"displayId": "CY_AXIS_Y_SIGN"
+			"displayId": "P_NORMAL_Y_SIGN"
 		},
 		"s31": {
 			"top": 509,
 			"left": 724,
-			"displayId": "CY_AXIS_Y_DECIMAL"
+			"displayId": "P_NORMAL_Y_DECIMAL"
 		},
 		"s33": {
 			"top": 510,
 			"left": 971,
-			"displayId": "CY_COMMA_4"
+			"displayId": "P_COMMA_4"
 		},
 		"s32": {
 			"top": 603,
 			"left": 723,
-			"displayId": "CY_AXIS_Y_AFTER_DECIMAL"
+			"displayId": "P_NORMAL_Y_AFTER_DECIMAL"
 		},
 		"s40": {
 			"top": 369,
 			"left": 1205,
-			"displayId": "CY_AXIS_Z_SIGN"
-		},
-		"s45": {
-			"top": 503,
-			"left": 1751,
-			"displayId": "CY_HEIGHT_DECIMAL"
-		},
-		"s47": {
-			"top": 504,
-			"left": 2015,
-			"displayId": "CY_SPACE_5"
-		},
-		"s46": {
-			"top": 604,
-			"left": 1745,
-			"displayId": "CY_HEIGHT_AFTER_DECIMAL"
+			"displayId": "P_NORMAL_Z_SIGN"
 		}
 	},
 	"transitions": [
@@ -446,12 +374,12 @@
 		},
 		{
 			"stateA": "start",
-			"label": "c",
+			"label": "p",
 			"stateB": "s0"
 		},
 		{
 			"stateA": "s0",
-			"label": "y",
+			"label": "l",
 			"stateB": "s14"
 		},
 		{
@@ -498,16 +426,6 @@
 			"stateA": "s8",
 			"label": ",",
 			"stateB": "s15"
-		},
-		{
-			"stateA": "s6",
-			"label": "0",
-			"stateB": "s44"
-		},
-		{
-			"stateA": "s6",
-			"label": " ",
-			"stateB": "s6"
 		},
 		{
 			"stateA": "s9",
@@ -665,39 +583,9 @@
 			"stateB": "s38"
 		},
 		{
-			"stateA": "s24",
-			"label": "0",
-			"stateB": "s24"
-		},
-		{
-			"stateA": "s24",
-			"label": ".",
-			"stateB": "s25"
-		},
-		{
-			"stateA": "s24",
-			"label": " ",
-			"stateB": "s6"
-		},
-		{
-			"stateA": "s25",
-			"label": "0",
-			"stateB": "s26"
-		},
-		{
-			"stateA": "s26",
-			"label": "0",
-			"stateB": "s26"
-		},
-		{
-			"stateA": "s26",
-			"label": " ",
-			"stateB": "s6"
-		},
-		{
 			"stateA": "s37",
 			"label": "0",
-			"stateB": "s24"
+			"stateB": "s9"
 		},
 		{
 			"stateA": "s37",
@@ -828,46 +716,6 @@
 			"stateA": "s43",
 			"label": "0",
 			"stateB": "s20"
-		},
-		{
-			"stateA": "s44",
-			"label": "0",
-			"stateB": "s44"
-		},
-		{
-			"stateA": "s44",
-			"label": ".",
-			"stateB": "s45"
-		},
-		{
-			"stateA": "s44",
-			"label": " ",
-			"stateB": "s47"
-		},
-		{
-			"stateA": "s45",
-			"label": "0",
-			"stateB": "s46"
-		},
-		{
-			"stateA": "s46",
-			"label": "0",
-			"stateB": "s46"
-		},
-		{
-			"stateA": "s46",
-			"label": " ",
-			"stateB": "s47"
-		},
-		{
-			"stateA": "s47",
-			"label": "0",
-			"stateB": "s9"
-		},
-		{
-			"stateA": "s47",
-			"label": " ",
-			"stateB": "s47"
 		}
 	],
 	"bulkTests": {
