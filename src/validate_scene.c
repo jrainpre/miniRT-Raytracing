@@ -29,11 +29,11 @@ t_line_state	line_transition(t_line_state state, char c)
 	return (LINE_REJECT);
 }
 
-int	is_valid_scene(char **scene_arr)
+int	is_valid_scene(t_lst_ref *scene_lines)
 {
 	t_line_state	state;
-	int				i;
-	int				j;
+	t_lst			*runner;
+	char			*line;
 	int				cameras;
 	int				lights;
 	int				ambient_lights;
@@ -43,53 +43,59 @@ int	is_valid_scene(char **scene_arr)
 	lights = 0;
 	ambient_lights = 0;
 	objects = 0;
-	j = 0;
-	while (scene_arr[j])
+	runner = scene_lines->head;
+	while (runner)
 	{
+		line = (char *)runner->content;
 		state = LINE_START;
-		i = 0;
-		while (scene_arr[j][i])
+		while (*line)
 		{
-			state = line_transition(state, scene_arr[j][i]);
+			state = line_transition(state, *line);
 			if (state == LINE_AMBIENT_LIGHT)
 			{
 				ambient_lights++;
-				if (!is_valid_ambient_light(scene_arr[j]))
+				runner->type = AMBIENT_LIGHT;
+				if (!is_valid_ambient_light(line))
 					return (0);
 				break ;
 			}
 			else if (state == LINE_CAMERA)
 			{
 				cameras++;
-				if (!is_valid_camera(scene_arr[j]))
+				runner->type = CAMERA;
+				if (!is_valid_camera(line))
 					return (0);
 				break ;
 			}
 			else if (state == LINE_LIGHT)
 			{
 				lights++;
-				if (!is_valid_light(scene_arr[j]))
+				runner->type = LIGHT;
+				if (!is_valid_light(line))
 					return (0);
 				break ;
 			}
 			else if (state == LINE_SPHERE)
 			{
 				objects++;
-				if (!is_valid_sphere(scene_arr[j]))
+				runner->type = SPHERE;
+				if (!is_valid_sphere(line))
 					return (0);
 				break ;
 			}
 			else if (state == LINE_PLANE)
 			{
 				objects++;
-				if (!is_valid_plane(scene_arr[j]))
+				runner->type = PLANE;
+				if (!is_valid_plane(line))
 					return (0);
 				break ;
 			}
 			else if (state == LINE_CYLINDER)
 			{
 				objects++;
-				if (!is_valid_cylinder(scene_arr[j]))
+				runner->type = CYLINDER;
+				if (!is_valid_cylinder(line))
 					return (0);
 				break ;
 			}
@@ -97,9 +103,9 @@ int	is_valid_scene(char **scene_arr)
 				return (0);
 			else if (state == LINE_NEW_LINE)
 				break ;
-			i++;
+			line++;
 		}
-		j++;
+		runner = runner->next;
 	}
 	if (cameras != 1)
 	{

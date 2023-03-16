@@ -1,6 +1,8 @@
 #ifndef DETERMINISTIC_FINITE_AUTOMATON_H
 # define DETERMINISTIC_FINITE_AUTOMATON_H
 
+# include "linked_list.h"
+
 typedef enum e_a_state
 {
 	A_START,
@@ -203,7 +205,7 @@ typedef enum e_cy_state
 	CY_REJECT
 }	t_cy_state;
 
-int			is_valid_scene(char **scene_arr);
+int			is_valid_scene(t_lst_ref *scene_lines);
 int			is_valid_ambient_light(char *line);
 int			is_valid_camera(char *line);
 int			is_valid_cylinder(char *line);
