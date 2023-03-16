@@ -102,7 +102,7 @@ void			*malloc_or_print_error(size_t size);
 void			*free_null(void *ptr);
 void			*free_arr_null(char **arr);
 double			ft_atof(const char *str);
-char			**read_file(char *file);
+t_lst_ref		*read_file(char *file);
 int				arguments_valid(int argc, char **argv);
 int				is_valid_ratio(float_t ratio);
 int				is_valid_color(t_color color);

@@ -1,55 +1,33 @@
 #include "miniRT.h"
 
-char	**read_file(char *file)
+t_lst_ref	*read_file(char *file)
 {
-	int		fd;
-	char	**scene_arr;
-	char	*line;
-	int		lines;
-	int		i;
+	int			fd;
+	t_lst_ref	*scene_lines;
+	char		*line;
 
+	scene_lines = malloc_or_print_error(sizeof (t_lst_ref));
+	if (scene_lines == NULL)
+		return (NULL);
+	scene_lines->head = NULL;
+	scene_lines->last = NULL;
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 	{
 		perror("open");
 		exit(1);
 	}
-	lines = 0;
 	line = "";
 	while (line != NULL)
 	{
 		line = get_next_line(fd);
 		if (line != NULL)
-		{
-			free_null(line);
-			line = "";
-			lines++;
-		}
+			ft_add_lst_last(ft_lstnew(line), scene_lines);
 	}
 	if (close(fd) == -1)
 	{
 		perror("close");
 		exit(1);
 	}
-	scene_arr = malloc_or_print_error((lines + 1) * sizeof (char *));
-	if (scene_arr == NULL)
-		return (NULL);
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-	{
-		perror("open");
-		exit(1);
-	}
-	i = 0;
-	while (i <= lines)
-	{
-		scene_arr[i] = get_next_line(fd);
-		i++;
-	}
-	if (close(fd) == -1)
-	{
-		perror("close");
-		exit(1);
-	}
-	return (scene_arr);
+	return (scene_lines);
 }
