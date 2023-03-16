@@ -231,3 +231,32 @@ void	test_valid_ambient_lights(void)
 	printf("\"%s\"\n%d\n\n", s7, is_valid_ambient_light(s7));
 	printf("\"%s\"\n%d\n\n", s8, is_valid_ambient_light(s8));
 }
+
+void	test_ft_atof(void)
+{
+	char *s1 = "1.5";
+	char *s2 = "0.5";
+	char *s3 = "-1.5";
+	char *s4 = "-0.5";
+	char *s5 = "1.51234";
+	char *s6 = "0.51234";
+	char *s7 = "-1.51234";
+	char *s8 = "-0.51234";
+
+	printf("   atof: %10.6f\n", atof(s1));
+	printf("ft_atof: %10.6f\n", ft_atof(s1));
+	printf("   atof: %10.6f\n", atof(s2));
+	printf("ft_atof: %10.6f\n", ft_atof(s2));
+	printf("   atof: %10.6f\n", atof(s3));
+	printf("ft_atof: %10.6f\n", ft_atof(s3));
+	printf("   atof: %10.6f\n", atof(s4));
+	printf("ft_atof: %10.6f\n", ft_atof(s4));
+	printf("   atof: %10.6f\n", atof(s5));
+	printf("ft_atof: %10.6f\n", ft_atof(s5));
+	printf("   atof: %10.6f\n", atof(s6));
+	printf("ft_atof: %10.6f\n", ft_atof(s6));
+	printf("   atof: %10.6f\n", atof(s7));
+	printf("ft_atof: %10.6f\n", ft_atof(s7));
+	printf("   atof: %10.6f\n", atof(s8));
+	printf("ft_atof: %10.6f\n", ft_atof(s8));
+}
