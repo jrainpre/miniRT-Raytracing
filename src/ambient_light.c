@@ -19,6 +19,13 @@ t_ambient_light	*init_ambient_light(char *line)
 	if (ambient_light == NULL)
 		return (NULL);
 	ambient_light->ratio = ft_atof(parameters[1]);
+	if (!is_valid_ratio(ambient_light->ratio))
+	{
+		ambient_light = free_null(ambient_light);
+		parameters = free_arr_null(parameters);
+		color = free_arr_null(color);
+		return (NULL);
+	}
 	ambient_light->color = get_color_from_str_arr(color);
 	parameters = free_arr_null(parameters);
 	color = free_arr_null(color);
