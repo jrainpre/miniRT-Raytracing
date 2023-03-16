@@ -20,6 +20,41 @@ typedef enum e_a_state
 	A_REJECT
 }	t_a_state;
 
+typedef enum e_l_state
+{
+	L_START,
+	L_IDENTIFIER_1,
+	L_IDENTIFIER_2,
+	L_SPACE_1,
+	L_ORIG_X_SIGN,
+	L_ORIG_X_BEFORE_DECIMAL,
+	L_ORIG_X_DECIMAL,
+	L_ORIG_X_AFTER_DECIMAL,
+	L_COMMA_1,
+	L_ORIG_Y_SIGN,
+	L_ORIG_Y_BEFORE_DECIMAL,
+	L_ORIG_Y_DECIMAL,
+	L_ORIG_Y_AFTER_DECIMAL,
+	L_COMMA_2,
+	L_ORIG_Z_SIGN,
+	L_ORIG_Z_BEFORE_DECIMAL,
+	L_ORIG_Z_DECIMAL,
+	L_ORIG_Z_AFTER_DECIMAL,
+	L_SPACE_2,
+	L_BRIGHTNESS_BEFORE_DECIMAL,
+	L_BRIGHTNESS_DECIMAL,
+	L_BRIGHTNESS_AFTER_DECIMAL,
+	L_SPACE_3,
+	L_RED,
+	L_COMMA_3,
+	L_GREEN,
+	L_COMMA_4,
+	L_BLUE,
+	L_SPACE_4,
+	L_ACCEPT,
+	L_REJECT
+}	t_l_state;
+
 typedef enum e_s_state
 {
 	S_START,
@@ -130,7 +165,12 @@ int			is_valid_cylinder(char *line);
 int			is_valid_light(char *line);
 int			is_valid_plane(char *line);
 int			is_valid_sphere(char *line);
+int			is_valid_light(char *line);
 t_a_state	ambient_light_transition(t_a_state state, char c);
 t_s_state	sphere_transition(t_s_state state, char c);
+t_l_state	light_transition(t_l_state state, char c);
+
+
+
 
 #endif
