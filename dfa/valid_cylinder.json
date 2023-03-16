@@ -187,250 +187,254 @@
 		},
 		"startState": "start",
 		"acceptStates": [
-			"s12"
+			"s12",
+			"s13",
+			"s7"
 		]
 	},
 	"states": {
 		"start": {},
 		"s0": {
 			"top": 435,
-			"left": 0,
+			"left": -1097,
 			"displayId": "CY_IDENTIFIER_1"
 		},
 		"s14": {
 			"top": 515,
-			"left": 0,
+			"left": -1097,
 			"displayId": "CY_IDENTIFIER_2"
 		},
 		"s1": {
 			"top": 66,
-			"left": 31,
+			"left": -1066,
 			"displayId": "CY_SPACE_1"
 		},
 		"s3": {
 			"top": 74,
-			"left": 253,
+			"left": -844,
 			"displayId": "CY_ORIG_X_BEFORE_DECIMAL"
 		},
 		"s41": {
 			"top": 14,
-			"left": 177,
+			"left": -920,
 			"displayId": "CY_ORIG_X_SIGN"
 		},
 		"s5": {
 			"top": 172,
-			"left": 257,
+			"left": -840,
 			"displayId": "CY_ORIG_X_DECIMAL"
 		},
 		"s15": {
 			"top": 177,
-			"left": 501,
+			"left": -596,
 			"displayId": "CY_COMMA_1"
 		},
 		"s8": {
 			"top": 303,
-			"left": 240,
+			"left": -857,
 			"displayId": "CY_ORIG_X_AFTER_DECIMAL"
 		},
 		"s6": {
 			"top": 184,
-			"left": 1964,
+			"left": 867,
 			"displayId": "CY_SPACE_4"
 		},
 		"s44": {
 			"top": 426,
-			"left": 1755,
+			"left": 658,
 			"displayId": "CY_HEIGHT_BEFORE_DECIMAL"
 		},
 		"s9": {
 			"top": 81,
-			"left": 2211,
+			"left": 1114,
 			"displayId": "CY_RED"
 		},
 		"s10": {
 			"top": 183,
-			"left": 2189,
+			"left": 1092,
 			"displayId": "CY_COMMA_5"
 		},
 		"s4": {
 			"top": 305,
-			"left": 2279,
+			"left": 1182,
 			"displayId": "CY_GREEN"
 		},
 		"s11": {
 			"top": 411,
-			"left": 2288,
+			"left": 1191,
 			"displayId": "CY_COMMA_6"
 		},
 		"s7": {
+			"isAccept": true,
 			"top": 531,
-			"left": 2408,
+			"left": 1311,
 			"displayId": "CY_BLUE"
 		},
 		"s13": {
+			"isAccept": true,
 			"top": 290,
-			"left": 2610,
+			"left": 1513,
 			"displayId": "CY_SPACE_6"
 		},
 		"s12": {
 			"isAccept": true,
 			"top": 532,
-			"left": 2650,
+			"left": 1553,
 			"displayId": "CY_ACCEPT"
 		},
 		"s16": {
 			"top": 72,
-			"left": 716,
+			"left": -381,
 			"displayId": "CY_ORIG_Y_BEFORE_DECIMAL"
 		},
 		"s42": {
 			"top": 16,
-			"left": 561,
+			"left": -536,
 			"displayId": "CY_ORIG_Y_SIGN"
 		},
 		"s17": {
 			"top": 166,
-			"left": 729,
+			"left": -368,
 			"displayId": "CY_ORIG_Y_DECIMAL"
 		},
 		"s19": {
 			"top": 169,
-			"left": 975,
+			"left": -122,
 			"displayId": "CY_COMMA_2"
 		},
 		"s18": {
 			"top": 299,
-			"left": 724,
+			"left": -373,
 			"displayId": "CY_ORIG_Y_AFTER_DECIMAL"
 		},
 		"s20": {
 			"top": 81,
-			"left": 1237,
+			"left": 140,
 			"displayId": "CY_ORIG_Z_BEFORE_DECIMAL"
 		},
 		"s43": {
 			"top": 16,
-			"left": 1091,
+			"left": -6,
 			"displayId": "CY_ORIG_Z_SIGN"
 		},
 		"s21": {
 			"top": 183,
-			"left": 1202,
+			"left": 105,
 			"displayId": "CY_ORIG_Z_DECIMAL"
 		},
 		"s23": {
 			"top": 185,
-			"left": 1471,
+			"left": 374,
 			"displayId": "CY_SPACE_2"
 		},
 		"s22": {
 			"top": 310,
-			"left": 1206,
+			"left": 109,
 			"displayId": "CY_ORIG_Z_AFTER_DECIMAL"
 		},
 		"s2": {
 			"top": 431,
-			"left": 233,
+			"left": -864,
 			"displayId": "CY_AXIS_X_BEFORE_DECIMAL"
 		},
 		"s38": {
 			"top": 370,
-			"left": 235,
+			"left": -862,
 			"displayId": "CY_AXIS_X_SIGN"
 		},
 		"s24": {
 			"top": 77,
-			"left": 1683,
+			"left": 586,
 			"displayId": "CY_DIAMETER_BEFORE_DECIMAL"
 		},
 		"s25": {
 			"top": 183,
-			"left": 1682,
+			"left": 585,
 			"displayId": "CY_DIAMETER_DECIMAL"
 		},
 		"s26": {
 			"top": 312,
-			"left": 1680,
+			"left": 583,
 			"displayId": "CY_DIAMETER_AFTER_DECIMAL"
 		},
 		"s37": {
 			"top": 510,
-			"left": 1474,
+			"left": 377,
 			"displayId": "CY_SPACE_3"
 		},
 		"s34": {
 			"top": 426,
-			"left": 1205,
+			"left": 108,
 			"displayId": "CY_AXIS_Z_BEFORE_DECIMAL"
 		},
 		"s35": {
 			"top": 510,
-			"left": 1202,
+			"left": 105,
 			"displayId": "CY_AXIS_Z_DECIMAL"
 		},
 		"s36": {
 			"top": 598,
-			"left": 1205,
+			"left": 108,
 			"displayId": "CY_AXIS_Z_AFTER_DECIMAL"
 		},
 		"s27": {
 			"top": 515,
-			"left": 231,
+			"left": -866,
 			"displayId": "CY_AXIS_X_DECIMAL"
 		},
 		"s29": {
 			"top": 515,
-			"left": 506,
+			"left": -591,
 			"displayId": "CY_COMMA_3"
 		},
 		"s28": {
 			"top": 600,
-			"left": 225,
+			"left": -872,
 			"displayId": "CY_AXIS_X_AFTER_DECIMAL"
 		},
 		"s30": {
 			"top": 419,
-			"left": 723,
+			"left": -374,
 			"displayId": "CY_AXIS_Y_BEFORE_DECIMAL"
 		},
 		"s39": {
 			"top": 363,
-			"left": 724,
+			"left": -373,
 			"displayId": "CY_AXIS_Y_SIGN"
 		},
 		"s31": {
 			"top": 509,
-			"left": 724,
+			"left": -373,
 			"displayId": "CY_AXIS_Y_DECIMAL"
 		},
 		"s33": {
 			"top": 510,
-			"left": 971,
+			"left": -126,
 			"displayId": "CY_COMMA_4"
 		},
 		"s32": {
 			"top": 603,
-			"left": 723,
+			"left": -374,
 			"displayId": "CY_AXIS_Y_AFTER_DECIMAL"
 		},
 		"s40": {
 			"top": 369,
-			"left": 1205,
+			"left": 108,
 			"displayId": "CY_AXIS_Z_SIGN"
 		},
 		"s45": {
 			"top": 503,
-			"left": 1751,
+			"left": 654,
 			"displayId": "CY_HEIGHT_DECIMAL"
 		},
 		"s47": {
 			"top": 504,
-			"left": 2015,
+			"left": 918,
 			"displayId": "CY_SPACE_5"
 		},
 		"s46": {
 			"top": 604,
-			"left": 1745,
+			"left": 648,
 			"displayId": "CY_HEIGHT_AFTER_DECIMAL"
 		}
 	},
