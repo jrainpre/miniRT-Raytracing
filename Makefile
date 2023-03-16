@@ -51,6 +51,7 @@ SRCSLIST		:= main.c \
 					validate_camera.c \
 					validate_cylinder.c \
 					validate_light.c \
+					validate_numbers.c \
 					validate_plane.c \
 					validate_scene.c \
 					validate_sphere.c \
