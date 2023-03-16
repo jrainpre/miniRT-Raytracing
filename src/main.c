@@ -29,7 +29,7 @@ int	main(int argc, char **argv)
 		data = free_data_null(data);
 		return (1);
 	}
-	if (fill_dummy_scene(data) == -1)
+	if (fill_scene(data->scene, data->scene_lines, data->win) == -1)
 	{
 		data->scene = free_scene_null(data->scene);
 		data = free_data_null(data);

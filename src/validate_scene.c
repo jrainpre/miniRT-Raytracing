@@ -54,6 +54,7 @@ int	is_valid_scene(t_lst_ref *scene_lines)
 			if (state == LINE_AMBIENT_LIGHT)
 			{
 				ambient_lights++;
+				runner->type = AMBIENT_LIGHT;
 				if (!is_valid_ambient_light(line))
 					return (0);
 				break ;
@@ -61,6 +62,7 @@ int	is_valid_scene(t_lst_ref *scene_lines)
 			else if (state == LINE_CAMERA)
 			{
 				cameras++;
+				runner->type = CAMERA;
 				if (!is_valid_camera(line))
 					return (0);
 				break ;
@@ -68,6 +70,7 @@ int	is_valid_scene(t_lst_ref *scene_lines)
 			else if (state == LINE_LIGHT)
 			{
 				lights++;
+				runner->type = LIGHT;
 				if (!is_valid_light(line))
 					return (0);
 				break ;
@@ -75,6 +78,7 @@ int	is_valid_scene(t_lst_ref *scene_lines)
 			else if (state == LINE_SPHERE)
 			{
 				objects++;
+				runner->type = SPHERE;
 				if (!is_valid_sphere(line))
 					return (0);
 				break ;
@@ -82,6 +86,7 @@ int	is_valid_scene(t_lst_ref *scene_lines)
 			else if (state == LINE_PLANE)
 			{
 				objects++;
+				runner->type = PLANE;
 				if (!is_valid_plane(line))
 					return (0);
 				break ;
@@ -89,6 +94,7 @@ int	is_valid_scene(t_lst_ref *scene_lines)
 			else if (state == LINE_CYLINDER)
 			{
 				objects++;
+				runner->type = CYLINDER;
 				if (!is_valid_cylinder(line))
 					return (0);
 				break ;

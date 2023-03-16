@@ -30,7 +30,7 @@ SRCSLIST		:= main.c \
 					colors.c \
 					cylinder.c \
 					data.c \
-					dummy_scene.c \
+					fill_scene.c \
 					free.c \
 					ft_atof.c \
 					function_tests.c \
@@ -122,11 +122,11 @@ fclean:			clean
 re:				fclean all
 
 test:			all
-				./${NAME} scenes/testscene01.rt
+				./${NAME} scenes/dummy_scene.rt
 
 val:			all
 				valgrind \
 				--leak-check=full \
 				--show-leak-kinds=all \
 				--track-origins=yes \
-				./${NAME} scenes/testscene01.rt
+				./${NAME} scenes/dummy_scene.rt

@@ -89,7 +89,7 @@ void			pan_right(t_camera *cam, float_t angle);
 t_light			*init_light(char *line);
 void			translate_light(t_light *light, t_vec3 vec);
 t_ambient_light	*init_ambient_light(char *line);
-int				fill_dummy_scene(t_data *data);
+int				fill_scene(t_scene *scene, t_lst_ref *scene_lines, t_resolution win);
 int				add_sphere(t_lst_ref *objects, char *line);
 int				add_plane(t_lst_ref *objects, char *line);
 int				add_cylinder(t_lst_ref *objects, char *line);
