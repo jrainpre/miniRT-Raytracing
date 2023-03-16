@@ -37,9 +37,27 @@ int	add_cylinder(t_lst_ref *objects, char *line)
 		return (-1);
 	cylinder->orig = get_vec_from_str_arr(orig);
 	cylinder->axis = get_vec_from_str_arr(axis);
+	if (!is_normalized(cylinder->axis))
+	{
+		cylinder = free_null(cylinder);
+		parameters = free_arr_null(parameters);
+		orig = free_arr_null(orig);
+		axis = free_arr_null(axis);
+		color = free_arr_null(color);
+		return (-1);
+	}
 	cylinder->radius = ft_atof(parameters[3]) / 2;
 	cylinder->height = ft_atof(parameters[4]);
 	cylinder->color = get_color_from_str_arr(color);
+	if (!is_valid_color(cylinder->color))
+	{
+		cylinder = free_null(cylinder);
+		parameters = free_arr_null(parameters);
+		orig = free_arr_null(orig);
+		axis = free_arr_null(axis);
+		color = free_arr_null(color);
+		return (-1);
+	}
 	parameters = free_arr_null(parameters);
 	orig = free_arr_null(orig);
 	axis = free_arr_null(axis);
