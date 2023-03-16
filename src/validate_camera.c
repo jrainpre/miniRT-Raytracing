@@ -22,7 +22,7 @@ t_c_state	camera_transition(t_c_state state, char c)
 			return (C_SPACE_1);
 		if (ft_isdigit(c))
 			return (C_ORIG_X_BEFORE_DECIMAL);
-		if (c == '-')
+		if (c == '-' || c == '+')
 			return (C_ORIG_X_SIGN);
 	}
 	else if (state == C_ORIG_X_SIGN)
@@ -55,7 +55,7 @@ t_c_state	camera_transition(t_c_state state, char c)
 	{
 		if (ft_isdigit(c))
 			return (C_ORIG_Y_BEFORE_DECIMAL);
-		if (c == '-')
+		if (c == '-' || c == '+')
 			return (C_ORIG_Y_SIGN);
 	}
 	else if (state == C_ORIG_Y_SIGN)
@@ -88,7 +88,7 @@ t_c_state	camera_transition(t_c_state state, char c)
 	{
 		if (ft_isdigit(c))
 			return (C_ORIG_Z_BEFORE_DECIMAL);
-		if (c == '-')
+		if (c == '-' || c == '+')
 			return (C_ORIG_Z_SIGN);
 	}
 	else if (state == C_ORIG_Z_SIGN)
@@ -123,7 +123,7 @@ t_c_state	camera_transition(t_c_state state, char c)
 			return (C_SPACE_2);
 		if (ft_isdigit(c))
 			return (C_ORIENTATION_X_BEFORE_DECIMAL);
-		if (c == '-')
+		if (c == '-' || c == '+')
 			return (C_ORIENTATION_X_SIGN);
 	}
 	else if (state == C_ORIENTATION_X_SIGN)
@@ -156,7 +156,7 @@ t_c_state	camera_transition(t_c_state state, char c)
 		{
 			if (ft_isdigit(c))
 				return (C_ORIENTATION_Y_BEFORE_DECIMAL);
-			if (c == '-')
+			if (c == '-' || c == '+')
 				return (C_ORIENTATION_Y_SIGN);
 		}
 		else if (state == C_ORIENTATION_Y_SIGN)
@@ -189,7 +189,7 @@ t_c_state	camera_transition(t_c_state state, char c)
 		{
 			if (ft_isdigit(c))
 				return (C_ORIENTATION_Z_BEFORE_DECIMAL);
-			if (c == '-')
+			if (c == '-' || c == '+')
 				return (C_ORIENTATION_Z_SIGN);
 		}
 		else if (state == C_ORIENTATION_Z_SIGN)

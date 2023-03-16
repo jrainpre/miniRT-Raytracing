@@ -20,7 +20,7 @@ t_l_state	light_transition(t_l_state state, char c)
 			return (L_SPACE_1);
 		if (ft_isdigit(c))
 			return (L_ORIG_X_BEFORE_DECIMAL);
-		if (c == '-')
+		if (c == '-' || c == '+')
 			return (L_ORIG_X_SIGN);
 	}
 	else if (state == L_ORIG_X_SIGN)
@@ -53,7 +53,7 @@ t_l_state	light_transition(t_l_state state, char c)
 	{
 		if (ft_isdigit(c))
 			return (L_ORIG_Y_BEFORE_DECIMAL);
-		if (c == '-')
+		if (c == '-' || c == '+')
 			return (L_ORIG_Y_SIGN);
 	}
 	else if (state == L_ORIG_Y_SIGN)
@@ -86,7 +86,7 @@ t_l_state	light_transition(t_l_state state, char c)
 	{
 		if (ft_isdigit(c))
 			return (L_ORIG_Z_BEFORE_DECIMAL);
-		if (c == '-')
+		if (c == '-' || c == '+')
 			return (L_ORIG_Z_SIGN);
 	}
 	else if (state == L_ORIG_Z_SIGN)

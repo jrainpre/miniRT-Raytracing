@@ -23,7 +23,7 @@ t_p_state	plane_transition(t_p_state state, char c)
 	{
 		if (c == ' ')
 			return (P_SPACE_1);
-		if (c == '-')
+		if (c == '-' || c == '+')
 			return (P_ORIG_X_SIGN);
 		if (ft_isdigit(c))
 			return (P_ORIG_X_BEFORE_DECIMAL);
@@ -58,7 +58,7 @@ t_p_state	plane_transition(t_p_state state, char c)
 	{
 		if (ft_isdigit(c))
 			return (P_ORIG_Y_BEFORE_DECIMAL);
-		if (c == '-')
+		if (c == '-' || c == '+')
 			return (P_ORIG_Y_SIGN);
 	}
 	else if (state == P_ORIG_Y_SIGN)
@@ -91,7 +91,7 @@ t_p_state	plane_transition(t_p_state state, char c)
 	{
 		if (ft_isdigit(c))
 			return (P_ORIG_Z_BEFORE_DECIMAL);
-		if (c == '-')
+		if (c == '-' || c == '+')
 			return (P_ORIG_Z_SIGN);
 	}
 	else if (state == P_ORIG_Z_SIGN)
@@ -157,7 +157,7 @@ t_p_state	plane_transition(t_p_state state, char c)
 	{
 		if (ft_isdigit(c))
 			return (P_NORMAL_Y_BEFORE_DECIMAL);
-		if (c == '-')
+		if (c == '-' || c == '+')
 			return (P_NORMAL_Y_SIGN);
 	}
 	else if (state == P_NORMAL_Y_SIGN)
@@ -188,7 +188,7 @@ t_p_state	plane_transition(t_p_state state, char c)
 	{
 		if (ft_isdigit(c))
 			return (P_NORMAL_Z_BEFORE_DECIMAL);
-		if (c == '-')
+		if (c == '-' || c == '+')
 			return (P_NORMAL_Z_SIGN);
 	}
 	else if (state == P_NORMAL_Z_SIGN)

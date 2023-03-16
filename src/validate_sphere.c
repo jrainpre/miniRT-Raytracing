@@ -25,7 +25,7 @@ t_s_state	sphere_transition(t_s_state state, char c)
 			return (S_SPACE_1);
 		if (ft_isdigit(c))
 			return (S_ORIG_X_BEFORE_DECIMAL);
-		if (c == '-')
+		if (c == '-' || c == '+')
 			return (S_ORIG_X_SIGN);
 	}
 	else if (state == S_ORIG_X_SIGN)
@@ -58,7 +58,7 @@ t_s_state	sphere_transition(t_s_state state, char c)
 	{
 		if (ft_isdigit(c))
 			return (S_ORIG_Y_BEFORE_DECIMAL);
-		if (c == '-')
+		if (c == '-' || c == '+')
 			return (S_ORIG_Y_SIGN);
 	}
 	else if (state == S_ORIG_Y_SIGN)
@@ -91,7 +91,7 @@ t_s_state	sphere_transition(t_s_state state, char c)
 	{
 		if (ft_isdigit(c))
 			return (S_ORIG_Z_BEFORE_DECIMAL);
-		if (c == '-')
+		if (c == '-' || c == '+')
 			return (S_ORIG_Z_SIGN);
 	}
 	else if (state == S_ORIG_Z_SIGN)
