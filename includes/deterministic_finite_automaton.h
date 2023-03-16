@@ -69,6 +69,52 @@ typedef enum e_line_state
 	LINE_REJECT
 }	t_line_state;
 
+typedef enum e_p_state
+{
+	P_START,
+	P_IDENTIFIER_1,
+	P_IDENTIFIER_2,
+	P_SPACE_1,
+	P_ORIG_X_SIGN,
+	P_ORIG_X_BEFORE_DECIMAL,
+	P_ORIG_X_DECIMAL,
+	P_ORIG_X_AFTER_DECIMAL,
+	P_COMMA_1,
+	P_ORIG_Y_SIGN,
+	P_ORIG_Y_BEFORE_DECIMAL,
+	P_ORIG_Y_DECIMAL,
+	P_ORIG_Y_AFTER_DECIMAL,
+	P_COMMA_2,
+	P_ORIG_Z_SIGN,
+	P_ORIG_Z_BEFORE_DECIMAL,
+	P_ORIG_Z_DECIMAL,
+	P_ORIG_Z_AFTER_DECIMAL,
+	P_SPACE_2,
+	P_NORMAL_X_SIGN,
+	P_NORMAL_X_BEFORE_DECIMAL,
+	P_NORMAL_X_DECIMAL,
+	P_NORMAL_X_AFTER_DECIMAL,
+	P_COMMA_3,
+	P_NORMAL_Y_SIGN,
+	P_NORMAL_Y_BEFORE_DECIMAL,
+	P_NORMAL_Y_DECIMAL,
+	P_NORMAL_Y_AFTER_DECIMAL,
+	P_COMMA_4,
+	P_NORMAL_Z_SIGN,
+	P_NORMAL_Z_BEFORE_DECIMAL,
+	P_NORMAL_Z_DECIMAL,
+	P_NORMAL_Z_AFTER_DECIMAL,
+	P_SPACE_3,
+	P_RED,
+	P_COMMA_5,
+	P_GREEN,
+	P_COMMA_6,
+	P_BLUE,
+	P_SPACE_4,
+	P_ACCEPT,
+	P_REJECT
+}	t_p_state;
+
 typedef enum e_cy_state
 {
 	CY_START,
@@ -132,5 +178,7 @@ int			is_valid_plane(char *line);
 int			is_valid_sphere(char *line);
 t_a_state	ambient_light_transition(t_a_state state, char c);
 t_s_state	sphere_transition(t_s_state state, char c);
+t_cy_state	cylinder_transition(t_cy_state state, char c);
+t_p_state	plane_transition(t_p_state state, char c);
 
 #endif
