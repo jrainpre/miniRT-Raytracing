@@ -1,5 +1,5 @@
 #ifndef SPHERE_H
-#define SPHERE_H
+# define SPHERE_H
 
 // ◦ Sphere:
 // sp 0.0,0.0,20.6 12.6 10,0,255
@@ -8,14 +8,14 @@
 // ∗ the sphere diameter: 12.6
 // ∗ R,G,B colors in range [0-255]: 10, 0, 255
 
-#include <math.h>
-#include "vector.h"
-#include "colors.h"
-# include "sphere.h"
+# include <math.h>
+# include "miniRT.h"
+# include "vector.h"
+# include "colors.h"
 # include "light.h"
 # include "ray.h"
-# include "miniRT.h"
-
+# include "scene.h"
+# include "image.h"
 
 typedef struct s_sphere {
 	t_pt3 orig;
@@ -23,13 +23,17 @@ typedef struct s_sphere {
 	t_color color;
 } t_sphere;
 
-typedef struct s_sphere_hit_calc {
+typedef struct s_hit_calc {
 	float_t a;
 	float_t b;
 	float_t c;
 	float_t discriminant;
 	float_t distance_t;
-} t_sphere_hit_calc;
+} t_hit_calc;
+
+
+
+
 
 
 

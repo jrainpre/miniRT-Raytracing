@@ -24,8 +24,6 @@
 # include "colors.h"
 # include "cylinder.h"
 # include "deterministic_finite_automaton.h"
-# include "function_tests.h"
-# include "image.h"
 # include "light.h"
 # include "linked_list.h"
 # include "matrix.h"
@@ -33,7 +31,9 @@
 # include "ray.h"
 # include "scene.h"
 # include "sphere.h"
+# include "image.h"
 # include "vector.h"
+# include "function_tests.h"
 
 /* Macros */
 
@@ -108,12 +108,25 @@ int				is_valid_ratio(float_t ratio);
 int				is_valid_color(t_color color);
 int				is_normalized(t_vec3 vec);
 
-int light_shade_sphere(t_sphere *sphere, t_scene *scene, float_t distance_t, t_ray ray);
-t_vec3 hit_point_sphere(float_t distance_t, t_ray ray);
+
+int calc_distant_t(t_hit_calc *calc);
 float_t get_light_angle(t_vec3 hit_point, t_sphere *sphere, t_scene *scene);
-int get_color_sphere(t_sphere *sphere, t_scene *scene, t_vec3 hit_point);
-int calc_distant_t(t_sphere_hit_calc *calc);
-int hit_sphere(t_sphere *sphere, t_ray ray, t_scene *scene);
-t_color get_refelctive_color(t_scene *scene, t_sphere *sphere, t_color act_color, t_vec3 hit_point);
+t_lst	*get_closest_hit(t_scene *scene, t_ray ray);
+float_t	get_distance_t(t_lst *object, t_ray ray);
+float_t get_sphere_distance_t(t_lst *object, t_ray ray);
+int light_shade_object(t_scene *scene, t_lst *object, t_ray ray);
+t_vec3 get_hitpoint_object(t_lst *object, float_t distance_t, t_ray ray);
+t_vec3 get_hitpoint_sphere(t_lst *object, float_t distance_t, t_ray ray);
+int get_color_hitpoint(t_scene *scene, t_lst *object, t_ray ray, t_vec3 hitpoint);
+t_color get_ambient_color_object(t_scene *scene, t_lst *object);
+t_color get_ambient_color_sphere(t_scene *scene, t_lst *object);
+t_color get_diffuse_color_object(t_scene *scene, t_lst *object, t_vec3 hitpoint);
+t_color get_diffuse_color_sphere(t_scene *scene, t_lst *object, t_vec3 hitpoint);
+t_color get_specular_color_object(t_scene *scene, t_lst *object, t_vec3 hitpoint);
+t_vec3 get_reflection_vec_sphere(t_vec3 hit_point, t_sphere *sphere, t_scene *scene);
+t_color get_specular_color_sphere(t_scene *scene, t_lst *object, t_vec3 hitpoint);
+
+
+
 
 #endif

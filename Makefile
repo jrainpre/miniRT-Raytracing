@@ -27,9 +27,11 @@ SRCSDIR			:= ./src/
 SRCSLIST		:= main.c \
 					ambient_light.c \
 					camera.c \
+					closest_hit.c \
 					colors.c \
 					cylinder.c \
 					data.c \
+					diffuse_light.c \
 					fill_scene.c \
 					free.c \
 					ft_atof.c \
@@ -45,6 +47,7 @@ SRCSLIST		:= main.c \
 					read_file.c \
 					render.c \
 					scene.c \
+					specular_light.c \
 					sphere.c \
 					validate_ambient_light.c \
 					validate_arguments.c \
@@ -55,7 +58,7 @@ SRCSLIST		:= main.c \
 					validate_plane.c \
 					validate_scene.c \
 					validate_sphere.c \
-					vector_helpers.c
+					vector_helpers.c 
 					
 SRCS			:= $(addprefix ${SRCSDIR}, ${SRCSLIST})
 
