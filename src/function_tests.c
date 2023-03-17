@@ -144,40 +144,40 @@ void	print_object(void *object, t_object_type type)
 	if (type == SPHERE)
 	{
 		sphere = (t_sphere *)object;
-		// print_vec3("sphere->orig", sphere->orig);
-		// printf("sphere->radius\nr: %10.4f\n\n", sphere->radius);
-		// print_color("sphere->color", sphere->color);
+		print_vec3("sphere->orig", sphere->orig);
+		printf("sphere->radius\nr: %10.4f\n\n", sphere->radius);
+		print_color("sphere->color", sphere->color);
 	}
 	else if (type == CYLINDER)
 	{
 		cylinder = (t_cylinder *)object;
-		// print_vec3("cylinder->orig", cylinder->orig);
-		// print_vec3("cylinder->axis", cylinder->axis);
-		// printf("cylinder->radius\nr: %10.4f\n\n", cylinder->radius);
-		// printf("cylinder->height\nr: %10.4f\n\n", cylinder->height);
-		// print_color("cylinder->color", cylinder->color);
+		print_vec3("cylinder->orig", cylinder->orig);
+		print_vec3("cylinder->axis", cylinder->axis);
+		printf("cylinder->radius\nr: %10.4f\n\n", cylinder->radius);
+		printf("cylinder->height\nr: %10.4f\n\n", cylinder->height);
+		print_color("cylinder->color", cylinder->color);
 	}
 	else if (type == PLANE)
 	{
 		plane = (t_plane *)object;
-		// print_vec3("plane->point", plane->point);
-		// print_vec3("plane->normal_vec", plane->normal_vec);
-		// print_color("plane->color", plane->color);
+		print_vec3("plane->point", plane->point);
+		print_vec3("plane->normal_vec", plane->normal_vec);
+		print_color("plane->color", plane->color);
 	}
 	else if (type == CAMERA)
 	{
 		cam = (t_camera *)object;
-		// print_vec3("cam->orig", cam->orig);
-		// print_vec3("cam->orientation", cam->orientation);
-		// print_vec3("cam->left", cam->left);
-		// print_vec3("cam->up", cam->up);
-		// printf("cam->fov\nr: %10.4f\n\n", cam->fov);
-		// printf("cam->sensor_height\nr: %10.4f\n\n", cam->sensor_height);
-		// printf("cam->sensor_width\nr: %10.4f\n\n", cam->sensor_width);
-		// printf("cam->focal_length\nr: %10.4f\n\n", cam->focal_length);
-		// print_vec3("cam->vertical", cam->vertical);
-		// print_vec3("cam->horizontal", cam->horizontal);
-		// print_vec3("cam->upper_left_corner", cam->upper_left_corner);
+		print_vec3("cam->orig", cam->orig);
+		print_vec3("cam->orientation", cam->orientation);
+		print_vec3("cam->left", cam->left);
+		print_vec3("cam->up", cam->up);
+		printf("cam->fov\nr: %10.4f\n\n", cam->fov);
+		printf("cam->sensor_height\nr: %10.4f\n\n", cam->sensor_height);
+		printf("cam->sensor_width\nr: %10.4f\n\n", cam->sensor_width);
+		printf("cam->focal_length\nr: %10.4f\n\n", cam->focal_length);
+		print_vec3("cam->vertical", cam->vertical);
+		print_vec3("cam->horizontal", cam->horizontal);
+		print_vec3("cam->upper_left_corner", cam->upper_left_corner);
 	}
 }
 

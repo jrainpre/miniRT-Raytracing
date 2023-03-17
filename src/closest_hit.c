@@ -30,8 +30,8 @@ float_t	get_distance_t(t_lst *object, t_ray ray)
 	type = object->type;
 	if (type == SPHERE)
 		return (get_sphere_distance_t(object, ray));
-	// else if (type == PLANE)
-	// 	return (get_plane_distance_t(object, ray));
+	else if (type == PLANE)
+		return (get_plane_distance_t(object, ray));
 	// else if (type == CYLINDER)
 	// 	return (get_cylinder_distance_t(object, ray));
 	return (INFINITY);
@@ -76,8 +76,8 @@ t_vec3 get_hitpoint_object(t_lst *object, float_t distance_t, t_ray ray)
 	type = object->type;
 	if (type == SPHERE)
 		return (get_hitpoint_sphere(object, distance_t, ray));
-	// else if (type == PLANE)
-	// 	return (get_hitpoint_plane(object, distance_t, ray));
+	else if (type == PLANE)
+		return (get_hitpoint_plane(object, distance_t, ray));
 	// else if (type == CYLINDER)
 	// 	return (get_hitpoint_cylinder(object, distance_t, ray));
 	return ((t_vec3){0, 0, 0});
@@ -121,6 +121,22 @@ float_t get_light_angle(t_vec3 hit_point, t_sphere *sphere, t_scene *scene)
 	float_t angle;
 
 	normal_hit_point = vec_sub(hit_point, sphere->orig);
+	unit_normal_hit_point = unit_vec3(normal_hit_point);
+	unit_light = unit_vec3(scene->light->orig);
+	angle = scalar_prod(unit_normal_hit_point, unit_light);
+	angle = fmax(angle, 0.0f);
+	return (angle);
+}
+
+float_t get_light_angle_plane(t_vec3 hit_point, t_plane *plane, t_scene *scene)
+{
+	t_vec3 unit_light;
+	t_vec3 normal_hit_point;
+	t_vec3 unit_normal_hit_point;
+	float_t angle;
+
+	(void)hit_point;
+	normal_hit_point = vec_mult(plane->normal_vec, -1);
 	unit_normal_hit_point = unit_vec3(normal_hit_point);
 	unit_light = unit_vec3(scene->light->orig);
 	angle = scalar_prod(unit_normal_hit_point, unit_light);
