@@ -45,6 +45,7 @@ SRCSLIST		:= main.c \
 					plane.c \
 					rays.c \
 					read_file.c \
+					render_plane.c \
 					render.c \
 					scene.c \
 					specular_light.c \

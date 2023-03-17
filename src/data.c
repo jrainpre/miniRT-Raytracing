@@ -12,7 +12,7 @@ t_data	*init_data(void)
 	data->scene = NULL;
 	data->scene_lines = NULL;
 	data->img = NULL;
-	data->win = (t_resolution){1280, 720};
+	data->win = (t_resolution){480, 270};
 	return (data);
 }
 

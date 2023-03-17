@@ -111,22 +111,29 @@ int				is_normalized(t_vec3 vec);
 
 int calc_distant_t(t_hit_calc *calc);
 float_t get_light_angle(t_vec3 hit_point, t_sphere *sphere, t_scene *scene);
+float_t get_light_angle_plane(t_vec3 hit_point, t_plane *plane, t_scene *scene);
 t_lst	*get_closest_hit(t_scene *scene, t_ray ray);
 float_t	get_distance_t(t_lst *object, t_ray ray);
 float_t get_sphere_distance_t(t_lst *object, t_ray ray);
+float_t get_plane_distance_t(t_lst *object, t_ray ray);
 int light_shade_object(t_scene *scene, t_lst *object, t_ray ray);
 t_vec3 get_hitpoint_object(t_lst *object, float_t distance_t, t_ray ray);
 t_vec3 get_hitpoint_sphere(t_lst *object, float_t distance_t, t_ray ray);
+t_vec3 get_hitpoint_plane(t_lst *object, float_t distance_t, t_ray ray);
 int get_color_hitpoint(t_scene *scene, t_lst *object, t_ray ray, t_vec3 hitpoint);
 t_color get_ambient_color_object(t_scene *scene, t_lst *object);
 t_color get_ambient_color_sphere(t_scene *scene, t_lst *object);
+t_color	get_ambient_color_plane(t_scene *scene, t_lst *object);
 t_color get_diffuse_color_object(t_scene *scene, t_lst *object, t_vec3 hitpoint);
 t_color get_diffuse_color_sphere(t_scene *scene, t_lst *object, t_vec3 hitpoint);
+t_color	get_diffuse_light_plane(t_scene *scene, t_lst *object, t_vec3 hitpoint);
 t_color get_specular_color_object(t_scene *scene, t_lst *object, t_vec3 hitpoint);
 t_vec3 get_reflection_vec_sphere(t_vec3 hit_point, t_sphere *sphere, t_scene *scene);
 t_color get_specular_color_sphere(t_scene *scene, t_lst *object, t_vec3 hitpoint);
 
 
 
+
+int				hit_plane(t_plane *plane, t_ray ray, t_scene *scene);
 
 #endif

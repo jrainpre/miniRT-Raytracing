@@ -19,6 +19,10 @@ typedef struct s_plane {
 	t_color	color;
 }	t_plane;
 
-
+typedef struct s_plane_hit_calc {
+	float_t	numerator;
+	float_t	denominator;
+	float_t	distance_t;
+}	t_plane_hit_calc;
 
 #endif

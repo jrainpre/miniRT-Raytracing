@@ -44,6 +44,7 @@ int	key_hook1(int keysym, t_data *data)
 		translate_light(data->scene->light, (t_vec3){0, 10, 0});
 	if (keysym == XK_s)
 		translate_light(data->scene->light, (t_vec3){0, -10, 0});
+	print_object(data->scene->cam, CAMERA);
 	return (0);
 }
 
