@@ -42,7 +42,7 @@ t_color	color_mult(t_color color, float_t factor)
 	prod.r = color.r * factor;
 	prod.g = color.g * factor;
 	prod.b = color.b * factor;
-	prod.a = color.a * factor;
+	prod.a = color.a;
 	return (prod);
 }
 

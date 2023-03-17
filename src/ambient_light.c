@@ -38,3 +38,28 @@ t_ambient_light	*init_ambient_light(char *line)
 	color = free_arr_null(color);
 	return (ambient_light);
 }
+
+t_color get_ambient_color_object(t_scene *scene, t_lst *object)
+{
+	t_object_type	type;
+
+	type = object->type;
+	if (type == SPHERE)
+		return (get_ambient_color_sphere(scene, object));
+	// else if (type == PLANE)
+	// 	return (get_ambient_light_plane(scene, object));
+	// else if (type == CYLINDER)
+	// 	return (get_ambient_light_cylinder(scene, object));
+	return ((t_color){0, 0, 0, 0});
+}
+
+t_color get_ambient_color_sphere(t_scene *scene, t_lst *object)
+{
+	t_sphere *sphere;
+	t_color ambient;
+
+	sphere = (t_sphere *)object->content;
+	ambient = color_mult_color(sphere->color, scene->ambient_light->color);
+	ambient = color_mult(ambient, scene->ambient_light->ratio);
+	return (ambient);
+}
