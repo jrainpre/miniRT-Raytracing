@@ -56,11 +56,11 @@ float_t get_sphere_distance_t(t_lst *object, t_ray ray)
 	return (calc.distance_t);
 }
 
-int light_shade_object(t_scene *scene, t_lst *object, t_ray ray)
+t_color light_shade_object(t_scene *scene, t_lst *object, t_ray ray)
 {
 	t_vec3 hit_point;
-	int color;
 	float_t distance_t;
+	t_color color;
 
 	distance_t = get_distance_t(object, ray);
 	hit_point = get_hitpoint_object(object, distance_t, ray);
@@ -93,7 +93,7 @@ t_vec3 get_hitpoint_sphere(t_lst *object, float_t distance_t, t_ray ray)
 	return (hit_point);
 }
 
-int get_color_hitpoint(t_scene *scene, t_lst *object, t_ray ray, t_vec3 hitpoint)
+t_color get_color_hitpoint(t_scene *scene, t_lst *object, t_ray ray, t_vec3 hitpoint)
 {
 	t_color ambient;
 	t_color diffuse;
@@ -109,7 +109,7 @@ int get_color_hitpoint(t_scene *scene, t_lst *object, t_ray ray, t_vec3 hitpoint
 	result = color_add(ambient, diffuse);
 	result = color_add(result, specular);
 	result = color_clamp(result, 0.0f, 1.0f);
-	return (color_conversion(result));
+	return (result);
 
 }	
 
