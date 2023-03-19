@@ -60,27 +60,28 @@ int follow_ray(t_scene *scene, t_ray ray)
 	t_color color;
 	float_t factor = 1.0f;
 	int i = 0;
-	color = (t_color){0, 0, 0, 0};
+	color = (t_color){0, 0, 0, 1};
 	t_color act_color;
-	act_color = (t_color){0, 0, 0, 0};
+	act_color = (t_color){0, 0, 0, 1};
 
-	while (i < 100)
+	while (i < 3)
 	{
 		object = get_closest_hit(scene, ray);
 		if (object == NULL)
-			return (color_conversion(color));
+			return (color_conversion(act_color));
+	
 		distance_t = get_distance_t(object, ray);
 		hit_point = vec_add(ray.orig, vec_mult(ray.dir, distance_t));
 		normal = get_normal_to_surface(object, hit_point);
 		color = light_shade_object(scene, object, ray);
-		color = color_mult(color, factor);
-		act_color = color_add(act_color, color);
-		factor *= 0.7f;
-		ray.orig = vec_add(ray.orig, vec_mult(normal, 0.000001));
+		act_color = color_mult(color_add(color_mult(color, 1), act_color),factor);
+		factor *= 0.5f;
+		ray.orig = vec_add(ray.orig, vec_mult(normal, 0.0001));
 		ray.dir = get_reflect_ray(ray.dir, normal);
 		i++;
 	}
-	return(color_conversion(color));
+	act_color = color_clamp(act_color, 0.0f, 1.0f);
+	return(color_conversion(act_color));
 
 
 
