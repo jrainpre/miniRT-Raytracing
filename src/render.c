@@ -64,7 +64,7 @@ int follow_ray(t_scene *scene, t_ray ray)
 	t_color act_color;
 	act_color = (t_color){0, 0, 0, 1};
 
-	while (i < 3)
+	while (i < 1)
 	{
 		object = get_closest_hit(scene, ray);
 		if (object == NULL)
