@@ -1,8 +1,8 @@
 #ifndef IMAGE_H
 # define IMAGE_H
 
-# define WIN_W 1280.0
-# define WIN_H 720.0
+# define WIN_W 1920.0
+# define WIN_H 1080.0
 
 # include "sphere.h"
 # include "light.h"
@@ -31,6 +31,8 @@ typedef struct s_data
 	t_lst_ref		*scene_lines;
 	t_img			*img;
 	t_resolution	win;
+	t_color			*pixelcolors;
+	int 			pixelcolors_int;
 }			t_data;
 
 int		loop_hook(t_data *data);

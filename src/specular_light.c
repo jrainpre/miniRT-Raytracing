@@ -46,9 +46,8 @@ t_color get_specular_color_sphere(t_scene *scene, t_lst *object, t_vec3 hitpoint
 	to_light = unit_vec3(vec_sub(scene->light->orig, hitpoint));
 	angle = scalar_prod(to_camera, reflection);
 	angle = clamp(angle, 0.0f, 1.0f);
-	float_t refctivness = 90;
-	angle = pow(angle, refctivness);
-	factor = refctivness / 256;
+	angle = pow(angle, sphere->reflect_factor * 90);
+	factor = sphere->reflect_factor * 128 / 256;
 	act_color = color_mult((t_color){1.0, 1.0, 1.0, 1.0}, angle * factor * scene->light->ratio);
 	return (act_color);
 }

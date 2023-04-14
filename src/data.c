@@ -22,6 +22,7 @@ void	*free_data_null(t_data *data)
 	data->img = free_null(data->img);
 	data->scene = free_scene_null(data->scene);
 	data->scene_lines = free_lst_null(data->scene_lines);
+	data->pixelcolors = free_null(data->pixelcolors);
 	data = free_null(data);
 	return (data);
 }

@@ -44,6 +44,8 @@ int	key_hook1(int keysym, t_data *data)
 		translate_light(data->scene->light, (t_vec3){0, 10, 0});
 	if (keysym == XK_s)
 		translate_light(data->scene->light, (t_vec3){0, -10, 0});
+	data->pixelcolors_int = 1;
+	ft_memset(data->pixelcolors, 0, data->win.width * data->win.height * sizeof (t_color));
 	print_object(data->scene->cam, CAMERA);
 	return (0);
 }
@@ -61,6 +63,8 @@ int	close_app(t_data *data)
 
 int	start_mlx(t_data *data)
 {
+	data->pixelcolors = ft_calloc(data->win.width * data->win.height, sizeof (t_color));
+	data->pixelcolors_int = 1;
 	data->mlx_ptr = mlx_init();
 	if (data->mlx_ptr == NULL)
 		ft_putstr_fd("Failed to set up the connection to the X server\n", 2);
