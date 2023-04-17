@@ -142,12 +142,9 @@ t_vec3		random_in_hemisphere(const t_vec3 normal)
 	return (vec_mult(in_unit_sphere, -1));
 }
 
-static t_vec3	calulate_fuzzed_reflected(t_vec3 direction,
-												t_vec3 normal,
-												double fuzziness)
+static t_vec3	calulate_fuzzed_reflected(t_vec3 direction, t_vec3 normal, double fuzziness)
 {
-	const t_vec3	incident = unit_vec3(direction);
-	const t_vec3	reflected = get_reflect_ray(incident, normal);
+	const t_vec3	reflected = get_reflect_ray(unit_vec3(direction), normal);
 	const t_vec3	fuzz = vec_mult(random_in_unit_sphere(), fuzziness);
 	const t_vec3	fuzzed_reflected = vec_add(reflected, fuzz);
 
@@ -177,11 +174,10 @@ t_color follow_ray(t_scene *scene, t_ray ray)
 	t_color color;
 	float_t factor = 1.0f;
 	int i = 0;
-	// t_color  skycolor = (t_color){0.6, 0.7, 0.9, 1};
 	t_color act_color;
 	act_color = (t_color){0, 0, 0, 1};
 
-	while (i < 5)
+	while (i < 50)
 	{
 		object = get_closest_hit(scene, ray);
 		if (object == NULL)
@@ -196,7 +192,6 @@ t_color follow_ray(t_scene *scene, t_ray ray)
 		ray.dir = calulate_fuzzed_reflected(ray.dir, normal, 1 - get_reflect_factor(object));
 		 i++;
 	}
-	// act_color = color_clamp(act_color, 0.0f, 1.0f);
 	return(act_color);
 }
 

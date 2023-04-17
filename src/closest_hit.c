@@ -89,6 +89,7 @@ t_vec3 get_hitpoint_sphere(t_lst *object, float_t distance_t, t_ray ray)
 	t_sphere *sphere;
 
 	sphere = (t_sphere *)object->content;
+	(void)sphere;
 	hit_point = vec_add(vec_mult(ray.dir, distance_t), ray.orig);
 	return (hit_point);
 }
@@ -102,6 +103,7 @@ t_color get_color_hitpoint(t_scene *scene, t_lst *object, t_ray ray, t_vec3 hitp
 	t_ray light_ray;
 
 	light_ray = ray;
+	(void)light_ray;
 
 	ambient = get_ambient_color_object(scene, object);
 	diffuse = get_diffuse_color_object(scene, object, hitpoint);

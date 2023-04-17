@@ -136,4 +136,9 @@ t_color get_specular_color_sphere(t_scene *scene, t_lst *object, t_vec3 hitpoint
 
 int				hit_plane(t_plane *plane, t_ray ray, t_scene *scene);
 
+
+
+
+t_vec3		random_in_unit_sphere(void);
+
 #endif

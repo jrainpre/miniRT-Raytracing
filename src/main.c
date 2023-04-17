@@ -39,9 +39,9 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	t_sphere *sphere = data->scene->objects->head->content;
-	sphere->reflect_factor = 0.999;
+	sphere->reflect_factor = 0.99;
 	sphere = data->scene->objects->head->next->content;
-	sphere->reflect_factor = 0.4;
+	sphere->reflect_factor = 0.99;
 	if (start_mlx(data) == -1)
 	{
 		data = free_data_null(data);
