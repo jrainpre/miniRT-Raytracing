@@ -97,7 +97,7 @@ t_vec3		random_in_unit_sphere(void)
 	while (1)
 	{
 		random = random_vector_in(-1.0, 1.0);
-		if (length_squared(random) >= 1)
+		if (scalar_prod(random,random) >= 1)
 			continue ;
 		return (random);
 	}
@@ -144,9 +144,13 @@ t_vec3		random_in_hemisphere(const t_vec3 normal)
 
 static t_vec3	calulate_fuzzed_reflected(t_vec3 direction, t_vec3 normal, double fuzziness)
 {
-	const t_vec3	reflected = get_reflect_ray(unit_vec3(direction), normal);
-	const t_vec3	fuzz = vec_mult(random_in_unit_sphere(), fuzziness);
-	const t_vec3	fuzzed_reflected = vec_add(reflected, fuzz);
+	t_vec3 reflected;
+	t_vec3 fuzz;
+	t_vec3 fuzzed_reflected;
+
+	reflected = get_reflect_ray(unit_vec3(direction), normal);
+	fuzz = vec_mult(random_in_unit_sphere(), fuzziness);
+	fuzzed_reflected = vec_add(reflected, fuzz);
 
 	return (fuzzed_reflected);
 }
