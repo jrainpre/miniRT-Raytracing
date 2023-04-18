@@ -126,7 +126,7 @@ t_p_state	plane_transition(t_p_state state, char c)
 			return (P_SPACE_2);
 		if (ft_isdigit(c))
 			return (P_NORMAL_X_BEFORE_DECIMAL);
-		if (c == ' ')
+		if (c == '-')
 			return (P_NORMAL_X_SIGN);
 	}
 	else if (state == P_NORMAL_X_SIGN)

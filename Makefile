@@ -1,5 +1,5 @@
 NAME			:= miniRT
-CC				:= cc
+CC				:= clang
 RM		    	:= rm -f
 FLAGS			:= -Wall -Wextra -Werror
 DEBUG			:= -g
