@@ -1,5 +1,4 @@
 #include "miniRT.h"
-#include <time.h>
 
 
 int	main(int argc, char **argv)
@@ -40,8 +39,8 @@ int	main(int argc, char **argv)
 	}
 	t_sphere *sphere = data->scene->objects->head->content;
 	sphere->reflect_factor = 0.99;
-	sphere = data->scene->objects->head->next->content;
-	sphere->reflect_factor = 0.99;
+	// sphere = data->scene->objects->head->next->content;
+	// sphere->reflect_factor = 0.5;
 	if (start_mlx(data) == -1)
 	{
 		data = free_data_null(data);

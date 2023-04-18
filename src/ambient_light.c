@@ -48,8 +48,8 @@ t_color get_ambient_color_object(t_scene *scene, t_lst *object)
 		return (get_ambient_color_sphere(scene, object));
 	else if (type == PLANE)
 		return (get_ambient_color_plane(scene, object));
-	// else if (type == CYLINDER)
-	// 	return (get_ambient_light_cylinder(scene, object));
+	else if (type == CYLINDER)
+		return (get_ambient_light_cylinder(scene, object));
 	return ((t_color){0, 0, 0, 0});
 }
 
@@ -71,6 +71,17 @@ t_color	get_ambient_color_plane(t_scene *scene, t_lst *object)
 
 	plane = (t_plane *)object->content;
 	ambient = color_mult_color(plane->color, scene->ambient_light->color);
+	ambient = color_mult(ambient, scene->ambient_light->ratio);
+	return (ambient);
+}
+
+t_color	get_ambient_light_cylinder(t_scene *scene, t_lst *object)
+{
+	t_cylinder	*cylinder;
+	t_color		ambient;
+
+	cylinder = (t_cylinder *)object->content;
+	ambient = color_mult_color(cylinder->color, scene->ambient_light->color);
 	ambient = color_mult(ambient, scene->ambient_light->ratio);
 	return (ambient);
 }

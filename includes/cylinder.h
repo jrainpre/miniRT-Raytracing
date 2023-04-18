@@ -22,6 +22,7 @@ typedef struct s_cylinder {
 	float_t	radius;
 	float_t	height;
 	t_color	color;
+	float_t	reflect_factor;
 }	t_cylinder;
 
 #endif
