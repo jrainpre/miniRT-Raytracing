@@ -1,7 +1,7 @@
 NAME			:= miniRT
 CC				:= clang
 RM		    	:= rm -f
-FLAGS			:= -Wall -Wextra -Werror
+FLAGS			:= 
 DEBUG			:= -g
 
 HEADDIR			:= ./includes/
@@ -126,7 +126,7 @@ fclean:			clean
 re:				fclean all
 
 test:			all
-				./${NAME} scenes/dummy_scene.rt
+				./${NAME} scenes/reflectiontest1.rt
 
 val:			all
 				valgrind \

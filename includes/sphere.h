@@ -21,6 +21,7 @@ typedef struct s_sphere {
 	t_pt3 orig;
 	float_t radius;
 	t_color color;
+	float_t reflect_factor;
 } t_sphere;
 
 typedef struct s_hit_calc {

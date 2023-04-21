@@ -42,6 +42,7 @@ t_vec3 get_normal_to_surface(t_lst *object, t_vec3 hit_point)
 		plane = (t_plane *)object->content;
 		normal = plane->normal_vec;
 		normal = unit_vec3(normal);
+		// normal = vec_mult(normal, -1);
 
 	}
 	// else if (object->type == CYLINDER)
@@ -51,7 +52,73 @@ t_vec3 get_normal_to_surface(t_lst *object, t_vec3 hit_point)
 	return (normal);
 }
 
-int follow_ray(t_scene *scene, t_ray ray)
+float_t		random_float(void)
+{
+	return (rand() / (RAND_MAX + 1.0));
+}
+
+t_vec3	vector(float_t x, float_t y, float_t z)
+{
+	return ((t_vec3){x, y, z});
+}
+float_t		random_from(float_t min, float_t max)
+{
+	return (min + (max - min) * random_float());
+}
+
+t_vec3	random_vector_in(float_t min, float_t max)
+{
+	return (vector(random_from(min, max),
+							random_from(min, max),
+							random_from(min, max)));
+}
+
+t_vec3		random_in_unit_sphere(void)
+{
+	t_vec3 random;
+
+	while (1)
+	{
+		random = random_vector_in(-1.0, 1.0);
+		if (scalar_prod(random, random) >= 1)
+			continue ;
+		return (random);
+	}
+}
+
+t_vec3	random_vector(void)
+{
+	return (vector(random_float(), random_float(), random_float()));
+}
+
+static t_vec3	calulate_fuzzed_reflected(t_vec3 direction, t_vec3 normal, double fuzziness)
+{
+	t_vec3 reflected;
+	t_vec3 fuzz;
+	t_vec3 fuzzed_reflected;
+
+	reflected = get_reflect_ray(unit_vec3(direction), normal);
+	fuzz = vec_mult(random_in_unit_sphere(), fuzziness);
+	fuzzed_reflected = vec_add(reflected, fuzz);
+
+	return (fuzzed_reflected);
+}
+
+
+float_t get_reflect_factor(t_lst *object)
+{
+        if (object->type == SPHERE)
+                return (((t_sphere *)object->content)->reflect_factor);
+        else if (object->type == PLANE)
+                return (((t_plane *)object->content)->reflect_factor);
+        // else if (object->type == CYLINDER)
+        //         return (((t_cylinder *)object->content)->reflect_factor);
+
+        else
+              return (0);
+}
+
+t_color follow_ray(t_scene *scene, t_ray ray)
 {
 	float_t distance_t;
 	t_vec3 hit_point;
@@ -60,31 +127,35 @@ int follow_ray(t_scene *scene, t_ray ray)
 	t_color color;
 	float_t factor = 1.0f;
 	int i = 0;
-	color = (t_color){0, 0, 0, 1};
-	t_color act_color;
-	act_color = (t_color){0, 0, 0, 1};
+	t_color act_color = (t_color){0, 0, 0, 1};
 
-	while (i < 1)
+	while (i < 2)
 	{
 		object = get_closest_hit(scene, ray);
 		if (object == NULL)
-			return (color_conversion(act_color));
-	
+			return (act_color);
 		distance_t = get_distance_t(object, ray);
 		hit_point = vec_add(ray.orig, vec_mult(ray.dir, distance_t));
 		normal = get_normal_to_surface(object, hit_point);
 		color = light_shade_object(scene, object, ray);
-		act_color = color_mult(color_add(color_mult(color, 1), act_color),factor);
-		factor *= 0.5f;
-		ray.orig = vec_add(ray.orig, vec_mult(normal, 0.0001));
-		ray.dir = get_reflect_ray(ray.dir, normal);
-		i++;
+		act_color = color_add(color_mult(color, factor), act_color);
+		factor *= 0.7 * get_reflect_factor(object);
+		ray.orig = vec_add(ray.orig, vec_mult(normal, VEC_OFFSET));
+		ray.dir = calulate_fuzzed_reflected(ray.dir, normal, 1 - get_reflect_factor(object));
+		 i++;
 	}
-	act_color = color_clamp(act_color, 0.0f, 1.0f);
-	return(color_conversion(act_color));
+	return(act_color);
+}
 
+t_color color_div(t_color color, float_t div)
+{
+	t_color new_color;
 
-
+	new_color.r = color.r / div;
+	new_color.g = color.g / div;
+	new_color.b = color.b / div;
+	new_color.a = color.a;
+	return (new_color);
 }
 
 void	render_scene(t_data *data)
@@ -96,8 +167,8 @@ void	render_scene(t_data *data)
 	float_t		u;
 	float_t		v;
 	t_lst		*runner;
-	// t_lst *object;
-	int color;
+	t_color act_color;
+	t_color final_color;
 
 	cam = data->scene->cam;
 	runner = data->scene->objects->head;
@@ -111,12 +182,18 @@ void	render_scene(t_data *data)
 			v = (float_t)j / (data->win.height - 1);
 			ray.orig = cam->orig;
 			ray.dir = vec_sub(vec_add(vec_add(vec_mult(cam->horizontal, u), vec_mult(cam->vertical, v)), cam->upper_left_corner), cam->orig);
-			color = follow_ray(data->scene, ray);
-			img_pix_put(data, i, j, color);
+				const t_vec3	fuzz = vec_mult(random_in_unit_sphere(), FUZZ_FACTOR);
+			ray.dir = vec_add(ray.dir, fuzz);
+			act_color = follow_ray(data->scene, ray);
+			data->pixelcolors[i * data->win.width + j] = color_add(data->pixelcolors[i * data->win.width + j], act_color);
+			final_color = color_div(data->pixelcolors[i * data->win.width + j], data->pixelcolors_int);
+			final_color = color_clamp(final_color, 0.0f, 1.0f);
+			img_pix_put(data, i, j, color_conversion(final_color));
 			i++;
 		}
 		j++;
 	}
+	data->pixelcolors_int++;
 }
 
 void	render_background(t_data *data, int color)

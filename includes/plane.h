@@ -17,6 +17,8 @@ typedef struct s_plane {
 	t_pt3	point;
 	t_vec3	normal_vec;
 	t_color	color;
+	float_t reflect_factor;
+
 }	t_plane;
 
 typedef struct s_plane_hit_calc {
