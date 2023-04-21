@@ -127,7 +127,7 @@ t_color follow_ray(t_scene *scene, t_ray ray)
 	t_color color;
 	float_t factor = 1.0f;
 	int i = 0;
-	t_color act_color;
+	t_color act_color = (t_color){0, 0, 0, 1};
 
 	while (i < 2)
 	{
