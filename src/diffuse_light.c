@@ -64,8 +64,6 @@ t_color	get_diffuse_light_plane(t_scene *scene, t_lst *object, t_vec3 hitpoint)
 	t_plane	*plane;
 	float_t	angle;
 	t_color	act_color;
-
-
 	t_ray ray;
 
 	ray.orig = hitpoint;

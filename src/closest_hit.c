@@ -13,7 +13,7 @@ t_lst	*get_closest_hit(t_scene *scene, t_ray ray)
 	while (list)
 	{
 		distance_t = get_distance_t(list, ray);
-		if (distance_t > 0.0f && distance_t < closest_t)
+		if (distance_t > 0.0f && distance_t < 100000 && distance_t < closest_t)
 		{
 			closest_t = distance_t;
 			closest_hit = list;
@@ -33,29 +33,29 @@ float_t	get_distance_t(t_lst *object, t_ray ray)
 	else if (type == PLANE)
 		return (get_plane_distance_t(object, ray));
 	else if (type == CYLINDER)
-		return (get_cylinder_distance_t(object, ray));
+		return (get_cylinder_distance_tt(object, ray));
 	return (INFINITY);
 }
 
 
-// float_t get_cylinder_distance_t(t_lst *object, t_ray ray)
-// {
-// 	t_hit_calc	calc;
-// 	t_vec3	orig_diff;
-// 	t_cylinder *cylinder;
+float_t get_cylinder_distance_t(t_lst *object, t_ray ray)
+{
+	t_hit_calc	calc;
+	t_vec3	orig_diff;
+	t_cylinder *cylinder;
 
-// 	cylinder = (t_cylinder *)object->content;
-// 	orig_diff = vec_sub(ray.orig, cylinder->orig);
-// 	calc.a = scalar_prod(ray.dir, ray.dir) - pow(scalar_prod(ray.dir, cylinder->axis), 2);
-// 	calc.b = 2 * (scalar_prod(ray.dir, orig_diff) - scalar_prod(ray.dir, cylinder->axis) * scalar_prod(orig_diff, cylinder->axis));
-// 	calc.c = scalar_prod(orig_diff, orig_diff) - pow(scalar_prod(orig_diff, cylinder->axis), 2) - cylinder->radius * cylinder->radius;
-// 	calc.discriminant = calc.b * calc.b - 4 * calc.a * calc.c;
-// 	if (calc.discriminant < 0)
-// 		return (0);
-// 	if (calc_distant_t(&calc) == -1)
-// 		return (0);
-// 	return (calc.distance_t);
-// }
+	cylinder = (t_cylinder *)object->content;
+	orig_diff = vec_sub(ray.orig, cylinder->orig);
+	calc.a = scalar_prod(ray.dir, ray.dir) - pow(scalar_prod(ray.dir, cylinder->axis), 2);
+	calc.b = 2 * (scalar_prod(ray.dir, orig_diff) - scalar_prod(ray.dir, cylinder->axis) * scalar_prod(orig_diff, cylinder->axis));
+	calc.c = scalar_prod(orig_diff, orig_diff) - pow(scalar_prod(orig_diff, cylinder->axis), 2) - cylinder->radius * cylinder->radius;
+	calc.discriminant = calc.b * calc.b - 4 * calc.a * calc.c;
+	if (calc.discriminant < 0)
+		return (0);
+	if (calc_distant_t(&calc) == -1)
+		return (0);
+	return (calc.distance_t);
+}
 
 float_t find_top_cap_intersection(t_cylinder *cylinder, t_ray ray)
 {
@@ -89,45 +89,32 @@ float_t find_bottom_cap_intersection(t_cylinder *cylinder, t_ray ray)
 	return (0);
 }
 
-float_t get_cylinder_distance_t(t_lst *object, t_ray ray)
+float_t get_cylinder_distance_tt(t_lst *object, t_ray ray)
 {
-	t_hit_calc	calc;
-	t_vec3	orig_diff;
+	float_t distance_t;
 	t_cylinder *cylinder;
 	float_t intersect;
 
 	cylinder = (t_cylinder *)object->content;
-	orig_diff = vec_sub(ray.orig, cylinder->orig);
-	calc.a = scalar_prod(ray.dir, ray.dir) - pow(scalar_prod(ray.dir, cylinder->axis), 2);
-	calc.b = 2 * (scalar_prod(ray.dir, orig_diff) - scalar_prod(ray.dir, cylinder->axis) * scalar_prod(orig_diff, cylinder->axis));
-	calc.c = scalar_prod(orig_diff, orig_diff) - pow(scalar_prod(orig_diff, cylinder->axis), 2) - cylinder->radius * cylinder->radius;
-	calc.discriminant = calc.b * calc.b - 4 * calc.a * calc.c;
-	if (calc.discriminant < 0)
-		return (0);
-	if (calc_distant_t(&calc) == -1)
-		return (0);
+	distance_t = get_cylinder_distance_t(object, ray);
 
 
 	intersect = 0;
 	// Check if the intersection points are within the height limits of the cylinder
-	// t_vec3 point0 = vec_add(ray.orig, vec_mult(ray.dir, calc.distance_t));
-	// float_t proj0 = scalar_prod(vec_sub(point0, cylinder->orig), cylinder->axis);
+	t_vec3 point0 = vec_add(ray.orig, vec_mult(ray.dir, distance_t));
+	float_t proj0 = scalar_prod(vec_sub(point0, cylinder->orig), cylinder->axis);
 
-	intersect = find_bottom_cap_intersection(cylinder, ray);
-	if (find_top_cap_intersection(cylinder, ray) < intersect || intersect == 0)
-		intersect = find_top_cap_intersection(cylinder, ray);
 
-	// Check side intersections
-	// if (proj0 >= 0 && proj0 <= cylinder->height &&  calc.distance_t > 0)
-	// {
-	// 	if (calc.distance_t < intersect)
-	// 		intersect = calc.distance_t;
-	// 	else
-	// 		intersect = calc.distance_t;
+	float_t bottom_cap_intersect = find_bottom_cap_intersection(cylinder, ray);
+	float_t top_cap_intersect = find_top_cap_intersection(cylinder, ray);
 
-	// }
 
-	// Return the minimum valid intersection distance
+if (bottom_cap_intersect > 0 && (intersect == 0 || bottom_cap_intersect < intersect))
+    intersect = bottom_cap_intersect;
+if (top_cap_intersect > 0 && (intersect == 0 || top_cap_intersect < intersect))
+    intersect = top_cap_intersect;
+	if (proj0 >= 0 && proj0 <= cylinder->height &&  distance_t > 0)
+			intersect = distance_t;
 	return intersect;
 }
 
@@ -253,20 +240,27 @@ float_t get_light_angle_plane(t_vec3 hit_point, t_plane *plane, t_scene *scene)
 	return (angle);
 }
 
-// float_t get_light_angle_cylinder(t_vec3 hit_point, t_cylinder *cylinder, t_scene *scene)
-// {
-// 	t_vec3 unit_light;
-// 	t_vec3 normal_hit_point;
-// 	t_vec3 unit_normal_hit_point;
-// 	float_t angle;
+t_vec3 get_normal_cylinder(t_vec3 hit_point, t_cylinder *cylinder)
+{
+		t_vec3 unit_light;
+	t_vec3 normal_hit_point;
+	float_t angle;
+	float_t projection;
 
-// 	normal_hit_point = vec_sub(hit_point, cylinder->orig);
-// 	unit_normal_hit_point = unit_vec3(normal_hit_point);
-// 	unit_light = unit_vec3(scene->light->orig);
-// 	angle = scalar_prod(unit_normal_hit_point, unit_light);
-// 	angle = fmax(angle, 0.0f);
-// 	return (angle);
-// }
+	normal_hit_point = vec_sub(hit_point, cylinder->orig);
+	projection = scalar_prod(normal_hit_point, cylinder->axis);
+	if (projection > 0 && projection < cylinder->height)
+	{
+		t_vec3 projected_point = vec_add(cylinder->orig, vec_mult(cylinder->axis, projection));
+		normal_hit_point = vec_sub(hit_point, projected_point);
+	}
+	else if (projection >= cylinder->height)
+		normal_hit_point = cylinder->axis;
+	else
+		normal_hit_point = vec_mult(cylinder->axis, -1.0f);
+	return (unit_vec3(normal_hit_point));
+}
+
 
 float_t get_light_angle_cylinder(t_vec3 hit_point, t_cylinder *cylinder, t_scene *scene)
 {
