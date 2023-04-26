@@ -42,8 +42,6 @@ t_vec3 get_normal_to_surface(t_lst *object, t_vec3 hit_point)
 		plane = (t_plane *)object->content;
 		normal = plane->normal_vec;
 		normal = unit_vec3(normal);
-		// normal = vec_mult(normal, -1);
-
 	}
 	// else if (object->type == CYLINDER)
 
