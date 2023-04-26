@@ -13,7 +13,7 @@ t_lst	*get_closest_hit(t_scene *scene, t_ray ray)
 	while (list)
 	{
 		distance_t = get_distance_t(list, ray);
-		if (distance_t > 0.0f && distance_t < 100000 && distance_t < closest_t)
+		if (distance_t > 0.0f && distance_t < closest_t)
 		{
 			closest_t = distance_t;
 			closest_hit = list;
