@@ -9,8 +9,8 @@ t_color get_specular_color_object(t_scene *scene, t_lst *object, t_vec3 hitpoint
 		return (get_specular_color_sphere(scene, object, hitpoint));
 	else if (type == PLANE)
 		return (get_specular_color_plane(scene, object, hitpoint));
-	// else if (type == CYLINDER)
-	// 	return (get_specular_light_cylinder(scene, object, hitpoint, ray));
+	else if (type == CYLINDER)
+		return (get_specular_color_cylinder(scene, object, hitpoint));
 	return ((t_color){0, 0, 0, 0});
 }
 
@@ -119,31 +119,61 @@ t_vec3 get_reflection_vec_cylinder(t_vec3 hit_point, t_cylinder *cylinder, t_sce
 	return (reflection);
 }
 
+// t_color get_specular_color_cylinder(t_scene *scene, t_lst *object, t_vec3 hitpoint)
+// {
+// 	t_vec3 reflection;
+// 	t_vec3 to_camera;
+// 	t_vec3 to_light;
+// 	float_t angle;
+// 	float_t factor;
+// 	t_cylinder *cylinder;
+// 	t_color act_color;
+// 	t_ray ray;
+
+// 	ray.orig = hitpoint;
+// 	ray.dir = vec_sub(scene->light->orig, hitpoint);
+// 	ray.orig = vec_add(ray.orig, vec_mult(ray.dir, SHADOW_OFFSET));
+// 	cylinder = (t_cylinder *)object->content;
+// 	reflection = unit_vec3(get_reflection_vec_cylinder(hitpoint, cylinder, scene));
+// 	to_camera = unit_vec3(vec_sub(scene->cam->orig, hitpoint));
+// 	to_light = unit_vec3(vec_sub(scene->light->orig, hitpoint));
+// 	angle = scalar_prod(to_camera, reflection);
+// 	angle = clamp(angle, 0.0f, 1.0f);
+// 	angle = pow(angle, cylinder->reflect_factor * 120 );
+// 	if (get_closest_hit(scene, ray) != NULL)
+// 		angle = 0;
+// 	factor = cylinder->reflect_factor * 128 / 256;
+// 	act_color = color_mult((t_color){1.0, 1.0, 1.0, 1.0}, angle * factor * scene->light->ratio);
+// 	return (act_color);
+// }
+
+
 t_color get_specular_color_cylinder(t_scene *scene, t_lst *object, t_vec3 hitpoint)
 {
-	t_vec3 reflection;
-	t_vec3 to_camera;
-	t_vec3 to_light;
-	float_t angle;
-	float_t factor;
-	t_cylinder *cylinder;
-	t_color act_color;
-		t_ray ray;
+    t_vec3 reflection;
+    t_vec3 to_camera;
+    t_vec3 to_light;
+    float_t angle;
+    float_t factor;
+    t_cylinder *cylinder;
+    t_color act_color;
+    t_ray ray;
+    t_vec3 normal;
 
-	ray.orig = hitpoint;
-	ray.dir = vec_sub(scene->light->orig, hitpoint);
-	ray.orig = vec_add(ray.orig, vec_mult(ray.dir, SHADOW_OFFSET));
-
-	cylinder = (t_cylinder *)object->content;
-	reflection = unit_vec3(get_reflection_vec_cylinder(hitpoint, cylinder, scene));
-	to_camera = unit_vec3(vec_sub(scene->cam->orig, hitpoint));
-	to_light = unit_vec3(vec_sub(scene->light->orig, hitpoint));
-	angle = scalar_prod(to_camera, reflection);
-	angle = clamp(angle, 0.0f, 1.0f);
-	angle = pow(angle, cylinder->reflect_factor * 256);
-	if (get_closest_hit(scene, ray) != NULL)
-		angle = 0;
-	factor = cylinder->reflect_factor * 256 / 256;
-	act_color = color_mult((t_color){1.0, 1.0, 1.0, 1.0}, angle * factor * scene->light->ratio);
-	return (act_color);
+    ray.orig = hitpoint;
+    ray.dir = vec_sub(scene->light->orig, hitpoint);
+    ray.orig = vec_add(ray.orig, vec_mult(ray.dir, SHADOW_OFFSET));
+    cylinder = (t_cylinder *)object->content;
+    normal = get_normal_cylinder(hitpoint, cylinder);
+    to_light = unit_vec3(vec_sub(scene->light->orig, hitpoint));
+    reflection = vec_sub(vec_mult(normal, 2 * scalar_prod(normal, to_light)), to_light);
+    to_camera = unit_vec3(vec_sub(scene->cam->orig, hitpoint));
+    angle = scalar_prod(to_camera, reflection);
+    angle = clamp(angle, 0.0f, 1.0f);
+    angle = pow(angle, cylinder->reflect_factor * 120);
+    if (get_closest_hit(scene, ray) != NULL)
+        angle = 0;
+    factor = cylinder->reflect_factor * 128 / 256;
+    act_color = color_mult((t_color){1.0, 1.0, 1.0, 1.0}, angle * factor * scene->light->ratio);
+    return (act_color);
 }
