@@ -44,7 +44,7 @@ t_camera	*init_camera(t_resolution win, char *line)
 	cam->focal_length = (cam->sensor_width / 2) / tanf(deg_to_rad(cam->fov / 2.0));
 	cam->vertical = (t_vec3){0, -cam->sensor_height, 0};
 	cam->vertical = rotate_x(rotate_y(cam->vertical, cam->rot_y_angle), cam->rot_x_angle);
-	cam->horizontal = (t_vec3){-cam->sensor_width, 0, 0};
+	cam->horizontal = (t_vec3){cam->sensor_width, 0, 0};
 	cam->horizontal = rotate_x(rotate_y(cam->horizontal, cam->rot_y_angle), cam->rot_x_angle);
 	cam->left = (t_vec3){1, 0, 0};
 	cam->left = rotate_x(rotate_y(cam->left, cam->rot_y_angle), cam->rot_x_angle);
