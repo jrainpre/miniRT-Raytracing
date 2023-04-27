@@ -49,7 +49,7 @@ int	add_cylinder(t_lst_ref *objects, char *line)
 	cylinder->radius = ft_atof(parameters[3]) / 2;
 	cylinder->height = ft_atof(parameters[4]);
 	cylinder->color = get_color_from_str_arr(color);
-	cylinder->reflect_factor = 0.0;
+	cylinder->reflect_factor = 0.9;
 	if (!is_valid_color(cylinder->color))
 	{
 		cylinder = free_null(cylinder);
