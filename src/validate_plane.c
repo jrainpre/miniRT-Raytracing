@@ -261,6 +261,44 @@ t_p_state	plane_transition(t_p_state state, char c)
 			return (P_SPACE_4);
 		if (c == '\n')
 			return (P_ACCEPT);
+		if (ft_isdigit(c))
+			return (P_REFLECTIVENESS_BEFORE_DECIMAL);
+	}
+		else if (state == P_REFLECTIVENESS_BEFORE_DECIMAL)
+	{
+		if (c == ' ')
+			return (P_SPACE_5);
+		if (c == '.')
+			return (P_REFLECTIVENESS_DECIMAL);
+		if (ft_isdigit(c))
+			return (P_REFLECTIVENESS_BEFORE_DECIMAL);
+		if (c == '\n')
+			return (P_ACCEPT);
+	}
+	else if (state == P_SPACE_5)
+	{
+		if (c == ' ')
+			return (P_SPACE_5);
+		if (ft_isdigit(c))
+			return (P_REFLECTIVENESS_BEFORE_DECIMAL);
+		if (c == '.')
+			return (P_REFLECTIVENESS_DECIMAL);
+		if (c == '\n')
+			return (P_ACCEPT);
+	}
+	else if (state == P_REFLECTIVENESS_DECIMAL)
+	{
+		if(ft_isdigit(c))
+			return (P_REFLECTIVENESS_AFTER_DECIMAL);
+	}
+	else if (state == P_REFLECTIVENESS_AFTER_DECIMAL)
+	{
+		if (c == ' ')
+			return (P_SPACE_5);
+		if (ft_isdigit(c))
+			return (P_REFLECTIVENESS_AFTER_DECIMAL);
+		if (c == '\n')
+			return (P_ACCEPT);
 	}
 	else if (state == P_ACCEPT)
 		return (P_ACCEPT);
@@ -281,7 +319,7 @@ int	is_valid_plane(char *line)
 			break ;
 		i++;
 	}
-	if (state == P_ACCEPT || state == P_BLUE || state == P_SPACE_4)
+	if (state == P_ACCEPT || state == P_BLUE || state == P_SPACE_4 || state == P_REFLECTIVENESS_AFTER_DECIMAL || state == P_REFLECTIVENESS_BEFORE_DECIMAL || state == P_SPACE_5)
 		return (1);
 	ft_putstr_fd("Error\nPlane could not be parsed\n", STDERR_FILENO);
 	return (0);

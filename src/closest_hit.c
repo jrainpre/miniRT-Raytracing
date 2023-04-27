@@ -130,7 +130,7 @@ float_t get_cylinder_distance_t(t_lst *object, t_ray ray)
 	float_t proj0;
 
 	cylinder = (t_cylinder *)object->content;
-	distance_t = get_cylinder_distance_t(object, ray);
+	distance_t = get_cylinder_distance_t_proj(object, ray);
 	intersect = 0;
 	point0 = vec_add(ray.orig, vec_mult(ray.dir, distance_t));
 	proj0 = scalar_prod(vec_sub(point0, cylinder->orig), cylinder->axis);

@@ -192,6 +192,44 @@ t_s_state	sphere_transition(t_s_state state, char c)
 	{
 		if (c == ' ')
 			return (S_SPACE_4);
+		if (ft_isdigit(c))
+			return (S_REFLECTIVENESS_BEFORE_DECIMAL);
+		if (c == '\n')
+			return (S_ACCEPT);
+	}
+	else if (state == S_REFLECTIVENESS_BEFORE_DECIMAL)
+	{
+		if (c == ' ')
+			return (S_SPACE_5);
+		if (c == '.')
+			return (S_REFLECTIVENESS_DECIMAL);
+		if (ft_isdigit(c))
+			return (S_REFLECTIVENESS_BEFORE_DECIMAL);
+		if (c == '\n')
+			return (S_ACCEPT);
+	}
+	else if (state == S_SPACE_5)
+	{
+		if (c == ' ')
+			return (S_SPACE_5);
+		if (ft_isdigit(c))
+			return (S_REFLECTIVENESS_BEFORE_DECIMAL);
+		if (c == '.')
+			return (S_REFLECTIVENESS_DECIMAL);
+		if (c == '\n')
+			return (S_ACCEPT);
+	}
+	else if (state == S_REFLECTIVENESS_DECIMAL)
+	{
+		if(ft_isdigit(c))
+			return (S_REFLECTIVENESS_AFTER_DECIMAL);
+	}
+	else if (state == S_REFLECTIVENESS_AFTER_DECIMAL)
+	{
+		if (c == ' ')
+			return (S_SPACE_5);
+		if (ft_isdigit(c))
+			return (S_REFLECTIVENESS_AFTER_DECIMAL);
 		if (c == '\n')
 			return (S_ACCEPT);
 	}
@@ -214,7 +252,7 @@ int	is_valid_sphere(char *line)
 			break ;
 		i++;
 	}
-	if (state == S_ACCEPT || state == S_SPACE_4 || state == S_BLUE)
+	if (state == S_ACCEPT || state == S_SPACE_4 || state == S_BLUE || state == S_REFLECTIVENESS_AFTER_DECIMAL || state == S_SPACE_5 || state == S_REFLECTIVENESS_BEFORE_DECIMAL)
 		return (1);
 	ft_putstr_fd("Error\nSphere could not be parsed\n", STDERR_FILENO);
 	return (0);

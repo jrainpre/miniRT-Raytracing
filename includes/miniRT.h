@@ -153,5 +153,7 @@ t_vec3 get_normal_cylinder(t_vec3 hit_point, t_cylinder *cylinder);
 
 
 t_vec3		random_in_unit_sphere(void);
+float_t get_reflect_factor_from_str(char *str);
+
 
 #endif

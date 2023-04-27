@@ -101,3 +101,15 @@ t_color	mix_light(t_color act_color, t_color obj_color, t_color light_color,
 	mix = color_clamp(mix, 0.0f, 1.0f);
 	return (mix);
 }
+
+float_t get_reflect_factor_from_str(char *str)
+{
+	float_t	reflect_factor;
+
+	if (str == NULL)
+		return (0);
+	reflect_factor = ft_atof(str);
+	if (reflect_factor < 0 || reflect_factor > 1)
+		return (0);
+	return (reflect_factor);
+}
