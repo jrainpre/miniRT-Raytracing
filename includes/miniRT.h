@@ -112,6 +112,7 @@ int				arguments_valid(int argc, char **argv);
 int				is_valid_ratio(float_t ratio);
 int				is_valid_color(t_color color);
 int				is_normalized(t_vec3 vec);
+void			render_status(t_data *data, int color);
 
 
 int calc_distant_t(t_hit_calc *calc);

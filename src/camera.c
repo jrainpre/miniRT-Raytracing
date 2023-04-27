@@ -41,8 +41,8 @@ t_camera	*init_camera(t_resolution win, char *line)
 	if (cam->orientation.x < 0)
 		cam->rot_y_angle += M_PI;
 	cam->rot_x_angle = asinf(-cam->orientation.y);
-	if (cam->orientation.y > 0)
-		cam->rot_x_angle += M_PI;
+	// if (cam->orientation.y > 0)
+	// 	cam->rot_x_angle += M_PI;
 	cam->fov = ft_atof(parameters[3]);
 	cam->sensor_height = 0.024;
 	cam->sensor_width = ((float_t)win.width / (float_t)win.height) * cam->sensor_height;
