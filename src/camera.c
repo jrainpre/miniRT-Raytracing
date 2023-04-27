@@ -37,12 +37,22 @@ t_camera	*init_camera(t_resolution win, char *line)
 		return (NULL);
 	}
 	// Start with cam->orientation = (0, 0, 1) and calculate rotation angles to get to .rt-file orientation
-	cam->rot_y_angle = acosf(cam->orientation.z);
-	if (cam->orientation.x < 0)
-		cam->rot_y_angle += M_PI;
-	cam->rot_x_angle = asinf(-cam->orientation.y);
+	// if (cam->orientation.x == 0)
+	// 	cam->rot_y_angle = 0;
+	// else
+	// {
+	// 	cam->rot_y_angle = acosf(cam->orientation.z);
+	// 	if (cam->orientation.x < 0)
+	// 		cam->rot_y_angle += M_PI;
+	// }
+	// cam->rot_x_angle = atanf(cam->orientation.y * cosf(cam->rot_y_angle));
 	// if (cam->orientation.y > 0)
-	// 	cam->rot_x_angle += M_PI;
+	 	// cam->rot_x_angle += M_PI;
+	cam->rot_y_angle = asinf(cam->orientation.x);
+	if (cam->orientation.z == 0)
+		cam->rot_x_angle = 0;
+	else
+		cam->rot_x_angle = atanf(-cam->orientation.y / cam->orientation.z);
 	cam->fov = ft_atof(parameters[3]);
 	cam->sensor_height = 0.024;
 	cam->sensor_width = ((float_t)win.width / (float_t)win.height) * cam->sensor_height;
