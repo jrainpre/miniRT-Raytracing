@@ -43,8 +43,8 @@ t_vec3 get_normal_to_surface(t_lst *object, t_vec3 hit_point)
 		normal = plane->normal_vec;
 		normal = unit_vec3(normal);
 	}
-	// else if (object->type == CYLINDER)
-
+	else if (object->type == CYLINDER)
+		normal = get_normal_cylinder(hit_point, (t_cylinder *)object->content);
 	else
 		normal = (t_vec3){0, 0, 0};
 	return (normal);
@@ -109,9 +109,8 @@ float_t get_reflect_factor(t_lst *object)
                 return (((t_sphere *)object->content)->reflect_factor);
         else if (object->type == PLANE)
                 return (((t_plane *)object->content)->reflect_factor);
-        // else if (object->type == CYLINDER)
-        //         return (((t_cylinder *)object->content)->reflect_factor);
-
+        else if (object->type == CYLINDER)
+                return (((t_cylinder *)object->content)->reflect_factor);
         else
               return (0);
 }

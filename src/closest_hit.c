@@ -23,6 +23,36 @@ t_lst	*get_closest_hit(t_scene *scene, t_ray ray)
 	return (closest_hit);
 }
 
+t_lst	*get_closest_hit_light(t_scene *scene, t_ray ray)
+{
+	t_lst	*list;
+	t_lst	*closest_hit;
+	float_t	distance_t;
+	float_t	closest_t;
+	t_vec3	light_direction;
+	t_vec3	hit_to_light;
+
+	closest_t = INFINITY;
+	closest_hit = NULL;
+	light_direction = unit_vec3(vec_sub(scene->light->orig, ray.orig));
+	list = scene->objects->head;
+	while (list)
+	{
+		distance_t = get_distance_t(list, ray);
+		if (distance_t > 0.0f && distance_t < closest_t)
+		{
+			hit_to_light = vec_sub(scene->light->orig, vec_add(ray.orig, vec_mult(ray.dir, distance_t)));
+			if (scalar_prod(light_direction, hit_to_light) >= 0)
+			{
+				closest_t = distance_t;
+				closest_hit = list;
+			}
+		}
+		list = list->next;
+	}
+	return (closest_hit);
+}
+
 float_t	get_distance_t(t_lst *object, t_ray ray)
 {
 	t_object_type	type;
@@ -33,12 +63,12 @@ float_t	get_distance_t(t_lst *object, t_ray ray)
 	else if (type == PLANE)
 		return (get_plane_distance_t(object, ray));
 	else if (type == CYLINDER)
-		return (get_cylinder_distance_tt(object, ray));
+		return (get_cylinder_distance_t(object, ray));
 	return (INFINITY);
 }
 
 
-float_t get_cylinder_distance_t(t_lst *object, t_ray ray)
+float_t get_cylinder_distance_t_proj(t_lst *object, t_ray ray)
 {
 	t_hit_calc	calc;
 	t_vec3	orig_diff;
@@ -89,32 +119,29 @@ float_t find_bottom_cap_intersection(t_cylinder *cylinder, t_ray ray)
 	return (0);
 }
 
-float_t get_cylinder_distance_tt(t_lst *object, t_ray ray)
+float_t get_cylinder_distance_t(t_lst *object, t_ray ray)
 {
 	float_t distance_t;
 	t_cylinder *cylinder;
 	float_t intersect;
+	float_t bottom_cap_intersect;
+	float_t top_cap_intersect;
+	t_vec3 point0;
+	float_t proj0;
 
 	cylinder = (t_cylinder *)object->content;
 	distance_t = get_cylinder_distance_t(object, ray);
-
-
 	intersect = 0;
-	// Check if the intersection points are within the height limits of the cylinder
-	t_vec3 point0 = vec_add(ray.orig, vec_mult(ray.dir, distance_t));
-	float_t proj0 = scalar_prod(vec_sub(point0, cylinder->orig), cylinder->axis);
-
-
-	float_t bottom_cap_intersect = find_bottom_cap_intersection(cylinder, ray);
-	float_t top_cap_intersect = find_top_cap_intersection(cylinder, ray);
-
-
-if (bottom_cap_intersect > 0 && (intersect == 0 || bottom_cap_intersect < intersect))
-    intersect = bottom_cap_intersect;
-if (top_cap_intersect > 0 && (intersect == 0 || top_cap_intersect < intersect))
-    intersect = top_cap_intersect;
+	point0 = vec_add(ray.orig, vec_mult(ray.dir, distance_t));
+	proj0 = scalar_prod(vec_sub(point0, cylinder->orig), cylinder->axis);
+	bottom_cap_intersect = find_bottom_cap_intersection(cylinder, ray);
+	top_cap_intersect = find_top_cap_intersection(cylinder, ray);
+	if (bottom_cap_intersect > 0 && (intersect == 0 || bottom_cap_intersect < intersect))
+		intersect = bottom_cap_intersect;
+	if (top_cap_intersect > 0 && (intersect == 0 || top_cap_intersect < intersect))
+		intersect = top_cap_intersect;
 	if (proj0 >= 0 && proj0 <= cylinder->height &&  distance_t > 0)
-			intersect = distance_t;
+				intersect = distance_t;
 	return intersect;
 }
 
@@ -269,29 +296,19 @@ float_t get_light_angle_cylinder(t_vec3 hit_point, t_cylinder *cylinder, t_scene
 	t_vec3 unit_normal_hit_point;
 	float_t angle;
 	float_t projection;
+	t_vec3 projected_point;
 
 	normal_hit_point = vec_sub(hit_point, cylinder->orig);
 	projection = scalar_prod(normal_hit_point, cylinder->axis);
-
-	// Check if the hit point is on the side of the cylinder
 	if (projection > 0 && projection < cylinder->height)
 	{
-		// Calculate the normal for the side of the cylinder
-		t_vec3 projected_point = vec_add(cylinder->orig, vec_mult(cylinder->axis, projection));
+		projected_point = vec_add(cylinder->orig, vec_mult(cylinder->axis, projection));
 		normal_hit_point = vec_sub(hit_point, projected_point);
 	}
-	// Check if the hit point is on the top cap of the cylinder
 	else if (projection >= cylinder->height)
-	{
-		// Calculate the normal for the top cap of the cylinder
 		normal_hit_point = cylinder->axis;
-	}
-	// Check if the hit point is on the bottom cap of the cylinder
 	else
-	{
-		// Calculate the normal for the bottom cap of the cylinder
 		normal_hit_point = vec_mult(cylinder->axis, -1.0f);
-	}
 
 	unit_normal_hit_point = unit_vec3(normal_hit_point);
 	unit_light = unit_vec3(scene->light->orig);

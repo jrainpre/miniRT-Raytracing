@@ -1,6 +1,5 @@
 #include "miniRT.h"
 
-
 int	main(int argc, char **argv)
 {
 	srand(time(NULL));
@@ -37,10 +36,6 @@ int	main(int argc, char **argv)
 		data = free_data_null(data);
 		return (1);
 	}
-	// t_sphere *sphere = data->scene->objects->head->content;
-	// sphere->reflect_factor = 0.99;
-	// sphere = data->scene->objects->head->next->content;
-	// sphere->reflect_factor = 0.5;
 	if (start_mlx(data) == -1)
 	{
 		data = free_data_null(data);

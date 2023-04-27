@@ -141,11 +141,13 @@ t_color get_specular_color_plane(t_scene *scene, t_lst *object, t_vec3 hitpoint)
 t_color get_diffuse_light_cylinder(t_scene *scene, t_lst *object, t_vec3 hitpoint);
 t_color	get_ambient_light_cylinder(t_scene *scene, t_lst *object);
 t_vec3 get_hitpoint_cylinder(t_lst *object, float_t distance_t, t_ray ray);
-float_t get_cylinder_distance_tt(t_lst *object, t_ray ray);
+float_t get_cylinder_distance_t(t_lst *object, t_ray ray);
 float_t get_light_angle_cylinder(t_vec3 hit_point, t_cylinder *cylinder, t_scene *scene);
 t_color get_specular_color_cylinder(t_scene *scene, t_lst *object, t_vec3 hitpoint);
 t_vec3 get_normal_cylinder(t_vec3 hit_point, t_cylinder *cylinder);
 
+t_lst	*get_closest_hit_light(t_scene *scene, t_ray ray);
+t_vec3 get_normal_cylinder(t_vec3 hit_point, t_cylinder *cylinder);
 
 
 
