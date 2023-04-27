@@ -56,7 +56,7 @@ int	add_plane(t_lst_ref *objects, char *line)
 		color = free_arr_null(color);
 		return (-1);
 	}
-	plane->reflect_factor = 0.0;
+	plane->reflect_factor = get_reflect_factor_from_str(parameters[4]);
 	parameters = free_arr_null(parameters);
 	point = free_arr_null(point);
 	normal_vec = free_arr_null(normal_vec);
