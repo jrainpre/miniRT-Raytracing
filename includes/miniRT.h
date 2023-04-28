@@ -66,6 +66,10 @@ t_pt3			ray_point_at(t_ray ray, float_t t);
 float_t 		clamp(float_t value, float_t min, float_t max);
 t_vec3			rotate_x(t_vec3 vec, float_t angle);
 t_vec3			rotate_y(t_vec3 vec, float_t angle);
+
+t_vec3	rotate_z(t_vec3 vec, float_t angle);
+
+
 t_mat3x3		get_rot_x(float_t angle);
 float_t 		vec3_distance(t_vec3 vec1, t_vec3 vec2);
 
