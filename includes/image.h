@@ -33,6 +33,7 @@ typedef struct s_data
 	t_resolution	win;
 	t_color			*pixelcolors;
 	int 			pixelcolors_int;
+	t_lst			*slected_obj;
 }			t_data;
 
 int		loop_hook(t_data *data);

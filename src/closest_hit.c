@@ -225,7 +225,8 @@ t_color get_color_hitpoint(t_scene *scene, t_lst *object, t_ray ray, t_vec3 hitp
 
 	light_ray = ray;
 	(void)light_ray;
-
+	if (object->is_slected)
+		return ((t_color){1.0f, 0.0f, 0.0f});
 	ambient = get_ambient_color_object(scene, object);
 	diffuse = get_diffuse_color_object(scene, object, hitpoint);
 	specular = get_specular_color_object(scene, object, hitpoint);

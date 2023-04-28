@@ -315,6 +315,44 @@ t_cy_state	cylinder_transition(t_cy_state state, char c)
 	{
 		if (c == ' ')
 			return (CY_SPACE_6);
+		if (ft_isdigit(c))
+			return (CY_REFLECTIVENESS_BEFORE_DECIMAL);
+		if (c == '\n')
+			return (CY_ACCEPT);
+	}
+		else if (state == CY_REFLECTIVENESS_BEFORE_DECIMAL)
+	{
+		if (c == ' ')
+			return (CY_SPACE_7);
+		if (c == '.')
+			return (CY_REFLECTIVENESS_DECIMAL);
+		if (ft_isdigit(c))
+			return (CY_REFLECTIVENESS_BEFORE_DECIMAL);
+		if (c == '\n')
+			return (CY_ACCEPT);
+	}
+	else if (state == CY_SPACE_7)
+	{
+		if (c == ' ')
+			return (CY_SPACE_7);
+		if (ft_isdigit(c))
+			return (CY_REFLECTIVENESS_BEFORE_DECIMAL);
+		if (c == '.')
+			return (CY_REFLECTIVENESS_DECIMAL);
+		if (c == '\n')
+			return (CY_ACCEPT);
+	}
+	else if (state == CY_REFLECTIVENESS_DECIMAL)
+	{
+		if(ft_isdigit(c))
+			return (CY_REFLECTIVENESS_AFTER_DECIMAL);
+	}
+	else if (state == CY_REFLECTIVENESS_AFTER_DECIMAL)
+	{
+		if (c == ' ')
+			return (CY_SPACE_7);
+		if (ft_isdigit(c))
+			return (CY_REFLECTIVENESS_AFTER_DECIMAL);
 		if (c == '\n')
 			return (CY_ACCEPT);
 	}
@@ -337,7 +375,7 @@ int	is_valid_cylinder(char *line)
 			break ;
 		i++;
 	}
-	if (state == CY_ACCEPT || state == CY_BLUE || state == CY_SPACE_6)
+	if (state == CY_ACCEPT || state == CY_BLUE || state == CY_SPACE_6 || state == CY_REFLECTIVENESS_AFTER_DECIMAL || state == CY_SPACE_5 || state == CY_REFLECTIVENESS_BEFORE_DECIMAL)
 		return (1);
 	ft_putstr_fd("Error\nCylinder could not be parsed\n", STDERR_FILENO);
 	return (0);

@@ -49,7 +49,6 @@ int	add_cylinder(t_lst_ref *objects, char *line)
 	cylinder->radius = ft_atof(parameters[3]) / 2;
 	cylinder->height = ft_atof(parameters[4]);
 	cylinder->color = get_color_from_str_arr(color);
-	cylinder->reflect_factor = 0.9;
 	if (!is_valid_color(cylinder->color))
 	{
 		cylinder = free_null(cylinder);
@@ -59,12 +58,14 @@ int	add_cylinder(t_lst_ref *objects, char *line)
 		color = free_arr_null(color);
 		return (-1);
 	}
+	cylinder->reflect_factor = get_reflect_factor_from_str(parameters[6]);
 	parameters = free_arr_null(parameters);
 	orig = free_arr_null(orig);
 	axis = free_arr_null(axis);
 	color = free_arr_null(color);
 	ft_add_lst_last(ft_lstnew(cylinder), objects);
 	ft_lstlast(objects->head)->type = CYLINDER;
+	ft_lstlast(objects->head)->is_slected = 0;
 	print_object(cylinder, CYLINDER);
 	return (0);
 }
