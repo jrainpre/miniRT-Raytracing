@@ -36,20 +36,25 @@ t_camera	*init_camera(t_resolution win, char *line)
 		orientation = free_arr_null(orientation);
 		return (NULL);
 	}
-	cam->rot_y_angle = acosf(cam->orientation.z);
-	cam->rot_x_angle = asinf(-cam->orientation.y);
 	cam->fov = ft_atof(parameters[3]);
 	cam->sensor_height = 0.024;
 	cam->sensor_width = ((float_t)win.width / (float_t)win.height) * cam->sensor_height;
 	cam->focal_length = (cam->sensor_width / 2) / tanf(deg_to_rad(cam->fov / 2.0));
-	cam->vertical = (t_vec3){0, -cam->sensor_height, 0};
-	cam->vertical = rotate_x(rotate_y(cam->vertical, cam->rot_y_angle), cam->rot_x_angle);
-	cam->horizontal = (t_vec3){-cam->sensor_width, 0, 0};
-	cam->horizontal = rotate_x(rotate_y(cam->horizontal, cam->rot_y_angle), cam->rot_x_angle);
-	cam->left = (t_vec3){1, 0, 0};
-	cam->left = rotate_x(rotate_y(cam->left, cam->rot_y_angle), cam->rot_x_angle);
-	cam->up = (t_vec3){0, 1, 0};
-	cam->up = rotate_x(rotate_y(cam->up, cam->rot_y_angle), cam->rot_x_angle);
+	if (cam->orientation.y == 1 || cam->orientation.y == -1)
+		cam->horizontal = (t_vec3){1, 0, 0};
+	else
+		cam->horizontal = cross_prod(cam->orientation, (t_vec3){0, 1, 0});
+	cam->horizontal = unit_vec3(cam->horizontal);
+	cam->left = vec_mult(cam->horizontal, -1);
+	print_vec3("cam->horizontal", cam->horizontal);
+	cam->vertical = cross_prod(cam->orientation, cam->horizontal);
+	cam->vertical = unit_vec3(cam->vertical);
+	print_vec3("cam->vertical", cam->vertical);
+	cam->up = vec_mult(cam->vertical, -1);
+	cam->horizontal = vec_mult(cam->horizontal, cam->sensor_width);
+	print_vec3("cam->horizontal", cam->horizontal);
+	cam->vertical = vec_mult(cam->vertical, cam->sensor_height);
+	print_vec3("cam->vertical", cam->vertical);
 	cam->upper_left_corner = calc_upper_left_corner(cam);
 	parameters = free_arr_null(parameters);
 	orig = free_arr_null(orig);
