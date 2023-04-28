@@ -136,7 +136,10 @@ t_color follow_ray(t_scene *scene, t_ray ray)
 		normal = get_normal_to_surface(object, hit_point);
 		color = light_shade_object(scene, object, ray);
 		act_color = color_add(color_mult(color, factor), act_color);
-		factor *= 0.7 * get_reflect_factor(object);
+		if (object->is_slected)
+			factor = 0.0f;
+		else
+			factor *= 0.7 * get_reflect_factor(object);
 		ray.orig = vec_add(ray.orig, vec_mult(normal, VEC_OFFSET));
 		ray.dir = calulate_fuzzed_reflected(ray.dir, normal, 1 - get_reflect_factor(object));
 		 i++;

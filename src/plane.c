@@ -63,6 +63,7 @@ int	add_plane(t_lst_ref *objects, char *line)
 	color = free_arr_null(color);
 	ft_add_lst_last(ft_lstnew(plane), objects);
 	ft_lstlast(objects->head)->type = PLANE;
+	ft_lstlast(objects->head)->is_slected = 0;
 	print_object(plane, PLANE);
 	return (0);
 }

@@ -16,6 +16,7 @@ typedef struct s_lst
 {
 	void				*content;
 	enum e_object_type	type;
+	int 				is_slected;
 	struct s_lst		*prev;
 	struct s_lst		*next;
 }						t_lst;
