@@ -10,11 +10,20 @@ int	loop_hook(t_data *data)
 	return (0);
 }
 
-int	key_hook1(int keysym, t_data *data)
+void select_next_object(t_data *data)
 {
-	printf("%x\n", keysym);
-	if (keysym == XK_Escape)
-		close_app(data);
+	if (data->slected_obj != NULL)
+		data->slected_obj->is_slected = 0;
+	if (data->slected_obj == NULL)
+		data->slected_obj = data->scene->objects->head;
+	else
+		data->slected_obj = data->slected_obj->next;
+	if (data->slected_obj != NULL)
+		data->slected_obj->is_slected = 1;
+}
+
+void scene_actions(int keysym, t_data *data)
+{
 	if (keysym == XK_Left)
 		truck_left(data->scene->cam, 0.1);
 	if (keysym == XK_Right)
@@ -43,6 +52,243 @@ int	key_hook1(int keysym, t_data *data)
 		translate_light(data->scene->light, (t_vec3){0, 10, 0});
 	if (keysym == XK_s)
 		translate_light(data->scene->light, (t_vec3){0, -10, 0});
+}
+
+void increase_diameter_sphere(t_lst *object)
+{
+	t_sphere *sphere;
+	sphere = (t_sphere *)object;
+	sphere->radius += 0.1;
+}
+
+void decrease_diameter_sphere(t_lst *object)
+{
+	t_sphere *sphere;
+	sphere = (t_sphere *)object;
+	if (sphere->radius > 0.1)
+		sphere->radius -= 0.1;
+}
+
+void increase_diameter_cylinder(t_lst *object)
+{
+	t_cylinder *cylinder;
+	cylinder = (t_cylinder *)object;
+	cylinder->radius += 0.1;
+}
+
+void decrease_diameter_cylinder(t_lst *object)
+{
+	t_cylinder *cylinder;
+	cylinder = (t_cylinder *)object;
+	if (cylinder->radius > 0.1)
+		cylinder->radius -= 0.1;
+}
+
+void increase_hight_cylinder(t_lst *object)
+{
+	t_cylinder *cylinder;
+	cylinder = (t_cylinder *)object;
+	cylinder->height += 0.1;
+}
+
+void decrease_hight_cylinder(t_lst *object)
+{
+	t_cylinder *cylinder;
+	cylinder = (t_cylinder *)object;
+	if (cylinder->height > 0.1)
+		cylinder->height -= 0.1;
+}
+
+void object_key_up(t_lst *object)
+{
+	if (object->type == SPHERE)
+		increase_diameter_sphere(object->content);
+	if (object->type == CYLINDER)
+		increase_diameter_cylinder(object->content);
+}
+
+void object_key_down(t_lst *object)
+{
+	if (object->type == SPHERE)
+		decrease_diameter_sphere(object->content);
+	if (object->type == CYLINDER)
+		decrease_diameter_cylinder(object->content);
+}
+
+void object_key_left(t_lst *object)
+{
+	if (object->type == CYLINDER)
+		increase_hight_cylinder(object->content);
+}
+
+void object_key_right(t_lst *object)
+{
+	if (object->type == CYLINDER)
+		decrease_hight_cylinder(object->content);
+}
+
+void translate_obj_inc_x(t_lst *object)
+{
+	if (object->type == SPHERE)
+		((t_sphere *)object->content)->orig.x += 0.1;
+	if (object->type == CYLINDER)
+		((t_cylinder *)object->content)->orig.x += 0.1;
+	if (object->type == PLANE)
+		((t_plane *)object->content)->point.x += 0.1;
+}
+
+void translate_obj_dec_x(t_lst *object)
+{
+	if (object->type == SPHERE)
+		((t_sphere *)object->content)->orig.x -= 0.1;
+	if (object->type == CYLINDER)
+		((t_cylinder *)object->content)->orig.x -= 0.1;
+	if (object->type == PLANE)
+		((t_plane *)object->content)->point.x -= 0.1;
+}
+
+void translate_obj_inc_y(t_lst *object)
+{
+	if (object->type == SPHERE)
+		((t_sphere *)object->content)->orig.y += 0.1;
+	if (object->type == CYLINDER)
+		((t_cylinder *)object->content)->orig.y += 0.1;
+	if (object->type == PLANE)
+		((t_plane *)object->content)->point.y += 0.1;
+}
+
+void translate_obj_dec_y(t_lst *object)
+{
+	if (object->type == SPHERE)
+		((t_sphere *)object->content)->orig.y -= 0.1;
+	if (object->type == CYLINDER)
+		((t_cylinder *)object->content)->orig.y -= 0.1;
+	if (object->type == PLANE)
+		((t_plane *)object->content)->point.y -= 0.1;
+}
+
+void translate_obj_inc_z(t_lst *object)
+{
+	if (object->type == SPHERE)
+		((t_sphere *)object->content)->orig.z += 0.1;
+	if (object->type == CYLINDER)
+		((t_cylinder *)object->content)->orig.z += 0.1;
+	if (object->type == PLANE)
+		((t_plane *)object->content)->point.z += 0.1;
+}
+
+void translate_obj_dec_z(t_lst *object)
+{
+	if (object->type == SPHERE)
+		((t_sphere *)object->content)->orig.z -= 0.1;
+	if (object->type == CYLINDER)
+		((t_cylinder *)object->content)->orig.z -= 0.1;
+	if (object->type == PLANE)
+		((t_plane *)object->content)->point.z -= 0.1;
+}
+
+void rotate_obj_inc_x(t_lst *object)
+{
+	
+	if (object->type == CYLINDER)
+		((t_cylinder *)object->content)->axis = unit_vec3(rotate_x(((t_cylinder *)object->content)->axis, M_PI_4 / 4));
+	if (object->type == PLANE)
+		((t_plane *)object->content)->normal_vec = unit_vec3(rotate_x(((t_plane *)object->content)->normal_vec, M_PI_4 / 4));
+}
+
+void rotate_obj_dec_x(t_lst *object)
+{
+	if (object->type == CYLINDER)
+		((t_cylinder *)object->content)->axis = unit_vec3(rotate_x(((t_cylinder *)object->content)->axis, -M_PI_4 / 4));
+	if (object->type == PLANE)
+		((t_plane *)object->content)->normal_vec = unit_vec3(rotate_x(((t_plane *)object->content)->normal_vec, -M_PI_4 / 4));
+}
+
+void rotate_obj_inc_y(t_lst *object)
+{
+	if (object->type == CYLINDER)
+		((t_cylinder *)object->content)->axis = unit_vec3(rotate_y(((t_cylinder *)object->content)->axis, M_PI_4 / 4));
+	if (object->type == PLANE)
+		((t_plane *)object->content)->normal_vec = unit_vec3(rotate_y(((t_plane *)object->content)->normal_vec, M_PI_4 / 4));
+	
+}
+
+void rotate_obj_dec_y(t_lst *object)
+{
+	if (object->type == CYLINDER)
+		((t_cylinder *)object->content)->axis = unit_vec3(rotate_y(((t_cylinder *)object->content)->axis, -M_PI_4 / 4));
+	if (object->type == PLANE)
+		((t_plane *)object->content)->normal_vec = unit_vec3(rotate_y(((t_plane *)object->content)->normal_vec, -M_PI_4 / 4));
+}
+
+void rotate_obj_inc_z(t_lst *object)
+{
+	if (object->type == CYLINDER)
+		((t_cylinder *)object->content)->axis = unit_vec3(rotate_z(((t_cylinder *)object->content)->axis, M_PI_4 / 4));
+	if (object->type == PLANE)
+		((t_plane *)object->content)->normal_vec = unit_vec3(rotate_z(((t_plane *)object->content)->normal_vec, M_PI_4 / 4));
+}
+
+void rotate_obj_dec_z(t_lst *object)
+{
+	if (object->type == CYLINDER)
+		((t_cylinder *)object->content)->axis = unit_vec3(rotate_z(((t_cylinder *)object->content)->axis, -M_PI_4 / 4));
+	if (object->type == PLANE)
+		((t_plane *)object->content)->normal_vec = unit_vec3(rotate_z(((t_plane *)object->content)->normal_vec, -M_PI_4 / 4));
+}
+
+void object_actions(int keysym, t_data *data)
+{
+	if (keysym == XK_Up)
+		object_key_up(data->slected_obj);
+	if (keysym == XK_Down)
+		object_key_down(data->slected_obj);
+	if (keysym == XK_Left)
+		object_key_left(data->slected_obj);
+	if (keysym == XK_Right)
+		object_key_right(data->slected_obj);
+	if (keysym == XK_d)
+		translate_obj_inc_x(data->slected_obj);
+	if (keysym == XK_a)
+		translate_obj_dec_x(data->slected_obj);
+	if (keysym == XK_w)
+		translate_obj_inc_y(data->slected_obj);
+	if (keysym == XK_s)
+		translate_obj_dec_y(data->slected_obj);
+	if (keysym == XK_o)
+		translate_obj_inc_z(data->slected_obj);
+	if (keysym == XK_i)	
+		translate_obj_dec_z(data->slected_obj);	
+	if (keysym == XK_t)
+		rotate_obj_inc_x(data->slected_obj);
+	if (keysym == XK_g)
+		rotate_obj_dec_x(data->slected_obj);
+	if (keysym == XK_h)
+		rotate_obj_inc_y(data->slected_obj);
+	if (keysym == XK_f)
+		rotate_obj_dec_y(data->slected_obj);
+	if (keysym == XK_r)
+		rotate_obj_inc_z(data->slected_obj);
+	if (keysym == XK_z)
+		rotate_obj_dec_z(data->slected_obj);
+}
+
+int	key_hook1(int keysym, t_data *data)
+{
+	printf("%x\n", keysym);
+	if (keysym == XK_Escape)
+		close_app(data);
+	if (keysym == XK_n)
+		select_next_object(data);
+	if (keysym == XK_m)
+	{
+		data->slected_obj->is_slected = 0;
+		data->slected_obj = NULL;
+	}
+	if (data->slected_obj != NULL)
+		object_actions(keysym, data);
+	else
+		scene_actions(keysym, data);
 	data->pixelcolors_int = 1;
 	ft_memset(data->pixelcolors, 0, data->win.width * data->win.height * sizeof (t_color));
 	print_object(data->scene->cam, CAMERA);
@@ -87,3 +333,12 @@ int	start_mlx(t_data *data)
 	mlx_loop(data->mlx_ptr);
 	return (0);
 }
+
+
+
+
+
+
+
+
+
