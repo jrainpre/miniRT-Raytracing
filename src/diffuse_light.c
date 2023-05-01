@@ -1,6 +1,6 @@
 #include "miniRT.h"
 
-t_color get_diffuse_color_object(t_scene *scene, t_lst *object, t_vec3 hitpoint)
+t_color get_diffuse_color_object(t_scene *scene, t_lst *object, t_vec3 hitpoint, t_ray ray)
 {
 	t_object_type	type;
 
@@ -10,7 +10,7 @@ t_color get_diffuse_color_object(t_scene *scene, t_lst *object, t_vec3 hitpoint)
 	else if (type == PLANE)
 		return (get_diffuse_light_plane(scene, object, hitpoint));
 	else if (type == CYLINDER)
-		return (get_diffuse_light_cylinder(scene, object, hitpoint));
+		return (get_diffuse_light_cylinder(scene, object, hitpoint, ray));
 	return ((t_color){0, 0, 0, 0});
 }
 
@@ -53,7 +53,7 @@ t_color	get_diffuse_light_plane(t_scene *scene, t_lst *object, t_vec3 hitpoint)
 	return (act_color);
 }
 
-t_color get_diffuse_light_cylinder(t_scene *scene, t_lst *object, t_vec3 hitpoint)
+t_color get_diffuse_light_cylinder(t_scene *scene, t_lst *object, t_vec3 hitpoint, t_ray ray1)
 {
 	t_cylinder *cylinder;
 	float_t angle;
@@ -65,7 +65,7 @@ t_color get_diffuse_light_cylinder(t_scene *scene, t_lst *object, t_vec3 hitpoin
 	ray.orig = vec_add(ray.orig, vec_mult(ray.dir, SHADOW_OFFSET));
 	ray.dir = unit_vec3(vec_add(ray.dir, vec_mult(random_in_unit_sphere(), SHADOW_SOFT_MULTIPLIER)));
 	cylinder = (t_cylinder *)object->content;
-	angle = get_light_angle_cylinder(hitpoint, cylinder, scene);
+	angle = get_light_angle_cylinder(hitpoint, cylinder, scene, ray1);
 	if (get_closest_hit_light(scene, ray) != NULL)
 		angle = 0;
 	act_color = color_mult(cylinder->color, angle * scene->light->ratio);

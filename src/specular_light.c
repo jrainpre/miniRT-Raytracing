@@ -1,6 +1,6 @@
 #include "miniRT.h"
 
-t_color get_specular_color_object(t_scene *scene, t_lst *object, t_vec3 hitpoint)
+t_color get_specular_color_object(t_scene *scene, t_lst *object, t_vec3 hitpoint, t_ray ray)
 {
 	t_object_type	type;
 
@@ -10,7 +10,7 @@ t_color get_specular_color_object(t_scene *scene, t_lst *object, t_vec3 hitpoint
 	else if (type == PLANE)
 		return (get_specular_color_plane(scene, object, hitpoint));
 	else if (type == CYLINDER)
-		return (get_specular_color_cylinder(scene, object, hitpoint));
+		return (get_specular_color_cylinder(scene, object, hitpoint, ray));
 	return ((t_color){0, 0, 0, 0});
 }
 
@@ -116,7 +116,7 @@ t_vec3 get_reflection_vec_cylinder(t_vec3 hit_point, t_cylinder *cylinder, t_sce
 	return (reflection);
 }
 
-t_color get_specular_color_cylinder(t_scene *scene, t_lst *object, t_vec3 hitpoint)
+t_color get_specular_color_cylinder(t_scene *scene, t_lst *object, t_vec3 hitpoint, t_ray ray1)
 {
     t_vec3 reflection;
     t_vec3 to_camera;
@@ -132,7 +132,7 @@ t_color get_specular_color_cylinder(t_scene *scene, t_lst *object, t_vec3 hitpoi
     ray.dir = vec_sub(scene->light->orig, hitpoint);
     ray.orig = vec_add(ray.orig, vec_mult(ray.dir, SHADOW_OFFSET));
     cylinder = (t_cylinder *)object->content;
-    normal = get_normal_cylinder(hitpoint, cylinder);
+    normal = get_normal_cylinder( hitpoint, cylinder, scene, ray1);
     to_light = unit_vec3(vec_sub(scene->light->orig, hitpoint));
     reflection = vec_sub(vec_mult(normal, 2 * scalar_prod(normal, to_light)), to_light);
     to_camera = unit_vec3(vec_sub(scene->cam->orig, hitpoint));

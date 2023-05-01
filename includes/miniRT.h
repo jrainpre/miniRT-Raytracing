@@ -130,10 +130,10 @@ t_color get_color_hitpoint(t_scene *scene, t_lst *object, t_ray ray, t_vec3 hitp
 t_color get_ambient_color_object(t_scene *scene, t_lst *object);
 t_color get_ambient_color_sphere(t_scene *scene, t_lst *object);
 t_color	get_ambient_color_plane(t_scene *scene, t_lst *object);
-t_color get_diffuse_color_object(t_scene *scene, t_lst *object, t_vec3 hitpoint);
+t_color get_diffuse_color_object(t_scene *scene, t_lst *object, t_vec3 hitpoint, t_ray ray);
 t_color get_diffuse_color_sphere(t_scene *scene, t_lst *object, t_vec3 hitpoint);
 t_color	get_diffuse_light_plane(t_scene *scene, t_lst *object, t_vec3 hitpoint);
-t_color get_specular_color_object(t_scene *scene, t_lst *object, t_vec3 hitpoint);
+t_color get_specular_color_object(t_scene *scene, t_lst *object, t_vec3 hitpoint, t_ray ray);
 t_vec3 get_reflection_vec_sphere(t_vec3 hit_point, t_sphere *sphere, t_scene *scene);
 t_color get_specular_color_sphere(t_scene *scene, t_lst *object, t_vec3 hitpoint);
 
@@ -143,16 +143,15 @@ t_color get_specular_color_sphere(t_scene *scene, t_lst *object, t_vec3 hitpoint
 int				hit_plane(t_plane *plane, t_ray ray, t_scene *scene);
 t_color get_specular_color_plane(t_scene *scene, t_lst *object, t_vec3 hitpoint);
 
-t_color get_diffuse_light_cylinder(t_scene *scene, t_lst *object, t_vec3 hitpoint);
+t_color get_diffuse_light_cylinder(t_scene *scene, t_lst *object, t_vec3 hitpoint, t_ray ray1);
 t_color	get_ambient_light_cylinder(t_scene *scene, t_lst *object);
 t_vec3 get_hitpoint_cylinder(t_lst *object, float_t distance_t, t_ray ray);
 float_t get_cylinder_distance_t(t_lst *object, t_ray ray);
-float_t get_light_angle_cylinder(t_vec3 hit_point, t_cylinder *cylinder, t_scene *scene);
-t_color get_specular_color_cylinder(t_scene *scene, t_lst *object, t_vec3 hitpoint);
-t_vec3 get_normal_cylinder(t_vec3 hit_point, t_cylinder *cylinder);
+float_t get_light_angle_cylinder(t_vec3 hit_point, t_cylinder *cylinder, t_scene *scene, t_ray ray);
+t_color get_specular_color_cylinder(t_scene *scene, t_lst *object, t_vec3 hitpoint, t_ray ray);
 
 t_lst	*get_closest_hit_light(t_scene *scene, t_ray ray);
-t_vec3 get_normal_cylinder(t_vec3 hit_point, t_cylinder *cylinder);
+t_vec3 get_normal_cylinder(t_vec3 hit_point, t_cylinder *cylinder, t_scene *scene, t_ray ray);
 
 
 
