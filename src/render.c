@@ -25,7 +25,7 @@ t_vec3 get_reflect_ray(t_vec3 vector, t_vec3 normal)
 	return (reflection);
 }
 
-t_vec3 get_normal_to_surface(t_lst *object, t_vec3 hit_point)
+void get_normal_to_surface(t_lst *object, t_hit_info *hit_info)
 {
 	t_vec3 normal;
 	t_sphere *sphere;
@@ -34,20 +34,19 @@ t_vec3 get_normal_to_surface(t_lst *object, t_vec3 hit_point)
 	if (object->type == SPHERE)
 	{
 		sphere = (t_sphere *)object->content;
-		normal = vec_sub(hit_point, sphere->orig);
-		normal = unit_vec3(normal);
+		normal = vec_sub(hit_info->hitpoint, sphere->orig);
+		hit_info->normal = unit_vec3(normal);
 	}
 	else if (object->type == PLANE)
 	{
 		plane = (t_plane *)object->content;
 		normal = plane->normal_vec;
-		normal = unit_vec3(normal);
+		hit_info->normal = unit_vec3(normal);
 	}
-	// else if (object->type == CYLINDER)
-	// 	normal = get_normal_cylinder(hit_point, (t_cylinder *)object->content);
+	else if (object->type == CYLINDER)
+		get_normal_cylinder(hit_info, (t_cylinder *)object->content);
 	else
-		normal = (t_vec3){0, 0, 0};
-	return (normal);
+		hit_info->normal = (t_vec3){0, 0, 0};
 }
 
 float_t		random_float(void)
@@ -117,10 +116,9 @@ float_t get_reflect_factor(t_lst *object)
 
 t_color follow_ray(t_scene *scene, t_ray ray)
 {
+	t_hit_info hit_info;
 	float_t distance_t;
 	t_vec3 hit_point;
-	t_vec3 normal;
-	t_lst *object;
 	t_color color;
 	float_t factor = 1.0f;
 	int i = 0;
@@ -128,20 +126,19 @@ t_color follow_ray(t_scene *scene, t_ray ray)
 
 	while (i < 1)
 	{
-		object = get_closest_hit(scene, ray);
-		if (object == NULL)
+		get_closest_hit(scene, ray, &hit_info);
+		if (hit_info.object == NULL)
 			return (act_color);
-		distance_t = get_distance_t(object, ray);
-		hit_point = vec_add(ray.orig, vec_mult(ray.dir, distance_t));
-		normal = get_normal_to_surface(object, hit_point);
-		color = light_shade_object(scene, object, ray);
+		hit_info.hitpoint = vec_add(ray.orig, vec_mult(ray.dir, hit_info.distance));
+		get_normal_to_surface(hit_info.object, &hit_info);
+		color = light_shade_object(scene, hit_info.object, &hit_info);
 		act_color = color_add(color_mult(color, factor), act_color);
-		if (object->is_slected)
+		if (hit_info.object->is_slected)
 			factor = 0.0f;
 		else
-			factor *= 0.7 * get_reflect_factor(object);
-		ray.orig = vec_add(ray.orig, vec_mult(normal, VEC_OFFSET));
-		ray.dir = calulate_fuzzed_reflected(ray.dir, normal, 1 - get_reflect_factor(object));
+			factor *= 0.7 * get_reflect_factor(hit_info.object);
+		ray.orig = vec_add(ray.orig, vec_mult(hit_info.normal, VEC_OFFSET));
+		ray.dir = calulate_fuzzed_reflected(ray.dir, hit_info.normal, 1 - get_reflect_factor(hit_info.object));
 		 i++;
 	}
 	return(act_color);

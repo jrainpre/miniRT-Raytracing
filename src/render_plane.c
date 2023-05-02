@@ -1,13 +1,12 @@
 #include "miniRT.h"
 
-t_vec3	get_hitpoint_plane(t_lst *object, float_t distance_t, t_ray ray)
+void	get_hitpoint_plane(t_lst *object, t_hit_info *hit_info)
 {
 	t_vec3	hit_point;
 	t_plane	*plane;
 
 	plane = (t_plane *)object->content;
-	hit_point = vec_add(vec_mult(ray.dir, distance_t), ray.orig);
-	return (hit_point);
+	hit_info->hitpoint = vec_add(vec_mult(hit_info->ray.dir, hit_info->distance), hit_info->ray.orig);
 }
 
 float_t	get_plane_distance_t(t_lst *object, t_ray ray)
