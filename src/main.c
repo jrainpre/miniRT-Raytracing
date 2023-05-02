@@ -12,6 +12,8 @@ int	main(int argc, char **argv)
 	data = init_data();
 	if (data == NULL)
 		return (1);
+	if (argc == 4)
+		data->win = (t_resolution){ft_atoi(argv[2]), ft_atoi(argv[3])};
 	data->scene_lines = read_file(argv[1]);
 	if (data->scene_lines == NULL)
 	{

@@ -21,14 +21,14 @@ int	arguments_valid(int argc, char **argv)
 	{
 		win_x = ft_atoi(argv[2]);
 		win_y = ft_atoi(argv[3]);
-		if (win_x < 10 || win_x > 1920)
+		if (win_x < 300 || win_x > 1920)
 		{
-			ft_putstr_fd("Error\nwin_x must be in 10..1920\n", STDERR_FILENO);
+			ft_putstr_fd("Error\nwin_x must be in 300..1920\n", STDERR_FILENO);
 			return (0);
 		}
-		if (win_x < 10 || win_y > 1080)
+		if (win_y < 300 || win_y > 1080)
 		{
-			ft_putstr_fd("Error\nwin_y must be in 10..1080\n", STDERR_FILENO);
+			ft_putstr_fd("Error\nwin_y must be in 300..1080\n", STDERR_FILENO);
 			return (0);
 		}
 	}
