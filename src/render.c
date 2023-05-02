@@ -185,8 +185,8 @@ void	render_scene(t_data *data)
 				const t_vec3	fuzz = vec_mult(random_in_unit_sphere(), FUZZ_FACTOR);
 			ray.dir = vec_add(ray.dir, fuzz);
 			act_color = follow_ray(data->scene, ray);
-			data->pixelcolors[i * data->win.width + j] = color_add(data->pixelcolors[i * data->win.width + j], act_color);
-			final_color = color_div(data->pixelcolors[i * data->win.width + j], data->pixelcolors_int);
+			data->pixelcolors[j * data->win.width + i] = color_add(data->pixelcolors[j * data->win.width + i], act_color);
+			final_color = color_div(data->pixelcolors[j * data->win.width + i], data->pixelcolors_int);
 			final_color = color_clamp(final_color, 0.0f, 1.0f);
 			img_pix_put(data, i, j, color_conversion(final_color));
 			i++;
