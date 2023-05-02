@@ -62,7 +62,7 @@ t_color get_diffuse_light_cylinder(t_scene *scene, t_lst *object, t_vec3 hitpoin
 
 	ray.orig = hitpoint;
 	ray.dir = unit_vec3(vec_sub(scene->light->orig, hitpoint));
-	ray.orig = vec_add(ray.orig, vec_mult(ray.dir, SHADOW_OFFSET));
+	ray.orig = vec_add(ray.orig, vec_mult(ray.dir, 0.01));
 	ray.dir = unit_vec3(vec_add(ray.dir, vec_mult(random_in_unit_sphere(), SHADOW_SOFT_MULTIPLIER)));
 	cylinder = (t_cylinder *)object->content;
 	angle = get_light_angle_cylinder(hitpoint, cylinder, scene, ray1);

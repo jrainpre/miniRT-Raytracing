@@ -130,7 +130,7 @@ t_color get_specular_color_cylinder(t_scene *scene, t_lst *object, t_vec3 hitpoi
 
     ray.orig = hitpoint;
     ray.dir = vec_sub(scene->light->orig, hitpoint);
-    ray.orig = vec_add(ray.orig, vec_mult(ray.dir, SHADOW_OFFSET));
+    ray.orig = vec_add(ray.orig, vec_mult(ray.dir, 0.01));
     cylinder = (t_cylinder *)object->content;
     normal = get_normal_cylinder( hitpoint, cylinder, scene, ray1);
     to_light = unit_vec3(vec_sub(scene->light->orig, hitpoint));
