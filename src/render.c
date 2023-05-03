@@ -184,7 +184,6 @@ void	render_scene(t_data *data)
 			act_color = color_div(data->pixelcolors[j * data->win.width + i], data->pixelcolors_int);
 			act_color = color_clamp(act_color, 0.0f, 1.0f);
 			img_pix_put(data, i, j, color_conversion(act_color));
-			i++;
 		}
 	}
 	data->pixelcolors_int++;
