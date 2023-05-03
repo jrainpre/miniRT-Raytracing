@@ -1,16 +1,16 @@
 #include "miniRT.h"
 
-t_color get_specular_color_object(t_scene *scene, t_lst *object, t_vec3 hitpoint)
+t_color get_specular_color_object(t_scene *scene, t_lst *object, t_hit_info *hit_info)
 {
 	t_object_type	type;
 
 	type = object->type;
 	if (type == SPHERE)
-		return (get_specular_color_sphere(scene, object, hitpoint));
+		return (get_specular_color_sphere(scene, object, hit_info));
 	else if (type == PLANE)
-		return (get_specular_color_plane(scene, object, hitpoint));
+		return (get_specular_color_plane(scene, object, hit_info));
 	else if (type == CYLINDER)
-		return (get_specular_color_cylinder(scene, object, hitpoint));
+		return (get_specular_color_cylinder(scene, object, hit_info));
 	return ((t_color){0, 0, 0, 0});
 }
 
@@ -44,7 +44,7 @@ t_vec3 get_reflection_vec_plane(t_vec3 hit_point, t_plane *plane, t_scene *scene
 	return (reflection);
 }
 
-t_color get_specular_color_plane(t_scene *scene, t_lst *object, t_vec3 hitpoint)
+t_color get_specular_color_plane(t_scene *scene, t_lst *object, t_hit_info *hit_info)
 {
 	t_vec3 reflection;
 	t_vec3 to_camera;
@@ -55,14 +55,12 @@ t_color get_specular_color_plane(t_scene *scene, t_lst *object, t_vec3 hitpoint)
 	t_color act_color;
 		t_ray ray;
 
-	ray.orig = hitpoint;
-	ray.dir = vec_sub(scene->light->orig, hitpoint);
-	ray.orig = vec_add(ray.orig, vec_mult(ray.dir, SHADOW_OFFSET));
-
+	ray.dir = vec_sub(scene->light->orig, hit_info->hitpoint);
+	ray.orig = vec_add(hit_info->hitpoint, vec_mult(ray.dir, SHADOW_OFFSET));
 	plane = (t_plane *)object->content;
-	reflection = unit_vec3(get_reflection_vec_plane(hitpoint, plane, scene));
-	to_camera = unit_vec3(vec_sub(scene->cam->orig, hitpoint));
-	to_light = unit_vec3(vec_sub(scene->light->orig, hitpoint));
+	reflection = unit_vec3(get_reflection_vec_plane(hit_info->hitpoint, plane, scene));
+	to_camera = unit_vec3(vec_sub(scene->cam->orig, hit_info->hitpoint));
+	to_light = unit_vec3(vec_sub(scene->light->orig, hit_info->hitpoint));
 	angle = scalar_prod(to_camera, reflection);
 	angle = clamp(angle, 0.0f, 1.0f);
 	angle = pow(angle, plane->reflect_factor * 120);
@@ -73,7 +71,7 @@ t_color get_specular_color_plane(t_scene *scene, t_lst *object, t_vec3 hitpoint)
 	return (act_color);
 }
 
-t_color get_specular_color_sphere(t_scene *scene, t_lst *object, t_vec3 hitpoint)
+t_color get_specular_color_sphere(t_scene *scene, t_lst *object, t_hit_info *hit_info)
 {
 	t_vec3 reflection;
 	t_vec3 to_camera;
@@ -82,16 +80,14 @@ t_color get_specular_color_sphere(t_scene *scene, t_lst *object, t_vec3 hitpoint
 	float_t factor;
 	t_sphere *sphere;
 	t_color act_color;
-		t_ray ray;
+	t_ray ray;
 
-	ray.orig = hitpoint;
-	ray.dir = vec_sub(scene->light->orig, hitpoint);
-	ray.orig = vec_add(ray.orig, vec_mult(ray.dir, SHADOW_OFFSET));
-
+	ray.dir = vec_sub(scene->light->orig, hit_info->hitpoint);
+	ray.orig = vec_add(hit_info->hitpoint, vec_mult(ray.dir, SHADOW_OFFSET));
 	sphere = (t_sphere *)object->content;
-	reflection = unit_vec3(get_reflection_vec_sphere(hitpoint, sphere, scene));
-	to_camera = unit_vec3(vec_sub(scene->cam->orig, hitpoint));
-	to_light = unit_vec3(vec_sub(scene->light->orig, hitpoint));
+	reflection = unit_vec3(get_reflection_vec_sphere(hit_info->hitpoint, sphere, scene));
+	to_camera = unit_vec3(vec_sub(scene->cam->orig, hit_info->hitpoint));
+	to_light = unit_vec3(vec_sub(scene->light->orig, hit_info->hitpoint));
 	angle = scalar_prod(to_camera, reflection);
 	angle = clamp(angle, 0.0f, 1.0f);
 	angle = pow(angle, sphere->reflect_factor * 256);
@@ -116,7 +112,7 @@ t_vec3 get_reflection_vec_cylinder(t_vec3 hit_point, t_cylinder *cylinder, t_sce
 	return (reflection);
 }
 
-t_color get_specular_color_cylinder(t_scene *scene, t_lst *object, t_vec3 hitpoint)
+t_color get_specular_color_cylinder(t_scene *scene, t_lst *object, t_hit_info *hit_info)
 {
     t_vec3 reflection;
     t_vec3 to_camera;
@@ -126,16 +122,13 @@ t_color get_specular_color_cylinder(t_scene *scene, t_lst *object, t_vec3 hitpoi
     t_cylinder *cylinder;
     t_color act_color;
     t_ray ray;
-    t_vec3 normal;
 
-    ray.orig = hitpoint;
-    ray.dir = vec_sub(scene->light->orig, hitpoint);
-    ray.orig = vec_add(ray.orig, vec_mult(ray.dir, SHADOW_OFFSET));
+    ray.dir = vec_sub(scene->light->orig, hit_info->hitpoint);
+    ray.orig = vec_add(hit_info->hitpoint, vec_mult(ray.dir, 0.01));
     cylinder = (t_cylinder *)object->content;
-    normal = get_normal_cylinder(hitpoint, cylinder);
-    to_light = unit_vec3(vec_sub(scene->light->orig, hitpoint));
-    reflection = vec_sub(vec_mult(normal, 2 * scalar_prod(normal, to_light)), to_light);
-    to_camera = unit_vec3(vec_sub(scene->cam->orig, hitpoint));
+    to_light = unit_vec3(vec_sub(scene->light->orig, hit_info->hitpoint));
+    reflection = vec_sub(vec_mult(hit_info->normal, 2 * scalar_prod(hit_info->normal, to_light)), to_light);
+    to_camera = unit_vec3(vec_sub(scene->cam->orig, hit_info->hitpoint));
     angle = scalar_prod(to_camera, reflection);
     angle = clamp(angle, 0.0f, 1.0f);
     angle = pow(angle, cylinder->reflect_factor * 120);

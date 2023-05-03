@@ -281,7 +281,7 @@ int	key_hook1(int keysym, t_data *data)
 		close_app(data);
 	if (keysym == XK_n)
 		select_next_object(data);
-	if (keysym == XK_m)
+	if (keysym == XK_m && data->slected_obj != NULL)
 	{
 		data->slected_obj->is_slected = 0;
 		data->slected_obj = NULL;

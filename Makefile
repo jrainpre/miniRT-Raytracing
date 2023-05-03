@@ -16,6 +16,7 @@ HEADLIST		:= miniRT.h \
 					linked_list.h \
 					matrix.h \
 					plane.h \
+					random.h \
 					ray.h \
 					scene.h \
 					sphere.h \
@@ -127,7 +128,7 @@ fclean:			clean
 re:				fclean all
 
 test:			all
-				./${NAME} scenes/reflectiontest4.rt
+				./${NAME} scenes/reflectiontest.rt
 
 val:			all
 				valgrind \
