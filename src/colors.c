@@ -102,7 +102,7 @@ t_color	mix_light(t_color act_color, t_color obj_color, t_color light_color,
 	return (mix);
 }
 
-float_t get_reflect_factor_from_str(char *str)
+float_t	get_reflect_factor_from_str(char *str)
 {
 	float_t	reflect_factor;
 

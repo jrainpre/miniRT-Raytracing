@@ -56,7 +56,7 @@ typedef struct s_hit_info
 	float_t		distance;
 	t_lst		*object;
 	t_ray 		ray;
-}			t_hit_info;
+}			t_hit_info;	
 
 /* Functions */
 
@@ -122,7 +122,7 @@ int				is_valid_ratio(float_t ratio);
 int				is_valid_color(t_color color);
 int				is_normalized(t_vec3 vec);
 void			render_status(t_data *data, int color);
-
+void			*calloc_or_print_error(size_t count, size_t size);
 
 int calc_distant_t(t_hit_calc *calc);
 float_t get_light_angle(t_vec3 hit_point, t_sphere *sphere, t_scene *scene);
@@ -148,7 +148,7 @@ t_vec3 get_reflection_vec_sphere(t_vec3 hit_point, t_sphere *sphere, t_scene *sc
 t_color get_specular_color_sphere(t_scene *scene, t_lst *object, t_hit_info *hit_info);
 
 
-float_t get_cylinder_distance_t(t_lst *object, t_ray ray);
+float_t get_cylinder_distance_t(t_cylinder *cylinder, t_ray ray);
 
 
 int				hit_plane(t_plane *plane, t_ray ray, t_scene *scene);
@@ -156,7 +156,7 @@ t_color get_specular_color_plane(t_scene *scene, t_lst *object, t_hit_info *hit_
 
 t_color get_diffuse_light_cylinder(t_scene *scene, t_lst *object, t_hit_info *hit_info);
 t_color	get_ambient_light_cylinder(t_scene *scene, t_lst *object);
-float_t get_light_angle_cylinder(t_hit_info *hit_info, t_cylinder *cylinder, t_scene *scene);
+float_t get_light_angle_cyl(t_hit_info *hit_info, t_cylinder *cyl, t_scene *scene);
 t_color get_specular_color_cylinder(t_scene *scene, t_lst *object, t_hit_info *hit_info);
 
 t_lst	*get_closest_hit_light(t_scene *scene, t_ray ray);

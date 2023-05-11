@@ -12,3 +12,15 @@ void	*malloc_or_print_error(size_t size)
 	}
 	return (ptr);
 }
+
+void	*calloc_or_print_error(size_t count, size_t size)
+{
+	void	*ptr;
+
+	ptr = calloc(count, size);
+	if (ptr == NULL)
+	{
+		ft_putstr_fd("calloc error\n", STDERR_FILENO);
+		exit(NULL);
+	}
+}

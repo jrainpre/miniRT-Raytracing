@@ -11,7 +11,7 @@ int	loop_hook(t_data *data)
 	return (0);
 }
 
-void select_next_object(t_data *data)
+void	select_next_object(t_data *data)
 {
 	if (data->slected_obj != NULL)
 		data->slected_obj->is_slected = 0;
@@ -23,7 +23,23 @@ void select_next_object(t_data *data)
 		data->slected_obj->is_slected = 1;
 }
 
-void scene_actions(int keysym, t_data *data)
+void	light_actions(int keysym, t_data *data)
+{
+	if (keysym == XK_a)
+		translate_light(data->scene->light, (t_vec3){-10, 0, 0});
+	if (keysym == XK_d)
+		translate_light(data->scene->light, (t_vec3){10, 0, 0});
+	if (keysym == XK_w)
+		translate_light(data->scene->light, (t_vec3){0, 10, 0});
+	if (keysym == XK_s)
+		translate_light(data->scene->light, (t_vec3){0, -10, 0});
+	if (keysym == XK_y)
+		translate_light(data->scene->light, (t_vec3){0, 0, 10});
+	if (keysym == XK_x)
+		translate_light(data->scene->light, (t_vec3){0, 0, -10});
+}
+
+void	camera_actions(int keysym, t_data *data)
 {
 	if (keysym == XK_Left)
 		truck_left(data->scene->cam, 0.1);
@@ -45,66 +61,66 @@ void scene_actions(int keysym, t_data *data)
 		tilt_up(data->scene->cam, M_PI_4 / 4);
 	if (keysym == XK_f)
 		tilt_down(data->scene->cam, M_PI_4 / 4);
-	if (keysym == XK_a)
-		translate_light(data->scene->light, (t_vec3){-10, 0, 0});
-	if (keysym == XK_d)
-		translate_light(data->scene->light, (t_vec3){10, 0, 0});
-	if (keysym == XK_w)
-		translate_light(data->scene->light, (t_vec3){0, 10, 0});
-	if (keysym == XK_s)
-		translate_light(data->scene->light, (t_vec3){0, -10, 0});
-	if (keysym == XK_y)
-		translate_light(data->scene->light, (t_vec3){0, 0, 10});
-	if (keysym == XK_x)
-		translate_light(data->scene->light, (t_vec3){0, 0, -10});
 }
 
-void increase_diameter_sphere(t_lst *object)
+void	scene_actions(int keysym, t_data *data)
 {
-	t_sphere *sphere;
+	camera_actions(keysym, data);
+	light_actions(keysym, data);
+}
+
+void	increase_diameter_sphere(t_lst *object)
+{
+	t_sphere	*sphere;
+
 	sphere = (t_sphere *)object;
 	sphere->radius += 0.1;
 }
 
-void decrease_diameter_sphere(t_lst *object)
+void	decrease_diameter_sphere(t_lst *object)
 {
-	t_sphere *sphere;
+	t_sphere	*sphere;
+
 	sphere = (t_sphere *)object;
 	if (sphere->radius > 0.1)
 		sphere->radius -= 0.1;
 }
 
-void increase_diameter_cylinder(t_lst *object)
+void	increase_diameter_cylinder(t_lst *object)
 {
-	t_cylinder *cylinder;
+	t_cylinder	*cylinder;
+
 	cylinder = (t_cylinder *)object;
 	cylinder->radius += 0.1;
 }
 
-void decrease_diameter_cylinder(t_lst *object)
+void	decrease_diameter_cylinder(t_lst *object)
 {
-	t_cylinder *cylinder;
+	t_cylinder	*cylinder;
+
 	cylinder = (t_cylinder *)object;
 	if (cylinder->radius > 0.1)
 		cylinder->radius -= 0.1;
 }
 
-void increase_hight_cylinder(t_lst *object)
+void	increase_hight_cylinder(t_lst *object)
 {
-	t_cylinder *cylinder;
+	t_cylinder	*cylinder;
+
 	cylinder = (t_cylinder *)object;
 	cylinder->height += 0.1;
 }
 
-void decrease_hight_cylinder(t_lst *object)
+void	decrease_hight_cylinder(t_lst *object)
 {
-	t_cylinder *cylinder;
+	t_cylinder	*cylinder;
+
 	cylinder = (t_cylinder *)object;
 	if (cylinder->height > 0.1)
 		cylinder->height -= 0.1;
 }
 
-void object_key_up(t_lst *object)
+void	object_resize_up(t_lst *object)
 {
 	if (object->type == SPHERE)
 		increase_diameter_sphere(object->content);
@@ -112,7 +128,7 @@ void object_key_up(t_lst *object)
 		increase_diameter_cylinder(object->content);
 }
 
-void object_key_down(t_lst *object)
+void	object_resize_down(t_lst *object)
 {
 	if (object->type == SPHERE)
 		decrease_diameter_sphere(object->content);
@@ -120,19 +136,19 @@ void object_key_down(t_lst *object)
 		decrease_diameter_cylinder(object->content);
 }
 
-void object_key_left(t_lst *object)
+void	object_resize_left(t_lst *object)
 {
 	if (object->type == CYLINDER)
 		increase_hight_cylinder(object->content);
 }
 
-void object_key_right(t_lst *object)
+void	object_resize_right(t_lst *object)
 {
 	if (object->type == CYLINDER)
 		decrease_hight_cylinder(object->content);
 }
 
-void translate_obj_inc_x(t_lst *object)
+void	translate_obj_inc_x(t_lst *object)
 {
 	if (object->type == SPHERE)
 		((t_sphere *)object->content)->orig.x += 0.1;
@@ -142,7 +158,7 @@ void translate_obj_inc_x(t_lst *object)
 		((t_plane *)object->content)->point.x += 0.1;
 }
 
-void translate_obj_dec_x(t_lst *object)
+void	translate_obj_dec_x(t_lst *object)
 {
 	if (object->type == SPHERE)
 		((t_sphere *)object->content)->orig.x -= 0.1;
@@ -152,7 +168,7 @@ void translate_obj_dec_x(t_lst *object)
 		((t_plane *)object->content)->point.x -= 0.1;
 }
 
-void translate_obj_inc_y(t_lst *object)
+void	translate_obj_inc_y(t_lst *object)
 {
 	if (object->type == SPHERE)
 		((t_sphere *)object->content)->orig.y += 0.1;
@@ -162,7 +178,7 @@ void translate_obj_inc_y(t_lst *object)
 		((t_plane *)object->content)->point.y += 0.1;
 }
 
-void translate_obj_dec_y(t_lst *object)
+void	translate_obj_dec_y(t_lst *object)
 {
 	if (object->type == SPHERE)
 		((t_sphere *)object->content)->orig.y -= 0.1;
@@ -172,7 +188,7 @@ void translate_obj_dec_y(t_lst *object)
 		((t_plane *)object->content)->point.y -= 0.1;
 }
 
-void translate_obj_inc_z(t_lst *object)
+void	translate_obj_inc_z(t_lst *object)
 {
 	if (object->type == SPHERE)
 		((t_sphere *)object->content)->orig.z += 0.1;
@@ -182,7 +198,7 @@ void translate_obj_inc_z(t_lst *object)
 		((t_plane *)object->content)->point.z += 0.1;
 }
 
-void translate_obj_dec_z(t_lst *object)
+void	translate_obj_dec_z(t_lst *object)
 {
 	if (object->type == SPHERE)
 		((t_sphere *)object->content)->orig.z -= 0.1;
@@ -192,78 +208,104 @@ void translate_obj_dec_z(t_lst *object)
 		((t_plane *)object->content)->point.z -= 0.1;
 }
 
-void rotate_obj_inc_x(t_lst *object)
+void	rotate_obj_inc_x(t_lst *object)
 {
-	
+	t_vec3	axis;
+
 	if (object->type == CYLINDER)
-		((t_cylinder *)object->content)->axis = unit_vec3(rotate_x(((t_cylinder *)object->content)->axis, M_PI_4 / 4));
+	{
+		axis = rotate_x(((t_cylinder *)object->content)->axis, M_PI_4 / 4);
+		((t_cylinder *)object->content)->axis = unit_vec3(axis);
+	}
 	if (object->type == PLANE)
-		((t_plane *)object->content)->normal_vec = unit_vec3(rotate_x(((t_plane *)object->content)->normal_vec, M_PI_4 / 4));
+	{
+		axis = rotate_x(((t_plane *)object->content)->normal_vec, M_PI_4 / 4);
+		((t_plane *)object->content)->normal_vec = unit_vec3(axis);
+	}
 }
 
-void rotate_obj_dec_x(t_lst *object)
+void	rotate_obj_dec_x(t_lst *object)
 {
+	t_vec3	axis;
+
 	if (object->type == CYLINDER)
-		((t_cylinder *)object->content)->axis = unit_vec3(rotate_x(((t_cylinder *)object->content)->axis, -M_PI_4 / 4));
+	{
+		axis = rotate_x(((t_cylinder *)object->content)->axis, -M_PI_4 / 4);
+		((t_cylinder *)object->content)->axis = unit_vec3(axis);
+	}
 	if (object->type == PLANE)
-		((t_plane *)object->content)->normal_vec = unit_vec3(rotate_x(((t_plane *)object->content)->normal_vec, -M_PI_4 / 4));
+	{
+		axis = rotate_x(((t_plane *)object->content)->normal_vec, -M_PI_4 / 4);
+		((t_plane *)object->content)->normal_vec = unit_vec3(axis);
+	}
 }
 
-void rotate_obj_inc_y(t_lst *object)
+void	rotate_obj_inc_y(t_lst *object)
 {
+	t_vec3	axis;
+
 	if (object->type == CYLINDER)
-		((t_cylinder *)object->content)->axis = unit_vec3(rotate_y(((t_cylinder *)object->content)->axis, M_PI_4 / 4));
+	{
+		axis = rotate_y(((t_cylinder *)object->content)->axis, M_PI_4 / 4);
+		((t_cylinder *)object->content)->axis = unit_vec3(axis);
+	}
 	if (object->type == PLANE)
-		((t_plane *)object->content)->normal_vec = unit_vec3(rotate_y(((t_plane *)object->content)->normal_vec, M_PI_4 / 4));
-	
+	{
+		axis = rotate_y(((t_plane *)object->content)->normal_vec, M_PI_4 / 4);
+		((t_plane *)object->content)->normal_vec = unit_vec3(axis);
+	}
 }
 
-void rotate_obj_dec_y(t_lst *object)
+void	rotate_obj_dec_y(t_lst *object)
 {
+	t_vec3	axis;
+
 	if (object->type == CYLINDER)
-		((t_cylinder *)object->content)->axis = unit_vec3(rotate_y(((t_cylinder *)object->content)->axis, -M_PI_4 / 4));
+	{
+		axis = rotate_y(((t_cylinder *)object->content)->axis, -M_PI_4 / 4);
+		((t_cylinder *)object->content)->axis = unit_vec3(axis);
+	}
 	if (object->type == PLANE)
-		((t_plane *)object->content)->normal_vec = unit_vec3(rotate_y(((t_plane *)object->content)->normal_vec, -M_PI_4 / 4));
+	{
+		axis = rotate_y(((t_plane *)object->content)->normal_vec, -M_PI_4 / 4);
+		((t_plane *)object->content)->normal_vec = unit_vec3(axis);
+	}
 }
 
-void rotate_obj_inc_z(t_lst *object)
+void	rotate_obj_inc_z(t_lst *object)
 {
+	t_vec3	axis;
+
 	if (object->type == CYLINDER)
-		((t_cylinder *)object->content)->axis = unit_vec3(rotate_z(((t_cylinder *)object->content)->axis, M_PI_4 / 4));
+	{
+		axis = rotate_z(((t_cylinder *)object->content)->axis, M_PI_4 / 4);
+		((t_cylinder *)object->content)->axis = unit_vec3(axis);
+	}
 	if (object->type == PLANE)
-		((t_plane *)object->content)->normal_vec = unit_vec3(rotate_z(((t_plane *)object->content)->normal_vec, M_PI_4 / 4));
+	{
+		axis = rotate_z(((t_plane *)object->content)->normal_vec, M_PI_4 / 4);
+		((t_plane *)object->content)->normal_vec = unit_vec3(axis);
+	}
 }
 
-void rotate_obj_dec_z(t_lst *object)
+void	rotate_obj_dec_z(t_lst *object)
 {
+	t_vec3	axis;
+
 	if (object->type == CYLINDER)
-		((t_cylinder *)object->content)->axis = unit_vec3(rotate_z(((t_cylinder *)object->content)->axis, -M_PI_4 / 4));
+	{
+		axis = rotate_z(((t_cylinder *)object->content)->axis, -M_PI_4 / 4);
+		((t_cylinder *)object->content)->axis = unit_vec3(axis);
+	}
 	if (object->type == PLANE)
-		((t_plane *)object->content)->normal_vec = unit_vec3(rotate_z(((t_plane *)object->content)->normal_vec, -M_PI_4 / 4));
+	{
+		axis = rotate_z(((t_plane *)object->content)->normal_vec, -M_PI_4 / 4);
+		((t_plane *)object->content)->normal_vec = unit_vec3(axis);
+	}
 }
 
-void object_actions(int keysym, t_data *data)
+void	object_rotate(int keysym, t_data *data)
 {
-	if (keysym == XK_Up)
-		object_key_up(data->slected_obj);
-	if (keysym == XK_Down)
-		object_key_down(data->slected_obj);
-	if (keysym == XK_Left)
-		object_key_left(data->slected_obj);
-	if (keysym == XK_Right)
-		object_key_right(data->slected_obj);
-	if (keysym == XK_d)
-		translate_obj_inc_x(data->slected_obj);
-	if (keysym == XK_a)
-		translate_obj_dec_x(data->slected_obj);
-	if (keysym == XK_w)
-		translate_obj_inc_y(data->slected_obj);
-	if (keysym == XK_s)
-		translate_obj_dec_y(data->slected_obj);
-	if (keysym == XK_o)
-		translate_obj_inc_z(data->slected_obj);
-	if (keysym == XK_i)	
-		translate_obj_dec_z(data->slected_obj);	
 	if (keysym == XK_t)
 		rotate_obj_inc_x(data->slected_obj);
 	if (keysym == XK_g)
@@ -278,9 +320,43 @@ void object_actions(int keysym, t_data *data)
 		rotate_obj_dec_z(data->slected_obj);
 }
 
+void	object_translate(int keysym, t_data *data)
+{
+	if (keysym == XK_d)
+		translate_obj_inc_x(data->slected_obj);
+	if (keysym == XK_a)
+		translate_obj_dec_x(data->slected_obj);
+	if (keysym == XK_w)
+		translate_obj_inc_y(data->slected_obj);
+	if (keysym == XK_s)
+		translate_obj_dec_y(data->slected_obj);
+	if (keysym == XK_o)
+		translate_obj_inc_z(data->slected_obj);
+	if (keysym == XK_i)
+		translate_obj_dec_z(data->slected_obj);
+}
+
+void	object_resize(int keysym, t_data *data)
+{
+	if (keysym == XK_Up)
+		object_resize_up(data->slected_obj);
+	if (keysym == XK_Down)
+		object_resize_down(data->slected_obj);
+	if (keysym == XK_Left)
+		object_resize_left(data->slected_obj);
+	if (keysym == XK_Right)
+		object_resize_right(data->slected_obj);
+}
+
+void	object_actions(int keysym, t_data *data)
+{
+	object_translate(keysym, data);
+	object_resize(keysym, data);
+	object_rotate(keysym, data);
+}
+
 int	key_hook1(int keysym, t_data *data)
 {
-	printf("%x\n", keysym);
 	if (keysym == XK_Escape)
 		close_app(data);
 	if (keysym == XK_n)
@@ -295,7 +371,8 @@ int	key_hook1(int keysym, t_data *data)
 	else
 		scene_actions(keysym, data);
 	data->pixelcolors_int = 1;
-	ft_memset(data->pixelcolors, 0, data->win.width * data->win.height * sizeof (t_color));
+	ft_memset(data->pixelcolors, 0, data->win.width * data->win.height
+		* sizeof(t_color));
 	print_object(data->scene->cam, CAMERA);
 	return (0);
 }
@@ -311,24 +388,32 @@ int	close_app(t_data *data)
 	return (0);
 }
 
+void	init_pixelcolors(t_data *data)
+{
+	data->pixelcolors = calloc_or_print_error(data->win.width * \
+	data->win.height, sizeof(t_color));
+	data->pixelcolors_int = 1;
+}
+
 int	start_mlx(t_data *data)
 {
-	data->pixelcolors = ft_calloc(data->win.width * data->win.height, sizeof (t_color));
-	data->pixelcolors_int = 1;
 	data->mlx_ptr = mlx_init();
 	if (data->mlx_ptr == NULL)
 		ft_putstr_fd("Failed to set up the connection to the X server\n", 2);
 	if (data->mlx_ptr == NULL)
 		return (-1);
-	data->win_ptr = mlx_new_window(data->mlx_ptr, data->win.width, data->win.height, "miniRT");
+	data->win_ptr = mlx_new_window(data->mlx_ptr, data->win.width,
+			data->win.height, "miniRT");
 	if (data->win_ptr == NULL)
 		ft_putstr_fd("Failed to create a new window\n", 2);
 	if (data->win_ptr == NULL)
 		return (-1);
-	data->img = malloc_or_print_error(sizeof (t_img));
-	if (data->img == NULL)
+	init_pixelcolors(data);
+	data->img = malloc_or_print_error(sizeof(t_img));
+	if (data->img == NULL || data->pixelcolors == NULL)
 		return (-1);
-	data->img->mlx_img = mlx_new_image(data->mlx_ptr, data->win.width, data->win.height);
+	data->img->mlx_img = mlx_new_image(data->mlx_ptr, data->win.width,
+			data->win.height);
 	data->img->addr = mlx_get_data_addr(data->img->mlx_img, &data->img->bpp,
 			&data->img->line_len, &data->img->endian);
 	mlx_loop_hook(data->mlx_ptr, loop_hook, data);
@@ -338,12 +423,3 @@ int	start_mlx(t_data *data)
 	mlx_loop(data->mlx_ptr);
 	return (0);
 }
-
-
-
-
-
-
-
-
-
