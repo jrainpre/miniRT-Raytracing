@@ -56,8 +56,15 @@ typedef struct s_hit_info
 	float_t		distance;
 	t_lst		*object;
 	t_ray 		ray;
-}			t_hit_info;	
+}			t_hit_info;
 
+typedef struct s_it
+{
+	int i;
+	int j;
+	float_t u;
+	float_t v;
+}		t_it;
 /* Functions */
 
 t_vec3			mat_mult(t_mat3x3 mat, t_vec3 vec);

@@ -408,8 +408,8 @@ int	start_mlx(t_data *data)
 		ft_putstr_fd("Failed to create a new window\n", 2);
 	if (data->win_ptr == NULL)
 		return (-1);
-	init_pixelcolors(data);
 	data->img = malloc_or_print_error(sizeof(t_img));
+	init_pixelcolors(data);
 	if (data->img == NULL || data->pixelcolors == NULL)
 		return (-1);
 	data->img->mlx_img = mlx_new_image(data->mlx_ptr, data->win.width,

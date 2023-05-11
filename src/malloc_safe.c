@@ -17,10 +17,11 @@ void	*calloc_or_print_error(size_t count, size_t size)
 {
 	void	*ptr;
 
-	ptr = calloc(count, size);
+	ptr = ft_calloc(count, size);
 	if (ptr == NULL)
 	{
 		ft_putstr_fd("calloc error\n", STDERR_FILENO);
-		exit(NULL);
+		return (NULL);
 	}
+	return (ptr);
 }
