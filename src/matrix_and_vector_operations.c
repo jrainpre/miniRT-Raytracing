@@ -63,8 +63,7 @@ t_vec3	vec_div(t_vec3 vec, float_t factor)
 	if (factor == 0)
 	{
 		ft_putstr_fd("WARNING: Dividing By 0\n", STDERR_FILENO);
-		// Check here what we should really return
-		return ((t_vec3){0, 0, 0});
+		// Check here what we should really return (return ((t_vec3){0, 0, 0}));
 	}
 	quotient.x = vec.x / factor;
 	quotient.y = vec.y / factor;
@@ -110,7 +109,7 @@ t_vec3	unit_vec3(t_vec3 vec)
 	return (unit);
 }
 
-int		vec_cmp(t_vec3 vec1, t_vec3 vec2)
+int	vec_cmp(t_vec3 vec1, t_vec3 vec2)
 {
 	if (vec1.x != vec2.x)
 		return (1);
@@ -121,7 +120,7 @@ int		vec_cmp(t_vec3 vec1, t_vec3 vec2)
 	return (0);
 }
 
-t_vec4 vec4_mult(t_vec4 vec, float_t factor)
+t_vec4	vec4_mult(t_vec4 vec, float_t factor)
 {
 	t_vec4	prod;
 
@@ -132,7 +131,7 @@ t_vec4 vec4_mult(t_vec4 vec, float_t factor)
 	return (prod);
 }
 
-float_t clamp(float_t value, float_t min, float_t max)
+float_t	clamp(float_t value, float_t min, float_t max)
 {
 	if (value < min)
 		return (min);
@@ -141,7 +140,7 @@ float_t clamp(float_t value, float_t min, float_t max)
 	return (value);
 }
 
-t_vec4 vec4_clamp(t_vec4 vec, float_t min, float_t max)
+t_vec4	vec4_clamp(t_vec4 vec, float_t min, float_t max)
 {
 	t_vec4	clamped;
 
