@@ -32,11 +32,4 @@ typedef struct s_hit_calc {
 	float_t distance_t;
 } t_hit_calc;
 
-
-
-
-
-
-
-
 #endif

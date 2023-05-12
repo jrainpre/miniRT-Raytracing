@@ -46,3 +46,15 @@ int	fill_scene(t_scene *scene, t_lst_ref *scene_lines, t_resolution win)
 	}
 	return (1);
 }
+
+float_t	get_reflect_factor_from_str(char *str)
+{
+	float_t	reflect_factor;
+
+	if (str == NULL)
+		return (0);
+	reflect_factor = ft_atof(str);
+	if (reflect_factor < 0 || reflect_factor > 1)
+		return (0);
+	return (reflect_factor);
+}
