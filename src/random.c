@@ -2,7 +2,10 @@
 
 float_t	random_float(void)
 {
-	return (rand() / (RAND_MAX + 1.0));
+	float_t not_so_random;
+
+	not_so_random = 0.5;
+	return (not_so_random);
 }
 
 t_vec3	vector(float_t x, float_t y, float_t z)

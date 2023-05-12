@@ -29,7 +29,6 @@
 # include "matrix.h"
 # include "plane.h"
 # include "ray.h"
-# include "scene.h"
 # include "sphere.h"
 # include "image.h"
 # include "vector.h"

@@ -14,7 +14,6 @@
 # include "colors.h"
 # include "light.h"
 # include "ray.h"
-# include "scene.h"
 # include "image.h"
 
 typedef struct s_sphere {

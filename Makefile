@@ -18,7 +18,6 @@ HEADLIST		:= miniRT.h \
 					plane.h \
 					random.h \
 					ray.h \
-					scene.h \
 					sphere.h \
 					vector.h
 
