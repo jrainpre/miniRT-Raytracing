@@ -29,7 +29,6 @@
 # include "matrix.h"
 # include "plane.h"
 # include "ray.h"
-# include "scene.h"
 # include "sphere.h"
 # include "image.h"
 # include "vector.h"
@@ -68,13 +67,264 @@ typedef struct s_it
 /* Functions */
 
 
-t_color specular_light_obj(t_scene *scene, t_lst *object, t_hit_info *hit_info);
+
+
+float_t	get_cylinder_distance_t_proj(t_cylinder *cylinder, t_ray ray);
+float_t	find_top_cap_intersection(t_cylinder *cylinder, t_ray ray);
+float_t	find_bottom_cap_intersection(t_cylinder *cylinder, t_ray ray);
+float_t	get_cylinder_distance_t(t_cylinder *cylinder, t_ray ray);
+
+void	get_normal_cylinder(t_hit_info *hit_info, t_cylinder *cylinder);
+void	normal_cyl_proj(t_hit_info *hit_info, t_cylinder *cylinder);
+void	normal_cyl_top_cap(t_hit_info *hit_info, t_cylinder *cylinder);
+void	normal_cyl_bottom_cap(t_hit_info *hit_info, t_cylinder *cylinder);
+
+
+t_color	follow_ray(t_scene *scene, t_ray ray);
+t_vec3	calulate_fuzzed_reflected(t_vec3 direction, t_vec3 normal, double fuzz);
+float_t	get_reflect_factor(t_lst *object);
+void	get_normal_to_surface(t_lst *object, t_hit_info *hit_info);
+t_vec3	get_reflect_ray(t_vec3 vector, t_vec3 normal);
+
+float_t	random_float(void);
+t_vec3	vector(float_t x, float_t y, float_t z);
+t_vec3	random_vector_in(float_t min, float_t max);
+t_vec3	random_in_unit_sphere(void);
+
+
+
+//closest_hit.c
+void	get_closest_hit(t_scene *scene, t_ray ray, t_hit_info *hit_info);
+int	is_in_fornt_of_light(t_scene *scene, t_ray ray, float_t distance_t);
+t_lst	*get_closest_hit_light(t_scene *scene, t_ray ray);
+float_t	get_distance_t(t_lst *object, t_ray ray);
+t_color	get_color_hitpoint(t_scene *scene, t_lst *object, t_hit_info *hit_info);
+
+//colors_calc.c
+t_color	color_mult(t_color color, float_t factor);
+t_color	color_add(t_color color1, t_color color2);
+t_color	color_mult_color(t_color color1, t_color color2);
+t_color	color_add_factor(t_color color, float_t factor);
+t_color	color_div(t_color color, float_t div);
+
+//colors.c
+int	color_conversion(t_color color);
+t_color	get_color_from_str_arr(char **str);
+t_color	color_mix(t_color obj_color, t_color light_color);
+t_color	color_clamp(t_color color, float_t min, float_t max);
+
+//cylinder_intersect.c
+float_t	get_cylinder_distance_t_proj(t_cylinder *cylinder, t_ray ray);
+float_t	find_top_cap_intersection(t_cylinder *cylinder, t_ray ray);
+float_t	find_bottom_cap_intersection(t_cylinder *cylinder, t_ray ray);
+float_t	get_cylinder_distance_t(t_cylinder *cylinder, t_ray ray);
+
+//cylinder_normal.c
+void	get_normal_cylinder(t_hit_info *hit_info, t_cylinder *cylinder);
+void	normal_cyl_proj(t_hit_info *hit_info, t_cylinder *cylinder);
+void	normal_cyl_top_cap(t_hit_info *hit_info, t_cylinder *cylinder);
+void	normal_cyl_bottom_cap(t_hit_info *hit_info, t_cylinder *cylinder);
+
+//cylinder.c
+
+//data.c
+t_data	*init_data(void);
+void	*free_data_null(t_data *data);
+
+//diffuse_light.c
+t_color	diffuse_light_obj(t_scene *scene, t_lst *obj, t_hit_info *hit);
+t_color	diffuse_light_sphere(t_scene *scene, t_sphere *sphere, t_hit_info *hit);
+t_color	diffuse_light_plane(t_scene *scene, t_plane *plane, t_hit_info *hit);
+t_color	diffuse_light_cyl(t_scene *scene, t_cylinder *cyl, t_hit_info *hit);
+
+//fill_scene.c
+
+//follow_ray.c
+t_color	follow_ray(t_scene *scene, t_ray ray);
+t_vec3	calulate_fuzzed_reflected(t_vec3 direction, t_vec3 normal, double fuzz);
+float_t	get_reflect_factor(t_lst *object);
+void	get_normal_to_surface(t_lst *object, t_hit_info *hit_info);
+t_vec3	get_reflect_ray(t_vec3 vector, t_vec3 normal);
+
+//free.c
+void	*free_null(void *ptr);
+void	*free_arr_null(char **arr);
+
+//ft_atof.c
+double	ft_atof(const char *str);
+
+//ft_function_tests.c
+//?
+
+//hooks_obj_actions.c
+void	object_rotate(int keysym, t_data *data);
+void	object_resize(int keysym, t_data *data);
+void	object_translate(int keysym, t_data *data);
+void	object_actions(int keysym, t_data *data);
+void	select_next_object(t_data *data);
+
+//hooks_resize_obj1.c
+void	increase_diameter_sphere(t_lst *object);
+void	decrease_diameter_sphere(t_lst *object);
+void	increase_diameter_cylinder(t_lst *object);
+void	decrease_diameter_cylinder(t_lst *object);
+void	increase_hight_cylinder(t_lst *object);
+
+//hooks_resize_obj2.c
+void	decrease_hight_cylinder(t_lst *object);
+void	object_resize_up(t_lst *object);
+void	object_resize_down(t_lst *object);
+void	object_resize_left(t_lst *object);
+void	object_resize_right(t_lst *object);
+
+//hooks_rotate_obj1.c
+void	rotate_obj_inc_x(t_lst *object);
+void	rotate_obj_dec_x(t_lst *object);
+void	rotate_obj_inc_y(t_lst *object);
+
+//hooks_rotate_obj2.c
+void	rotate_obj_dec_y(t_lst *object);
+void	rotate_obj_inc_z(t_lst *object);
+void	rotate_obj_dec_z(t_lst *object);
+
+//hooks_scene_actions.c
+void	light_actions(int keysym, t_data *data);
+void	camera_actions(int keysym, t_data *data);
+void	scene_actions(int keysym, t_data *data);
+
+//hooks_translate_obj1.c
+void	translate_obj_inc_x(t_lst *object);
+void	translate_obj_dec_x(t_lst *object);
+void	translate_obj_inc_y(t_lst *object);
+
+//hooks_translate_obj2.c
+void	translate_obj_dec_y(t_lst *object);
+void	translate_obj_inc_z(t_lst *object);
+void	translate_obj_dec_z(t_lst *object);
+
+//hooks.c
+int	loop_hook(t_data *data);
+int	key_hook1(int keysym, t_data *data);
+int	close_app(t_data *data);
+void	init_pixelcolors(t_data *data);
+int	start_mlx(t_data *data);
+
+//light_angle.c
+float_t	get_light_angle(t_vec3 hit_point, t_sphere *sphere, t_scene *scene);
+float_t	get_light_angle_plane(t_vec3 hit_point, t_plane *plane, t_scene *scene);
+float_t	get_light_angle_cyl(t_hit_info *hit_info, t_cylinder *cyl, t_scene *scene);
+
+//light.c
+
+//linked_list1.c
+t_lst	*ft_lstlast(t_lst *lst);
+t_lst	*ft_lstnew(void *content);
+void	ft_add_lst_last(t_lst *new_entry, t_lst_ref *lst_ref);
+
+//linked_list2.c
+void	ft_add_lst_head(t_lst *new_entry, t_lst_ref *lst_ref);
+void	clear_lst(t_lst_ref *lst_ref);
+void	*free_lst_null(t_lst_ref *lst_ref);
+
+//malloc_safe.c
+void	*malloc_or_print_error(size_t size);
+void	*calloc_or_print_error(size_t count, size_t size);
+
+//math_helper.c
+float_t	clamp(float_t value, float_t min, float_t max);
+float_t	deg_to_rad(float_t deg);
+
+//matrix.c
+t_vec3	rotate_x(t_vec3 vec, float_t angle);
+t_vec3	rotate_y(t_vec3 vec, float_t angle);
+t_vec3	rotate_z(t_vec3 vec, float_t angle);
+t_mat3x3	get_rot_x(float_t angle);
+
+//plane.c
+
+//random.c
+float_t	random_float(void);
+t_vec3	vector(float_t x, float_t y, float_t z);
+float_t	random_from(float_t min, float_t max);
+t_vec3 random_vector_in(float_t min, float_t max);
+t_vec3	random_in_unit_sphere(void);
+
+//rays.c
+t_pt3	ray_point_at(t_ray ray, float_t t);
+
+//read_file.c
+
+//render_plane.c
+float_t	get_plane_distance_t(t_lst *object, t_ray ray);
+
+//render.c
+void	img_pix_put(t_data *data, int x, int y, int color);
+t_ray	get_ray_offset(t_camera *cam, float_t u, float_t v);
+int	mult_sample_color(t_data *data, t_color color, int i, int j);
+void	render_scene(t_data *data);
+void	render_background(t_data *data, int color);
+
+//scene.c
+t_scene	*init_scene(void);
+void	*free_scene_null(t_scene *scene);
+
+//specular_light_helper.c
 t_vec3 reflect_vec_sphere(t_vec3 hit_point, t_sphere *sphere, t_scene *scene);
 t_vec3 reflect_vec_plane(t_vec3 hit_point, t_plane *plane, t_scene *scene);
+t_vec3	reflect_vec_cyl(t_hit_info *hit_info, t_cylinder *cyl, t_scene *scene);
 int check_in_shade(t_hit_info *hit_info, t_scene *scene);
+
+//specular_light.c
+t_color specular_light_obj(t_scene *scene, t_lst *object, t_hit_info *hit_info);
 t_color specular_light_plane(t_scene *scene, t_plane *plane, t_hit_info *hit_info);
-t_color specular_light_sphere(t_scene *scene, t_sphere *sphere, t_hit_info *hit_info);
 t_color specular_light_cyl(t_scene *scene, t_cylinder *cyl, t_hit_info *hit_info);
+t_color specular_light_sphere(t_scene *scene, t_sphere *sphere, t_hit_info *hit_info);
+
+//sphere.c
+
+//validate_ambient_light.c
+
+//validate_arguments.c
+
+//validate_camera.c
+
+//validate_cylinder.c
+
+//validate_light.c
+
+//validate_numbers.c
+
+//validate_plane.c
+
+//validate_scene.c
+
+//validate_sphere.c
+
+//vector_helper.c
+t_vec3	get_vec_from_str_arr(char **str);
+
+//vector_operations1.c
+t_vec3	vec_add(t_vec3 vec1, t_vec3 vec2);
+t_vec3	vec_sub(t_vec3 vec1, t_vec3 vec2);
+t_vec3	vec_mult(t_vec3 vec, float_t factor);
+t_vec3	vec_div(t_vec3 vec, float_t factor);
+
+//vector_operations2.c
+float_t	scalar_prod(t_vec3 vec1, t_vec3 vec2);
+t_vec3	cross_prod(t_vec3 vec1, t_vec3 vec2);
+float_t	vec_length(t_vec3 vec);
+t_vec3	unit_vec3(t_vec3 vec);
+int	vec_cmp(t_vec3 vec1, t_vec3 vec2);
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -185,11 +435,13 @@ t_lst	*get_closest_hit_light(t_scene *scene, t_ray ray);
 void get_normal_cylinder(t_hit_info *hit_info, t_cylinder *cylinder);
 
 
+t_color	color_div(t_color color, float_t div);
 
 
 t_vec3		random_in_unit_sphere(void);
 float_t get_reflect_factor_from_str(char *str);
 
+float_t	deg_to_rad(float_t deg);
 
 
 

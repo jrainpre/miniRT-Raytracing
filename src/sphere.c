@@ -47,3 +47,38 @@ int	add_sphere(t_lst_ref *objects, char *line)
 	print_object(sphere, SPHERE);
 	return (0);
 }
+
+float_t	get_sphere_distance_t(t_lst *object, t_ray ray)
+{
+	t_hit_calc	calc;
+	t_vec3		orig_diff;
+	t_sphere	*sphere;
+
+	sphere = (t_sphere *)object->content;
+	orig_diff = vec_sub(ray.orig, sphere->orig);
+	calc.a = scalar_prod(ray.dir, ray.dir);
+	calc.b = 2.0 * scalar_prod(orig_diff, ray.dir);
+	calc.c = \
+		scalar_prod(orig_diff, orig_diff) - sphere->radius * sphere->radius;
+	calc.discriminant = calc.b * calc.b - 4 * calc.a * calc.c;
+	if (calc.discriminant < 0)
+		return (0);
+	if (calc_distant_t(&calc) == -1)
+		return (0);
+	return (calc.distance_t);
+}
+
+int	calc_distant_t(t_hit_calc *calc)
+{
+	float_t	t1;
+	float_t	t2;
+	float_t	smallest_t;
+
+	t1 = (-calc->b - sqrt(calc->discriminant)) / (2.0f * calc->a);
+	t2 = (-calc->b + sqrt(calc->discriminant)) / (2.0f * calc->a);
+	smallest_t = fmin(t1, t2);
+	calc->distance_t = smallest_t;
+	if (calc->distance_t < 0)
+		return (-1);
+	return (0);
+}

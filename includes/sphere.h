@@ -14,7 +14,6 @@
 # include "colors.h"
 # include "light.h"
 # include "ray.h"
-# include "scene.h"
 # include "image.h"
 
 typedef struct s_sphere {
@@ -31,12 +30,5 @@ typedef struct s_hit_calc {
 	float_t discriminant;
 	float_t distance_t;
 } t_hit_calc;
-
-
-
-
-
-
-
 
 #endif

@@ -18,7 +18,6 @@ HEADLIST		:= miniRT.h \
 					plane.h \
 					random.h \
 					ray.h \
-					scene.h \
 					sphere.h \
 					vector.h
 
@@ -29,27 +28,44 @@ SRCSLIST		:= main.c \
 					ambient_light.c \
 					camera.c \
 					closest_hit.c \
+					colors_clac.c \
 					colors.c \
 					cylinder.c \
+					cylinder_intersect.c \
+					cylinder_normal.c \
 					data.c \
 					diffuse_light.c \
 					fill_scene.c \
+					follow_ray.c \
 					free.c \
 					ft_atof.c \
 					function_tests.c \
+					hooks_obj_actions.c \
+					hooks_resize_obj1.c \
+					hooks_resize_obj2.c \
+					hooks_rotate_obj1.c \
+					hooks_rotate_obj2.c \
+					hooks_translate_obj1.c \
+					hooks_translate_obj2.c \
+					hooks_scene_actions.c \
 					hooks.c \
 					light.c \
-					linked_list.c \
+					light_angle_obj.c \
+					linked_list1.c \
+					linked_list2.c \
 					malloc_safe.c \
-					matrix_and_vector_operations.c \
+					math_helper.c \
+					matrix_operations.c \
 					matrix.c \
 					plane.c \
 					rays.c \
+					random.c \
 					read_file.c \
 					render_plane.c \
 					render_status.c \
 					render.c \
 					scene.c \
+					specular_light_helper.c \
 					specular_light.c \
 					sphere.c \
 					validate_ambient_light.c \
@@ -61,7 +77,9 @@ SRCSLIST		:= main.c \
 					validate_plane.c \
 					validate_scene.c \
 					validate_sphere.c \
-					vector_helpers.c 
+					vector_helpers.c \
+					vector_operations1.c \
+					vector_operations2.c 
 					
 SRCS			:= $(addprefix ${SRCSDIR}, ${SRCSLIST})
 

@@ -36,13 +36,4 @@ typedef struct s_data
 	t_lst			*slected_obj;
 }			t_data;
 
-int		loop_hook(t_data *data);
-int		key_hook1(int keysym, t_data *data);
-int		close_app(t_data *data);
-int		start_mlx(t_data *data);
-void	img_pix_put(t_data *data, int x, int y, int color);
-void	render_background(t_data *data, int color);
-float_t	deg_to_rad(float_t deg);
-void	render_scene(t_data *data);
-
 #endif
