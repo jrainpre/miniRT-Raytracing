@@ -55,6 +55,7 @@ typedef struct s_hit_info
 	float_t		distance;
 	t_lst		*object;
 	t_ray 		ray;
+	int			is_inside_hit;
 }			t_hit_info;
 
 typedef struct s_it
@@ -69,10 +70,9 @@ typedef struct s_it
 
 
 
-float_t	get_cylinder_distance_t_proj(t_cylinder *cylinder, t_ray ray);
 float_t	find_top_cap_intersection(t_cylinder *cylinder, t_ray ray);
 float_t	find_bottom_cap_intersection(t_cylinder *cylinder, t_ray ray);
-float_t	get_cylinder_distance_t(t_cylinder *cylinder, t_ray ray);
+float_t	get_cylinder_distance_t(t_cylinder *cylinder, t_ray ray, t_hit_info *hit_info);
 
 void	get_normal_cylinder(t_hit_info *hit_info, t_cylinder *cylinder);
 void	normal_cyl_proj(t_hit_info *hit_info, t_cylinder *cylinder);
@@ -97,7 +97,7 @@ t_vec3	random_in_unit_sphere(void);
 void	get_closest_hit(t_scene *scene, t_ray ray, t_hit_info *hit_info);
 int	is_in_fornt_of_light(t_scene *scene, t_ray ray, float_t distance_t);
 t_lst	*get_closest_hit_light(t_scene *scene, t_ray ray);
-float_t	get_distance_t(t_lst *object, t_ray ray);
+float_t	get_distance_t(t_lst *object, t_ray ray, t_hit_info *hit_info);
 t_color	get_color_hitpoint(t_scene *scene, t_lst *object, t_hit_info *hit_info);
 
 //colors_calc.c
@@ -114,10 +114,10 @@ t_color	color_mix(t_color obj_color, t_color light_color);
 t_color	color_clamp(t_color color, float_t min, float_t max);
 
 //cylinder_intersect.c
-float_t	get_cylinder_distance_t_proj(t_cylinder *cylinder, t_ray ray);
+float_t	get_cylinder_distance_t_proj(t_cylinder *cylinder, t_ray ray, t_hit_info *hit_info);
 float_t	find_top_cap_intersection(t_cylinder *cylinder, t_ray ray);
 float_t	find_bottom_cap_intersection(t_cylinder *cylinder, t_ray ray);
-float_t	get_cylinder_distance_t(t_cylinder *cylinder, t_ray ray);
+float_t	get_cylinder_distance_t(t_cylinder *cylinder, t_ray ray, t_hit_info *hit_info);
 
 //cylinder_normal.c
 void	get_normal_cylinder(t_hit_info *hit_info, t_cylinder *cylinder);
@@ -397,12 +397,11 @@ int				is_normalized(t_vec3 vec);
 void			render_status(t_data *data, int color);
 void			*calloc_or_print_error(size_t count, size_t size);
 
-int calc_distant_t(t_hit_calc *calc);
+float_t	get_sphere_distance_t(t_lst *object, t_ray ray, t_hit_info *hit_info);
+
 float_t get_light_angle(t_vec3 hit_point, t_sphere *sphere, t_scene *scene);
 float_t get_light_angle_plane(t_vec3 hit_point, t_plane *plane, t_scene *scene);
 void get_closest_hit(t_scene *scene, t_ray ray, t_hit_info *hit_info);
-float_t	get_distance_t(t_lst *object, t_ray ray);
-float_t get_sphere_distance_t(t_lst *object, t_ray ray);
 float_t get_plane_distance_t(t_lst *object, t_ray ray);
 t_color light_shade_object(t_scene *scene, t_lst *object, t_hit_info *hit_info);
 void get_hitpoint_object(t_lst *object, t_hit_info *hit_info);
@@ -421,7 +420,6 @@ t_vec3 get_reflection_vec_sphere(t_vec3 hit_point, t_sphere *sphere, t_scene *sc
 t_color get_specular_color_sphere(t_scene *scene, t_lst *object, t_hit_info *hit_info);
 
 
-float_t get_cylinder_distance_t(t_cylinder *cylinder, t_ray ray);
 
 
 int				hit_plane(t_plane *plane, t_ray ray, t_scene *scene);

@@ -161,7 +161,7 @@ fclean:			clean
 re:				fclean all
 
 test:			all
-				./${NAME} scenes/reflectiontest.rt
+				./${NAME} scenes/test.rt
 
 val:			all
 				valgrind \

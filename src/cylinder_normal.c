@@ -17,7 +17,7 @@ void	normal_cyl_proj(t_hit_info *hit_info, t_cylinder *cylinder)
 
 	temp = vec_sub(hit_info->hitpoint, cylinder->orig);
 	projection = scalar_prod(temp, cylinder->axis);
-	distance_t = get_cylinder_distance_t_proj(cylinder, hit_info->ray);
+	distance_t = get_cylinder_distance_t_proj(cylinder, hit_info->ray, hit_info);
 	if (fabs(hit_info->distance - distance_t) < 0.001)
 	{
 		temp = vec_mult(cylinder->axis, projection);

@@ -12,7 +12,7 @@ void	get_closest_hit(t_scene *scene, t_ray ray, t_hit_info *hit_info)
 	list = scene->objects->head;
 	while (list)
 	{
-		distance_t = get_distance_t(list, ray);
+		distance_t = get_distance_t(list, ray, hit_info);
 		if (distance_t > 0.0f && distance_t < closest_t)
 		{
 			closest_t = distance_t;
@@ -43,16 +43,17 @@ t_lst	*get_closest_hit_light(t_scene *scene, t_ray ray)
 	t_lst	*closest_hit;
 	float_t	distance_t;
 	float_t	closest_t;
+	t_hit_info	hit_info;
 
 	closest_t = INFINITY;
 	closest_hit = NULL;
 	list = scene->objects->head;
 	while (list)
 	{
-		distance_t = get_distance_t(list, ray);
+		distance_t = get_distance_t(list, ray, &hit_info);
 		if (distance_t > 0.0f && distance_t < closest_t)
 		{
-			if (is_in_fornt_of_light(scene, ray, distance_t))
+			if (is_in_fornt_of_light(scene, ray, distance_t) && !hit_info.is_inside_hit)
 			{
 				closest_t = distance_t;
 				closest_hit = list;
@@ -63,17 +64,17 @@ t_lst	*get_closest_hit_light(t_scene *scene, t_ray ray)
 	return (closest_hit);
 }
 
-float_t	get_distance_t(t_lst *object, t_ray ray)
+float_t	get_distance_t(t_lst *object, t_ray ray, t_hit_info *hit_info)
 {
 	t_object_type	type;
 
 	type = object->type;
 	if (type == SPHERE)
-		return (get_sphere_distance_t(object, ray));
+		return (get_sphere_distance_t(object, ray, hit_info));
 	else if (type == PLANE)
 		return (get_plane_distance_t(object, ray));
 	else if (type == CYLINDER)
-		return (get_cylinder_distance_t((t_cylinder *)object->content, ray));
+		return (get_cylinder_distance_t((t_cylinder *)object->content, ray, hit_info));
 	return (INFINITY);
 }
 
