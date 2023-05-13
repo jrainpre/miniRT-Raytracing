@@ -1,10 +1,26 @@
 #include "miniRT.h"
 
+int calc_distant_t1(t_hit_calc *calc, t_hit_info *hit_info)
+{
+    float_t t1;
+    float_t t2;
+    float_t smallest_t;
+
+	hit_info->is_inside_hit = 0;
+    t1 = (-calc->b - sqrt(calc->discriminant)) / (2.0f * calc->a);
+    t2 = (-calc->b + sqrt(calc->discriminant)) / (2.0f * calc->a);
+    smallest_t = fmin(t1, t2);
+    calc->distance_t = smallest_t;
+    if (calc->distance_t < 0)
+        return (-1);
+    return (0);
+}
+
+
 float_t	get_cylinder_distance_t_proj(t_cylinder *cylinder, t_ray ray, t_hit_info *hit_info)
 {
 	t_hit_calc	calc;
 	t_vec3		orig_diff;
-
 
 	orig_diff = vec_sub(ray.orig, cylinder->orig);
 	calc.a = scalar_prod(ray.dir, ray.dir) \
@@ -70,17 +86,21 @@ float_t	get_cylinder_distance_t(t_cylinder *cylinder, t_ray ray, t_hit_info *hit
 	t_vec3	point;
 	float_t	proj;
 
-	distance_t = get_cylinder_distance_t_proj(cylinder, ray, hit_info);
 	intersect = 0;
+	hit_info->is_inside_hit = 0;
+	cap_intersect = find_bottom_cap_intersection(cylinder, ray);
+	distance_t = get_cylinder_distance_t_proj(cylinder, ray, hit_info);
 	point = vec_add(ray.orig, vec_mult(ray.dir, distance_t));
 	proj = scalar_prod(vec_sub(point, cylinder->orig), cylinder->axis);
-	cap_intersect = find_bottom_cap_intersection(cylinder, ray);
 	if (cap_intersect > 0 && (intersect == 0 || cap_intersect < intersect))
 		intersect = cap_intersect;
 	cap_intersect = find_top_cap_intersection(cylinder, ray);
 	if (cap_intersect > 0 && (intersect == 0 || cap_intersect < intersect))
 		intersect = cap_intersect;
+	if (hit_info->is_inside_hit == 0 || intersect == 0)
+	{
 	if (proj >= 0 && proj <= cylinder->height && distance_t > 0)
 		intersect = distance_t;
+	}
 	return (intersect);
 }
