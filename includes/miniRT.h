@@ -370,6 +370,9 @@ void			pedestal_up(t_camera *cam, float_t meters);
 void			pedestal_down(t_camera *cam, float_t meters);
 void			pan_left(t_camera *cam, float_t angle);
 void			pan_right(t_camera *cam, float_t angle);
+void			zoom_in(t_camera *cam, float_t focal_length);
+void			zoom_out(t_camera *cam, float_t focal_length);
+
 t_light			*init_light(char *line);
 void			translate_light(t_light *light, t_vec3 vec);
 t_ambient_light	*init_ambient_light(char *line);

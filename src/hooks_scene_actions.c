@@ -38,6 +38,10 @@ void	camera_actions(int keysym, t_data *data)
 		tilt_up(data->scene->cam, M_PI_4 / 4);
 	if (keysym == XK_f)
 		tilt_down(data->scene->cam, M_PI_4 / 4);
+	if (keysym == XK_period)
+		zoom_in(data->scene->cam, 0.001);
+	if (keysym == XK_comma)
+		zoom_out(data->scene->cam, 0.001);
 }
 
 void	scene_actions(int keysym, t_data *data)

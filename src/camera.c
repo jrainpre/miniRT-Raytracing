@@ -37,6 +37,10 @@ t_camera	*init_camera(t_resolution win, char *line)
 		return (NULL);
 	}
 	cam->fov = ft_atof(parameters[3]);
+	if (cam->fov < 1)
+		cam->fov = 1;
+	if (cam->fov > 180)
+		cam->fov = 180;
 	cam->sensor_height = 0.024;
 	cam->sensor_width = ((float_t)win.width / (float_t)win.height) * cam->sensor_height;
 	cam->focal_length = (cam->sensor_width / 2) / tanf(deg_to_rad(cam->fov / 2.0));
@@ -82,6 +86,20 @@ void	translate_camera(t_camera *cam, t_vec3 vec)
 	cam->orig = vec_add(cam->orig, vec);
 	cam->upper_left_corner = calc_upper_left_corner(cam);
 	print_object(cam, CAMERA);
+}
+
+void	zoom_in(t_camera *cam, float_t focal_length)
+{
+	cam->focal_length += focal_length;
+	cam->upper_left_corner = calc_upper_left_corner(cam);
+}
+
+void	zoom_out(t_camera *cam, float_t focal_length)
+{
+	cam->focal_length -= focal_length;
+	if (cam->focal_length < 0)
+		cam->focal_length = 0;
+	cam->upper_left_corner = calc_upper_left_corner(cam);
 }
 
 void	rotate_y_camera(t_camera *cam, float_t angle)
