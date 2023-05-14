@@ -37,6 +37,10 @@ t_camera	*init_camera(t_resolution win, char *line)
 		return (NULL);
 	}
 	cam->fov = ft_atof(parameters[3]);
+	if (cam->fov < 1)
+		cam->fov = 1;
+	if (cam->fov > 180)
+		cam->fov = 180;
 	cam->sensor_height = 0.024;
 	cam->sensor_width = ((float_t)win.width / (float_t)win.height) * cam->sensor_height;
 	cam->focal_length = (cam->sensor_width / 2) / tanf(deg_to_rad(cam->fov / 2.0));
