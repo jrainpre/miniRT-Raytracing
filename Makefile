@@ -1,4 +1,5 @@
 NAME			:= miniRT
+NAMEBONUS		:= miniRT_bonus
 CC				:= cc
 RM		    	:= rm -f
 FLAGS			:= 
@@ -62,7 +63,6 @@ SRCSLIST		:= main.c \
 					random.c \
 					read_file.c \
 					render_plane.c \
-					render_status.c \
 					render.c \
 					scene.c \
 					specular_light_helper.c \
@@ -79,13 +79,19 @@ SRCSLIST		:= main.c \
 					validate_sphere.c \
 					vector_helpers.c \
 					vector_operations1.c \
-					vector_operations2.c 
+					vector_operations2.c \
 					
 SRCS			:= $(addprefix ${SRCSDIR}, ${SRCSLIST})
+
+SRCSLISTBONUS	:= render_status_bonus.c
+SRCSBONUS		:= $(addprefix ${SRCSDIR}, ${SRCSLISTBONUS})
 
 OBJSDIR			:= ./obj/
 OBJSLIST		:= ${SRCSLIST:.c=.o}
 OBJS			:= $(addprefix ${OBJSDIR}, ${OBJSLIST})
+
+OBJSLISTBONUS 	:= ${OBJSLIST} ${SRCSLISTBONUS:.c=.o}
+OBJSBONUS		:= $(addprefix ${OBJSDIR}, ${OBJSLISTBONUS})
 
 MLXDIR			:= ./minilibx-linux/
 MLX				:= ${MLXDIR}libmlx.a
@@ -103,6 +109,13 @@ ${NAME}:		${MLX} ${LIBFT} ${OBJSDIR} ${OBJS}
 				@echo ""
 				@echo "${CYAN}Compiling ${NAME} ...${RESET}"
 				${CC} ${FLAGS} ${DEBUG} ${OBJS} -o ${NAME} ${LIBS} ${INCS}
+				@echo ""
+				@echo "${CYAN}${NAME} Created${RESET}"
+
+${NAMEBONUS}:	${MLX} ${LIBFT} ${OBJSDIR} ${OBJSBONUS}
+				@echo ""
+				@echo "${CYAN}Compiling ${NAMEBONUS} ...${RESET}"
+				${CC} ${FLAGS} ${DEBUG} ${OBJSBONUS} -o ${NAMEBONUS} ${LIBS} ${INCS}
 				@echo ""
 				@echo "${CYAN}${NAME} Created${RESET}"
 ${MLX}:
@@ -131,16 +144,18 @@ compiling:
 
 all:			${NAME}
 
+bonus:			${NAMEBONUS}
+
 clean:
 				@echo ""
-				@echo "${CYAN}Deleting ${NAME} Objects ...${RESET}"
+				@echo "${CYAN}Deleting ${NAME}/${NAMEBONUS} Objects ...${RESET}"
 				${RM} -r ${OBJSDIR}
 				make -C ${LIBFTDIR} clean
 
 fclean:			clean
 				@echo ""
-				@echo "${CYAN}Deleting ${NAME} Executable ...${RESET}"
-				${RM} ${NAME}
+				@echo "${CYAN}Deleting ${NAME}/${NAMEBONUS} Executable ...${RESET}"
+				${RM} ${NAME} ${NAMEBONUS}
 				make -C ${LIBFTDIR} fclean
 
 re:				fclean all

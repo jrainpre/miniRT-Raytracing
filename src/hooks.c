@@ -7,7 +7,6 @@ int	loop_hook(t_data *data)
 	render_scene(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 		data->img->mlx_img, 0, 0);
-	render_status(data, WHITE);
 	return (0);
 }
 
