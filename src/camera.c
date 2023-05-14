@@ -84,6 +84,20 @@ void	translate_camera(t_camera *cam, t_vec3 vec)
 	print_object(cam, CAMERA);
 }
 
+void	zoom_in(t_camera *cam, float_t focal_length)
+{
+	cam->focal_length += focal_length;
+	cam->upper_left_corner = calc_upper_left_corner(cam);
+}
+
+void	zoom_out(t_camera *cam, float_t focal_length)
+{
+	cam->focal_length -= focal_length;
+	if (cam->focal_length < 0)
+		cam->focal_length = 0;
+	cam->upper_left_corner = calc_upper_left_corner(cam);
+}
+
 void	rotate_y_camera(t_camera *cam, float_t angle)
 {
 	cam->orientation = rotate_y(cam->orientation, angle);
