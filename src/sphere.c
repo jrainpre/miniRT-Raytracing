@@ -23,7 +23,7 @@ int	add_sphere(t_lst_ref *objects, char *line)
 		orig = free_arr_null(orig);
 		return (-1);
 	}
-	sphere = malloc_or_print_error(sizeof (t_sphere));
+	sphere = malloc_or_print_error(sizeof(t_sphere));
 	if (sphere == NULL)
 		return (-1);
 	sphere->orig = get_vec_from_str_arr(orig);
@@ -58,8 +58,8 @@ float_t	get_sphere_distance_t(t_lst *object, t_ray ray, t_hit_info *hit_info)
 	orig_diff = vec_sub(ray.orig, sphere->orig);
 	calc.a = scalar_prod(ray.dir, ray.dir);
 	calc.b = 2.0 * scalar_prod(orig_diff, ray.dir);
-	calc.c = \
-		scalar_prod(orig_diff, orig_diff) - sphere->radius * sphere->radius;
+	calc.c = scalar_prod(orig_diff, orig_diff) \
+		- sphere->radius * sphere->radius;
 	calc.discriminant = calc.b * calc.b - 4 * calc.a * calc.c;
 	if (calc.discriminant < 0)
 		return (0);
@@ -68,30 +68,29 @@ float_t	get_sphere_distance_t(t_lst *object, t_ray ray, t_hit_info *hit_info)
 	return (calc.distance_t);
 }
 
-int calc_distant_t(t_hit_calc *calc, t_hit_info *hit_info)
+int	calc_distant_t(t_hit_calc *calc, t_hit_info *hit_info)
 {
-    float_t t1;
-    float_t t2;
+	float_t	t1;
+	float_t	t2;
 
-    t1 = (-calc->b - sqrt(calc->discriminant)) / (2.0f * calc->a);
-    t2 = (-calc->b + sqrt(calc->discriminant)) / (2.0f * calc->a);
-
-    if (t1 > 0 && t2 > 0)
-    {
+	t1 = (-calc->b - sqrt(calc->discriminant)) / (2.0f * calc->a);
+	t2 = (-calc->b + sqrt(calc->discriminant)) / (2.0f * calc->a);
+	if (t1 > 0 && t2 > 0)
+	{
 		hit_info->is_inside_hit = 0;
-        calc->distance_t = fmin(t1, t2);
-    }
-    else if (t1 > 0)
-    {
+		calc->distance_t = fmin(t1, t2);
+	}
+	else if (t1 > 0)
+	{
 		hit_info->is_inside_hit = 1;
-        calc->distance_t = t1;
-    }
-    else if (t2 > 0)
-    {
+		calc->distance_t = t1;
+	}
+	else if (t2 > 0)
+	{
 		hit_info->is_inside_hit = 1;
-        calc->distance_t = t2;
-    }
-    else
-        return (-1);
-    return (0);
+		calc->distance_t = t2;
+	}
+	else
+		return (-1);
+	return (0);
 }

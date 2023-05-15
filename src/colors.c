@@ -35,8 +35,6 @@ t_color	color_mix(t_color obj_color, t_color light_color)
 	return (mix);
 }
 
-
-
 t_color	color_clamp(t_color color, float_t min, float_t max)
 {
 	t_color	clamped;

@@ -14,11 +14,10 @@ void	normal_cyl_proj(t_hit_info *hit_info, t_cylinder *cylinder)
 	t_lst	object;
 	float_t	distance_t;
 	t_vec3	temp;
-	int temp2;
 
 	temp = vec_sub(hit_info->hitpoint, cylinder->orig);
 	projection = scalar_prod(temp, cylinder->axis);
-	distance_t = get_cylinder_distance_t_proj(cylinder, hit_info->ray, hit_info);
+	distance_t = get_cyl_distance_t_proj(cylinder, hit_info->ray, hit_info);
 	if (fabs(hit_info->distance - distance_t) < 0.001)
 	{
 		temp = vec_mult(cylinder->axis, projection);
@@ -49,6 +48,5 @@ void	normal_cyl_bottom_cap(t_hit_info *hit_info, t_cylinder *cylinder)
 	{
 		hit_info->normal = vec_mult(cylinder->axis, -1);
 		hit_info->is_inside_hit = 0;
-
 	}
 }
