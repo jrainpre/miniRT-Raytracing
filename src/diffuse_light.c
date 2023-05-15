@@ -37,7 +37,7 @@ t_color	diffuse_light_sphere(t_scene *scene, t_sphere *sphere, t_hit_info *hit)
 	ray.dir = unit_vec3(vec_add(ray.dir, \
 		vec_mult(random_in_unit_sphere(), SHADOW_SOFT_MULTIPLIER)));
 	angle = get_light_angle(hit->hitpoint, sphere, scene);
-	if (get_closest_hit_light(scene, ray) != NULL)
+	if (check_in_shade(hit, scene) == 0)
 		angle = 0;
 	act_color = color_mult(sphere->color, angle * scene->light->ratio);
 	return (act_color);
@@ -54,7 +54,7 @@ t_color	diffuse_light_plane(t_scene *scene, t_plane *plane, t_hit_info *hit)
 	ray.dir = unit_vec3(vec_add(ray.dir, \
 		vec_mult(random_in_unit_sphere(), SHADOW_SOFT_MULTIPLIER)));
 	angle = get_light_angle_plane(hit->hitpoint, plane, scene);
-	if (get_closest_hit_light(scene, ray) != NULL)
+	if (check_in_shade(hit, scene) == 0)
 		angle = 0;
 	act_color = color_mult(plane->color, angle * scene->light->ratio);
 	return (act_color);
@@ -71,7 +71,7 @@ t_color	diffuse_light_cyl(t_scene *scene, t_cylinder *cyl, t_hit_info *hit)
 	ray.dir = unit_vec3(vec_add(ray.dir, \
 		vec_mult(random_in_unit_sphere(), SHADOW_SOFT_MULTIPLIER)));
 	angle = get_light_angle_cyl(hit, cyl, scene);
-	if (get_closest_hit_light(scene, ray) != NULL)
+	if (check_in_shade(hit, scene) == 0)
 		angle = 0;
 	act_color = color_mult(cyl->color, angle * scene->light->ratio);
 	return (act_color);

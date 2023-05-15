@@ -44,9 +44,11 @@ t_vec3	reflect_vec_cyl(t_hit_info *hit_info, t_cylinder *cyl, t_scene *scene)
 int	check_in_shade(t_hit_info *hit, t_scene *scene)
 {
 	t_ray	ray;
-
-	ray.dir = vec_sub(scene->light->orig, hit->hitpoint);
-	ray.orig = vec_add(hit->hitpoint, vec_mult(ray.dir, SHADOW_OFFSET));
+	
+	if (hit->is_inside_hit == 1)
+		return (0);
+	ray.dir = unit_vec3(vec_sub(scene->light->orig, hit->hitpoint));
+	ray.orig = vec_add(hit->hitpoint, vec_mult(ray.dir, 0.001));
 	if (get_closest_hit_light(scene, ray) == NULL)
 		return (1);
 	return (0);
