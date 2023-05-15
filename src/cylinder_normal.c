@@ -14,6 +14,7 @@ void	normal_cyl_proj(t_hit_info *hit_info, t_cylinder *cylinder)
 	t_lst	object;
 	float_t	distance_t;
 	t_vec3	temp;
+	int temp2;
 
 	temp = vec_sub(hit_info->hitpoint, cylinder->orig);
 	projection = scalar_prod(temp, cylinder->axis);
@@ -33,7 +34,10 @@ void	normal_cyl_top_cap(t_hit_info *hit_info, t_cylinder *cylinder)
 
 	distance_t = find_top_cap_intersection(cylinder, hit_info->ray);
 	if (fabs(hit_info->distance - distance_t) < 0.001)
+	{
 		hit_info->normal = cylinder->axis;
+		hit_info->is_inside_hit = 0;
+	}
 }
 
 void	normal_cyl_bottom_cap(t_hit_info *hit_info, t_cylinder *cylinder)
@@ -42,5 +46,9 @@ void	normal_cyl_bottom_cap(t_hit_info *hit_info, t_cylinder *cylinder)
 
 	distance_t = find_bottom_cap_intersection(cylinder, hit_info->ray);
 	if (fabs(hit_info->distance - distance_t) < 0.001)
+	{
 		hit_info->normal = vec_mult(cylinder->axis, -1);
+		hit_info->is_inside_hit = 0;
+
+	}
 }

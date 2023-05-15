@@ -97,10 +97,7 @@ float_t	get_cylinder_distance_t(t_cylinder *cylinder, t_ray ray, t_hit_info *hit
 	cap_intersect = find_top_cap_intersection(cylinder, ray);
 	if (cap_intersect > 0 && (intersect == 0 || cap_intersect < intersect))
 		intersect = cap_intersect;
-	if (hit_info->is_inside_hit == 0 || intersect == 0)
-	{
-	if (proj >= 0 && proj <= cylinder->height && distance_t > 0)
+	if (proj >= 0 && proj <= cylinder->height && (intersect == 0 || distance_t < intersect))
 		intersect = distance_t;
-	}
 	return (intersect);
 }
