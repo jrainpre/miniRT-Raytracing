@@ -48,7 +48,7 @@ int	check_in_shade(t_hit_info *hit, t_scene *scene)
 	if (hit->is_inside_hit == 1)
 		return (0);
 	ray.dir = unit_vec3(vec_sub(scene->light->orig, hit->hitpoint));
-	ray.orig = vec_add(hit->hitpoint, vec_mult(ray.dir, 0.001));
+	ray.orig = vec_add(hit->hitpoint, vec_mult(ray.dir, SHADOW_OFFSET));
 	if (get_closest_hit_light(scene, ray) == NULL)
 		return (1);
 	return (0);

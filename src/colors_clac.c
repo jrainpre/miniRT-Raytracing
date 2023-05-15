@@ -36,7 +36,7 @@ t_color	color_mult_color(t_color color1, t_color color2)
 t_color	color_add_factor(t_color color, float_t factor)
 {
 	t_color	sum;
-
+	
 	sum.r = color.r + factor;
 	sum.g = color.g + factor;
 	sum.b = color.b + factor;

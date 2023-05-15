@@ -114,10 +114,10 @@ t_color	color_mix(t_color obj_color, t_color light_color);
 t_color	color_clamp(t_color color, float_t min, float_t max);
 
 //cylinder_intersect.c
-float_t	get_cylinder_distance_t_proj(t_cylinder *cylinder, t_ray ray, t_hit_info *hit_info);
+float_t	get_cyl_distance_t_proj(t_cylinder *cyl, t_ray ray, t_hit_info *hit);
 float_t	find_top_cap_intersection(t_cylinder *cylinder, t_ray ray);
 float_t	find_bottom_cap_intersection(t_cylinder *cylinder, t_ray ray);
-float_t	get_cylinder_distance_t(t_cylinder *cylinder, t_ray ray, t_hit_info *hit_info);
+float_t	get_cyl_distance_t(t_cylinder *cyl, t_ray ray, t_hit_info *hit);
 
 //cylinder_normal.c
 void	get_normal_cylinder(t_hit_info *hit_info, t_cylinder *cylinder);
@@ -281,6 +281,8 @@ t_color specular_light_cyl(t_scene *scene, t_cylinder *cyl, t_hit_info *hit_info
 t_color specular_light_sphere(t_scene *scene, t_sphere *sphere, t_hit_info *hit_info);
 
 //sphere.c
+int calc_distant_t(t_hit_calc *calc, t_hit_info *hit_info);
+
 
 //validate_ambient_light.c
 
