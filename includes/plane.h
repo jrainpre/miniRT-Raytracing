@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   plane.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frafal <frafal@student.42vienna.com>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/16 23:45:32 by frafal            #+#    #+#             */
+/*   Updated: 2023/05/16 23:47:59 by frafal           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PLANE_H
 # define PLANE_H
 /*
@@ -17,7 +29,7 @@ typedef struct s_plane {
 	t_pt3	point;
 	t_vec3	normal_vec;
 	t_color	color;
-	float_t reflect_factor;
+	float_t	reflect_factor;
 
 }	t_plane;
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   image.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frafal <frafal@student.42vienna.com>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/16 23:45:09 by frafal            #+#    #+#             */
+/*   Updated: 2023/05/16 23:46:22 by frafal           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef IMAGE_H
 # define IMAGE_H
 
@@ -32,7 +44,7 @@ typedef struct s_data
 	t_img			*img;
 	t_resolution	win;
 	t_color			*pixelcolors;
-	int 			pixelcolors_int;
+	int				pixelcolors_int;
 	t_lst			*slected_obj;
 }			t_data;
 
