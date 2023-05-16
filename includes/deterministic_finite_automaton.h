@@ -6,7 +6,7 @@
 /*   By: frafal <frafal@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:03:21 by frafal            #+#    #+#             */
-/*   Updated: 2023/05/16 15:17:57 by frafal           ###   ########.fr       */
+/*   Updated: 2023/05/16 19:13:52 by frafal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -272,7 +272,22 @@ typedef enum e_cy_state
 	CY_REJECT
 }	t_cy_state;
 
+typedef struct s_item_numbers
+{
+	int	cameras;
+	int	lights;
+	int	ambient_lights;
+	int	objects;
+}	t_item_numbers;
+
 int			is_valid_scene(t_lst_ref *scene_lines);
+int			is_valid_line(char *line, t_lst *runner,
+				t_line_state state, t_item_numbers *items);
+int			is_valid_line_1(char *line, t_lst *runner,
+				t_line_state state, t_item_numbers *items);
+int			is_valid_line_2(char *line, t_lst *runner,
+				t_line_state state, t_item_numbers *items);
+int			valid_number_of_items(t_item_numbers items);
 int			is_valid_ambient_light(char *line);
 int			is_valid_camera(char *line);
 int			is_valid_cylinder(char *line);

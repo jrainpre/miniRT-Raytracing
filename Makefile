@@ -54,6 +54,7 @@ SRCSLIST		:= main.c \
 					dfa_plane1.c \
 					dfa_plane2.c \
 					dfa_plane3.c \
+					dfa_scene.c \
 					diffuse_light.c \
 					fill_scene.c \
 					follow_ray.c \
