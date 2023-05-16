@@ -43,4 +43,3 @@ void	ft_add_lst_last(t_lst *new_entry, t_lst_ref *lst_ref)
 		lst_ref->last = new_entry;
 	}
 }
-

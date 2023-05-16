@@ -23,8 +23,8 @@ char	**split_parameter_camera(char *line, char ***orig, char ***orientation)
 	return (param);
 }
 
-t_camera	*validate_and_assign_camera(t_camera *cam, char **param, char **orig, \
-	char **orientation)
+t_camera	*validate_and_assign_camera(t_camera *cam, char **param, \
+	char **orig, char **orientation)
 {
 	cam->orig = get_vec_from_str_arr(orig);
 	cam->orientation = get_vec_from_str_arr(orientation);

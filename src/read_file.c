@@ -1,6 +1,6 @@
 #include "miniRT.h"
 
-void wrapper_open(char *file, int *fd)
+void	wrapper_open(char *file, int *fd)
 {
 	*fd = open(file, O_RDONLY);
 	if (*fd == -1)
@@ -10,7 +10,7 @@ void wrapper_open(char *file, int *fd)
 	}
 }
 
-void wrapper_close(int *fd)
+void	wrapper_close(int *fd)
 {
 	if (close(*fd) == -1)
 	{
@@ -25,7 +25,7 @@ t_lst_ref	*read_file(char *file)
 	t_lst_ref	*scene_lines;
 	char		*line;
 
-	scene_lines = malloc_or_print_error(sizeof (t_lst_ref));
+	scene_lines = malloc_or_print_error(sizeof(t_lst_ref));
 	if (scene_lines == NULL)
 		return (NULL);
 	scene_lines->head = NULL;
