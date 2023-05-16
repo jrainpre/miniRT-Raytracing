@@ -465,6 +465,7 @@ void			*free_arr_null(char **arr);
 double			ft_atof(const char *str);
 t_lst_ref		*read_file(char *file);
 int				arguments_valid(int argc, char **argv);
+int				win_size_valid(int argc, char **argv);
 int				is_valid_ratio(float_t ratio);
 int				is_valid_color(t_color color);
 int				is_normalized(t_vec3 vec);
