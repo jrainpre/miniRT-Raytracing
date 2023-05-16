@@ -41,6 +41,7 @@ SRCSLIST		:= main.c \
 					cylinder_intersect.c \
 					cylinder_normal.c \
 					data.c \
+					dfa_ambient_light.c \
 					diffuse_light.c \
 					fill_scene.c \
 					follow_ray.c \
