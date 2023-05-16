@@ -91,7 +91,48 @@ t_vec3	vector(float_t x, float_t y, float_t z);
 t_vec3	random_vector_in(float_t min, float_t max);
 t_vec3	random_in_unit_sphere(void);
 
+//ambient_light_init.c
+char	**split_parameters_ambient(char *line, char ***color);
+t_ambient_light	*validate_and_assign_ambient(t_ambient_light *ambient, char **param, char **color);
+t_ambient_light	*init_ambient_light(char *line);
 
+//ambient_light.c
+t_color	ambient_light_obj(t_scene *scene, t_lst *object);
+t_color	ambient_light_sphere(t_scene *scene, t_sphere *sphere);
+t_color	ambient_light_plane(t_scene *scene, t_plane *plane);
+t_color	ambient_light_cylinder(t_scene *scene, t_cylinder *cyl);
+
+//camera_init.c
+char	**split_parameter_camera(char *line, char ***orig, char ***orientation);
+t_camera	*validate_and_assign_camera(t_camera *cam, char **param, char **orig, char **orientation);
+void	init_camera_properties(t_camera *cam, t_resolution win, char **parameters);
+t_camera	*init_camera(t_resolution win, char *line);
+
+//camera_pan.c
+void	pan_left(t_camera *cam, float_t angle);
+void	pan_right(t_camera *cam, float_t angle);
+
+//camera_rotate.c
+void	rotate_y_camera(t_camera *cam, float_t angle);
+void	rotate_x_camera(t_camera *cam, float_t angle);
+void	rotate_camera_around_left_axis(t_camera *cam, float_t angle);
+
+//camera_tilt_dolly.c
+void	tilt_down(t_camera *cam, float_t angle);
+void	tilt_up(t_camera *cam, float_t angle);
+void	dolly_in(t_camera *cam, float_t meters);
+void	dolly_out(t_camera *cam, float_t meters);
+
+//camera_translate_zoom.c
+void	translate_camera(t_camera *cam, t_vec3 vec);
+void	zoom_out(t_camera *cam, float_t focal_length);
+void	zoom_in(t_camera *cam, float_t focal_length);
+
+//camera_truck_pedestal.c
+void	truck_left(t_camera *cam, float_t meters);
+void	truck_right(t_camera *cam, float_t meters);
+void	pedestal_up(t_camera *cam, float_t meters);
+void	pedestal_down(t_camera *cam, float_t meters);
 
 //closest_hit.c
 void	get_closest_hit(t_scene *scene, t_ray ray, t_hit_info *hit_info);
@@ -99,6 +140,12 @@ int	is_in_fornt_of_light(t_scene *scene, t_ray ray, float_t distance_t);
 t_lst	*get_closest_hit_light(t_scene *scene, t_ray ray);
 float_t	get_distance_t(t_lst *object, t_ray ray, t_hit_info *hit_info);
 t_color	get_color_hitpoint(t_scene *scene, t_lst *object, t_hit_info *hit_info);
+
+//cylinder.c
+int	split_parameter_cyl(char *line, char ***param);
+int	assign_parameter_cyl(char ***param, char ***orig, char ***axis, char ***color);
+t_cylinder	*create_cylinder(char **param, char **orig, char **axis, char **color);
+void	free_all_cyl(char **param, char **orig, char **axis, char **color);
 
 //colors_calc.c
 t_color	color_mult(t_color color, float_t factor);
@@ -138,6 +185,12 @@ t_color	diffuse_light_plane(t_scene *scene, t_plane *plane, t_hit_info *hit);
 t_color	diffuse_light_cyl(t_scene *scene, t_cylinder *cyl, t_hit_info *hit);
 
 //fill_scene.c
+int	fill_cam_light(t_scene *scene, t_lst *runner, t_resolution win, char *line);
+int	fill_obj(t_scene *scene, t_lst *runner, t_resolution win, char *line);
+int	fill_scene(t_scene *scene, t_lst_ref *scene_lines, t_resolution win);
+float_t	get_reflect_factor_from_str(char *str);
+
+
 
 //follow_ray.c
 t_color	follow_ray(t_scene *scene, t_ray ray);
@@ -152,9 +205,6 @@ void	*free_arr_null(char **arr);
 
 //ft_atof.c
 double	ft_atof(const char *str);
-
-//ft_function_tests.c
-//?
 
 //hooks_obj_actions.c
 void	object_rotate(int keysym, t_data *data);
@@ -215,6 +265,12 @@ float_t	get_light_angle_plane(t_vec3 hit_point, t_plane *plane, t_scene *scene);
 float_t	get_light_angle_cyl(t_hit_info *hit_info, t_cylinder *cyl, t_scene *scene);
 
 //light.c
+void	free_light(char **param, char **orig, char **color);
+char	**handle_orig_and_color_light(char **orig, char **param);
+int	fill_light_data(t_light *light, char **orig, char **param, char **color);
+t_light	*init_light(char *line);
+void	translate_light(t_light *light, t_vec3 vec);
+
 
 //linked_list1.c
 t_lst	*ft_lstlast(t_lst *lst);
@@ -240,7 +296,16 @@ t_vec3	rotate_y(t_vec3 vec, float_t angle);
 t_vec3	rotate_z(t_vec3 vec, float_t angle);
 t_mat3x3	get_rot_x(float_t angle);
 
+
+//planes_utils.c
+void	free_values_plane(char ***param, char ***point, char ***normal_vec, char ***color);
+int	split_parameter_plane(char *line, char ***param);
+void	add_plane_list(t_lst_ref *objects, t_plane *plane);
+
 //plane.c
+int	get_values_plane(char ***param, char ***point, char ***normal_vec, char ***color);
+int	assign_values_plane(t_plane *plane, char **point, char **normal_vec, char **color);
+int	add_plane(t_lst_ref *objects, char *line);
 
 //random.c
 float_t	random_float(void);
@@ -253,6 +318,9 @@ t_vec3	random_in_unit_sphere(void);
 t_pt3	ray_point_at(t_ray ray, float_t t);
 
 //read_file.c
+void wrapper_open(char *file, int *fd);
+void wrapper_close(int *fd);
+t_lst_ref	*read_file(char *file);
 
 //render_plane.c
 float_t	get_plane_distance_t(t_lst *object, t_ray ray);
@@ -281,7 +349,11 @@ t_color specular_light_cyl(t_scene *scene, t_cylinder *cyl, t_hit_info *hit_info
 t_color specular_light_sphere(t_scene *scene, t_sphere *sphere, t_hit_info *hit_info);
 
 //sphere.c
-int calc_distant_t(t_hit_calc *calc, t_hit_info *hit_info);
+int	split_param_sphere(char *line, char ***param, char ***orig, char ***color);
+t_sphere	*create_sphere(char **param, char **orig, char **color);
+int	add_sphere(t_lst_ref *objects, char *line);
+float_t	get_sphere_distance_t(t_lst *object, t_ray ray, t_hit_info *hit_info);
+int	calc_distant_t(t_hit_calc *calc, t_hit_info *hit_info);
 
 
 //validate_ambient_light.c

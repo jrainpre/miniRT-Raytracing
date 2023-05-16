@@ -27,7 +27,13 @@ HEADERS			:= $(addprefix ${HEADDIR}, ${HEADLIST})
 SRCSDIR			:= ./src/
 SRCSLIST		:= main.c \
 					ambient_light.c \
-					camera.c \
+					ambient_light_init.c \
+					camera_init.c \
+					camera_pan.c \
+					camera_rotate.c \
+					camera_tilt_dolly.c \
+					camera_translate_zoom.c \
+					camera_truck_pedestal.c \
 					closest_hit.c \
 					colors_clac.c \
 					colors.c \
@@ -40,7 +46,6 @@ SRCSLIST		:= main.c \
 					follow_ray.c \
 					free.c \
 					ft_atof.c \
-					function_tests.c \
 					hooks_obj_actions.c \
 					hooks_resize_obj1.c \
 					hooks_resize_obj2.c \
@@ -58,6 +63,7 @@ SRCSLIST		:= main.c \
 					math_helper.c \
 					matrix_operations.c \
 					matrix.c \
+					plane_utlis.c \
 					plane.c \
 					rays.c \
 					random.c \
@@ -161,7 +167,7 @@ fclean:			clean
 re:				fclean all
 
 test:			all
-				./${NAME} scenes/reflectiontest1.rt
+				./${NAME} scenes/reflectiontest5.rt
 
 val:			all
 				valgrind \

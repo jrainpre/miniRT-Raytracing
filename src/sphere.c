@@ -1,50 +1,66 @@
 #include "miniRT.h"
 
-int	add_sphere(t_lst_ref *objects, char *line)
+int	split_param_sphere(char *line, char ***param, char ***orig, char ***color)
+{
+	*param = ft_split(line, ' ');
+	if (*param == NULL)
+		return (-1);
+	*orig = ft_split((*param)[1], ',');
+	if (*orig == NULL)
+	{
+		*param = free_arr_null(*param);
+		return (-1);
+	}
+	*color = ft_split((*param)[3], ',');
+	if (*color == NULL)
+	{
+		*param = free_arr_null(*param);
+		*orig = free_arr_null(*orig);
+		return (-1);
+	}
+	return (0);
+}
+
+t_sphere	*create_sphere(char **param, char **orig, char **color)
 {
 	t_sphere	*sphere;
-	char		**parameters;
-	char		**orig;
-	char		**color;
 
-	parameters = ft_split(line, ' ');
-	if (parameters == NULL)
-		return (-1);
-	orig = ft_split(parameters[1], ',');
-	if (orig == NULL)
-	{
-		parameters = free_arr_null(parameters);
-		return (-1);
-	}
-	color = ft_split(parameters[3], ',');
-	if (color == NULL)
-	{
-		parameters = free_arr_null(parameters);
-		orig = free_arr_null(orig);
-		return (-1);
-	}
 	sphere = malloc_or_print_error(sizeof(t_sphere));
 	if (sphere == NULL)
-		return (-1);
+		return (NULL);
 	sphere->orig = get_vec_from_str_arr(orig);
-	sphere->radius = ft_atof(parameters[2]) / 2;
+	sphere->radius = ft_atof(param[2]) / 2;
 	sphere->color = get_color_from_str_arr(color);
-	sphere->reflect_factor = get_reflect_factor_from_str(parameters[4]);
+	sphere->reflect_factor = get_reflect_factor_from_str(param[4]);
 	if (!is_valid_color(sphere->color))
 	{
 		sphere = free_null(sphere);
-		parameters = free_arr_null(parameters);
+		param = free_arr_null(param);
 		orig = free_arr_null(orig);
 		color = free_arr_null(color);
-		return (-1);
+		return (NULL);
 	}
-	parameters = free_arr_null(parameters);
+	return (sphere);
+}
+
+int	add_sphere(t_lst_ref *objects, char *line)
+{
+	t_sphere	*sphere;
+	char		**param;
+	char		**orig;
+	char		**color;
+
+	if (split_param_sphere(line, &param, &orig, &color) == -1)
+		return (-1);
+	sphere = create_sphere(param, orig, color);
+	if (sphere == NULL)
+		return (-1);
+	param = free_arr_null(param);
 	orig = free_arr_null(orig);
 	color = free_arr_null(color);
 	ft_add_lst_last(ft_lstnew(sphere), objects);
 	ft_lstlast(objects->head)->type = SPHERE;
 	ft_lstlast(objects->head)->is_slected = 0;
-	print_object(sphere, SPHERE);
 	return (0);
 }
 

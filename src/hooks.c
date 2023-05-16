@@ -28,7 +28,6 @@ int	key_hook1(int keysym, t_data *data)
 	data->pixelcolors_int = 1;
 	ft_memset(data->pixelcolors, 0, data->win.width * data->win.height
 		* sizeof(t_color));
-	print_object(data->scene->cam, CAMERA);
 	return (0);
 }
 
