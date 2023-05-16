@@ -6,7 +6,7 @@
 /*   By: frafal <frafal@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:03:21 by frafal            #+#    #+#             */
-/*   Updated: 2023/05/16 13:03:22 by frafal           ###   ########.fr       */
+/*   Updated: 2023/05/16 13:17:19 by frafal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -298,9 +298,25 @@ t_c_state	camera_transition_9(t_c_state state, char c);
 t_c_state	camera_transition_10(t_c_state state, char c);
 t_c_state	camera_transition_11(t_c_state state, char c);
 t_c_state	camera_transition_12(t_c_state state, char c);
+t_cy_state	cylinder_transition(t_cy_state state, char c);
+t_cy_state	cylinder_transition_1(t_cy_state state, char c);
+t_cy_state	cylinder_transition_2(t_cy_state state, char c);
+t_cy_state	cylinder_transition_3(t_cy_state state, char c);
+t_cy_state	cylinder_transition_4(t_cy_state state, char c);
+t_cy_state	cylinder_transition_5(t_cy_state state, char c);
+t_cy_state	cylinder_transition_6(t_cy_state state, char c);
+t_cy_state	cylinder_transition_7(t_cy_state state, char c);
+t_cy_state	cylinder_transition_8(t_cy_state state, char c);
+t_cy_state	cylinder_transition_9(t_cy_state state, char c);
+t_cy_state	cylinder_transition_10(t_cy_state state, char c);
+t_cy_state	cylinder_transition_11(t_cy_state state, char c);
+t_cy_state	cylinder_transition_12(t_cy_state state, char c);
+t_cy_state	cylinder_transition_13(t_cy_state state, char c);
+t_cy_state	cylinder_transition_14(t_cy_state state, char c);
+t_cy_state	cylinder_transition_15(t_cy_state state, char c);
+t_cy_state	cylinder_transition_16(t_cy_state state, char c);
 t_s_state	sphere_transition(t_s_state state, char c);
 t_l_state	light_transition(t_l_state state, char c);
-t_cy_state	cylinder_transition(t_cy_state state, char c);
 t_p_state	plane_transition(t_p_state state, char c);
 t_l_state	light_transition(t_l_state state, char c);
 
