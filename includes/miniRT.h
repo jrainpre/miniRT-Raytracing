@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   miniRT.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frafal <frafal@student.42vienna.com>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/16 23:24:33 by frafal            #+#    #+#             */
+/*   Updated: 2023/05/16 23:34:29 by frafal           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINIRT_H
 # define MINIRT_H
 
@@ -67,8 +79,9 @@ typedef struct s_it
 }		t_it;
 /* Functions */
 
-
-
+//main.c
+int		check_errors(t_data *data, int argc, char **argv);
+int		init_and_fill_scene(t_data *data);
 
 float_t	find_top_cap_intersection(t_cylinder *cylinder, t_ray ray);
 float_t	find_bottom_cap_intersection(t_cylinder *cylinder, t_ray ray);
