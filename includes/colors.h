@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   colors.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frafal <frafal@student.42vienna.com>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/16 23:44:43 by frafal            #+#    #+#             */
+/*   Updated: 2023/05/16 23:46:57 by frafal           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef COLORS_H
 # define COLORS_H
 
@@ -18,10 +30,10 @@
 
 typedef struct s_color
 {
-	float_t r;
-	float_t g;
-	float_t b;
-	float_t a;
+	float_t	r;
+	float_t	g;
+	float_t	b;
+	float_t	a;
 }				t_color;
 
 #endif

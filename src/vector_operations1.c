@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vector_operations1.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frafal <frafal@student.42vienna.com>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/16 23:16:28 by frafal            #+#    #+#             */
+/*   Updated: 2023/05/16 23:18:20 by frafal           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "miniRT.h"
 
 t_vec3	vec_add(t_vec3 vec1, t_vec3 vec2)
@@ -35,10 +47,7 @@ t_vec3	vec_div(t_vec3 vec, float_t factor)
 	t_vec3	quotient;
 
 	if (factor == 0)
-	{
 		ft_putstr_fd("WARNING: Dividing By 0\n", STDERR_FILENO);
-		// Check here what we should really return (return ((t_vec3){0, 0, 0}));
-	}
 	quotient.x = vec.x / factor;
 	quotient.y = vec.y / factor;
 	quotient.z = vec.z / factor;

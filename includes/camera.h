@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   camera.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frafal <frafal@student.42vienna.com>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/16 23:44:37 by frafal            #+#    #+#             */
+/*   Updated: 2023/05/16 23:46:36 by frafal           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CAMERA_H
 # define CAMERA_H
 
@@ -11,7 +23,7 @@ C -50.0,0,20 0,0,1 70
 ∗ FOV : Horizontal field of view in degrees in range [0,180]: 70
 */
 
-#include "vector.h"
+# include "vector.h"
 
 typedef struct s_camera {
 	t_pt3	orig;

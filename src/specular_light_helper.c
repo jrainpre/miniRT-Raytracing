@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   specular_light_helper.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frafal <frafal@student.42vienna.com>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/16 23:16:10 by frafal            #+#    #+#             */
+/*   Updated: 2023/05/16 23:18:33 by frafal           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "miniRT.h"
 
 t_vec3	reflect_vec_sphere(t_vec3 hit_point, t_sphere *sphere, t_scene *scene)
@@ -44,7 +56,7 @@ t_vec3	reflect_vec_cyl(t_hit_info *hit_info, t_cylinder *cyl, t_scene *scene)
 int	check_in_shade(t_hit_info *hit, t_scene *scene)
 {
 	t_ray	ray;
-	
+
 	if (hit->is_inside_hit == 1)
 		return (0);
 	ray.dir = unit_vec3(vec_sub(scene->light->orig, hit->hitpoint));

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   deterministic_finite_automaton.h                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frafal <frafal@student.42vienna.com>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/16 13:03:21 by frafal            #+#    #+#             */
+/*   Updated: 2023/05/16 23:10:23 by frafal           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef DETERMINISTIC_FINITE_AUTOMATON_H
 # define DETERMINISTIC_FINITE_AUTOMATON_H
 
@@ -260,7 +272,22 @@ typedef enum e_cy_state
 	CY_REJECT
 }	t_cy_state;
 
+typedef struct s_item_numbers
+{
+	int	cameras;
+	int	lights;
+	int	ambient_lights;
+	int	objects;
+}	t_item_numbers;
+
 int			is_valid_scene(t_lst_ref *scene_lines);
+int			is_valid_line(char *line, t_lst *runner,
+				t_line_state state, t_item_numbers *items);
+int			is_valid_line_1(char *line, t_lst *runner,
+				t_line_state state, t_item_numbers *items);
+int			is_valid_line_2(char *line, t_lst *runner,
+				t_line_state state, t_item_numbers *items);
+int			valid_number_of_items(t_item_numbers items);
 int			is_valid_ambient_light(char *line);
 int			is_valid_camera(char *line);
 int			is_valid_cylinder(char *line);
@@ -269,10 +296,76 @@ int			is_valid_plane(char *line);
 int			is_valid_sphere(char *line);
 int			is_valid_light(char *line);
 t_a_state	ambient_light_transition(t_a_state state, char c);
-t_s_state	sphere_transition(t_s_state state, char c);
-t_l_state	light_transition(t_l_state state, char c);
+t_a_state	ambient_light_transition_1(t_a_state state, char c);
+t_a_state	ambient_light_transition_2(t_a_state state, char c);
+t_a_state	ambient_light_transition_3(t_a_state state, char c);
+t_a_state	ambient_light_transition_4(t_a_state state, char c);
+t_c_state	camera_transition(t_c_state state, char c);
+t_c_state	camera_transition_1(t_c_state state, char c);
+t_c_state	camera_transition_2(t_c_state state, char c);
+t_c_state	camera_transition_3(t_c_state state, char c);
+t_c_state	camera_transition_4(t_c_state state, char c);
+t_c_state	camera_transition_5(t_c_state state, char c);
+t_c_state	camera_transition_6(t_c_state state, char c);
+t_c_state	camera_transition_7(t_c_state state, char c);
+t_c_state	camera_transition_8(t_c_state state, char c);
+t_c_state	camera_transition_9(t_c_state state, char c);
+t_c_state	camera_transition_10(t_c_state state, char c);
+t_c_state	camera_transition_11(t_c_state state, char c);
+t_c_state	camera_transition_12(t_c_state state, char c);
 t_cy_state	cylinder_transition(t_cy_state state, char c);
-t_p_state	plane_transition(t_p_state state, char c);
+t_cy_state	cylinder_transition_1(t_cy_state state, char c);
+t_cy_state	cylinder_transition_2(t_cy_state state, char c);
+t_cy_state	cylinder_transition_3(t_cy_state state, char c);
+t_cy_state	cylinder_transition_4(t_cy_state state, char c);
+t_cy_state	cylinder_transition_5(t_cy_state state, char c);
+t_cy_state	cylinder_transition_6(t_cy_state state, char c);
+t_cy_state	cylinder_transition_7(t_cy_state state, char c);
+t_cy_state	cylinder_transition_8(t_cy_state state, char c);
+t_cy_state	cylinder_transition_9(t_cy_state state, char c);
+t_cy_state	cylinder_transition_10(t_cy_state state, char c);
+t_cy_state	cylinder_transition_11(t_cy_state state, char c);
+t_cy_state	cylinder_transition_12(t_cy_state state, char c);
+t_cy_state	cylinder_transition_13(t_cy_state state, char c);
+t_cy_state	cylinder_transition_14(t_cy_state state, char c);
+t_cy_state	cylinder_transition_15(t_cy_state state, char c);
+t_cy_state	cylinder_transition_16(t_cy_state state, char c);
 t_l_state	light_transition(t_l_state state, char c);
+t_l_state	light_transition_1(t_l_state state, char c);
+t_l_state	light_transition_2(t_l_state state, char c);
+t_l_state	light_transition_3(t_l_state state, char c);
+t_l_state	light_transition_4(t_l_state state, char c);
+t_l_state	light_transition_5(t_l_state state, char c);
+t_l_state	light_transition_6(t_l_state state, char c);
+t_l_state	light_transition_7(t_l_state state, char c);
+t_l_state	light_transition_8(t_l_state state, char c);
+t_l_state	light_transition_9(t_l_state state, char c);
+t_p_state	plane_transition(t_p_state state, char c);
+t_p_state	plane_transition_1(t_p_state state, char c);
+t_p_state	plane_transition_2(t_p_state state, char c);
+t_p_state	plane_transition_3(t_p_state state, char c);
+t_p_state	plane_transition_4(t_p_state state, char c);
+t_p_state	plane_transition_5(t_p_state state, char c);
+t_p_state	plane_transition_6(t_p_state state, char c);
+t_p_state	plane_transition_7(t_p_state state, char c);
+t_p_state	plane_transition_8(t_p_state state, char c);
+t_p_state	plane_transition_9(t_p_state state, char c);
+t_p_state	plane_transition_10(t_p_state state, char c);
+t_p_state	plane_transition_11(t_p_state state, char c);
+t_p_state	plane_transition_12(t_p_state state, char c);
+t_p_state	plane_transition_13(t_p_state state, char c);
+t_p_state	plane_transition_14(t_p_state state, char c);
+t_s_state	sphere_transition(t_s_state state, char c);
+t_s_state	sphere_transition_1(t_s_state state, char c);
+t_s_state	sphere_transition_2(t_s_state state, char c);
+t_s_state	sphere_transition_3(t_s_state state, char c);
+t_s_state	sphere_transition_4(t_s_state state, char c);
+t_s_state	sphere_transition_5(t_s_state state, char c);
+t_s_state	sphere_transition_6(t_s_state state, char c);
+t_s_state	sphere_transition_7(t_s_state state, char c);
+t_s_state	sphere_transition_8(t_s_state state, char c);
+t_s_state	sphere_transition_9(t_s_state state, char c);
+t_s_state	sphere_transition_10(t_s_state state, char c);
+t_s_state	sphere_transition_11(t_s_state state, char c);
 
 #endif

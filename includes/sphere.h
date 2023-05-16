@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sphere.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frafal <frafal@student.42vienna.com>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/16 23:45:46 by frafal            #+#    #+#             */
+/*   Updated: 2023/05/16 23:48:45 by frafal           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SPHERE_H
 # define SPHERE_H
 
@@ -17,18 +29,18 @@
 # include "image.h"
 
 typedef struct s_sphere {
-	t_pt3 orig;
-	float_t radius;
-	t_color color;
-	float_t reflect_factor;
-} t_sphere;
+	t_pt3	orig;
+	float_t	radius;
+	t_color	color;
+	float_t	reflect_factor;
+}			t_sphere;
 
 typedef struct s_hit_calc {
-	float_t a;
-	float_t b;
-	float_t c;
-	float_t discriminant;
-	float_t distance_t;
-} t_hit_calc;
+	float_t	a;
+	float_t	b;
+	float_t	c;
+	float_t	discriminant;
+	float_t	distance_t;
+}			t_hit_calc;
 
 #endif
