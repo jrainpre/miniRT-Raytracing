@@ -10,7 +10,8 @@ typedef enum e_object_type
 	PLANE,
 	CAMERA,
 	LIGHT,
-	AMBIENT_LIGHT
+	AMBIENT_LIGHT,
+	NOT_VALID
 }	t_object_type;
 typedef struct s_lst
 {

@@ -47,6 +47,7 @@ int	is_valid_scene(t_lst_ref *scene_lines)
 	while (runner)
 	{
 		line = (char *)runner->content;
+		runner->type = NOT_VALID;
 		state = LINE_START;
 		while (*line)
 		{
