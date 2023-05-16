@@ -42,6 +42,9 @@ SRCSLIST		:= main.c \
 					cylinder_normal.c \
 					data.c \
 					dfa_ambient_light.c \
+					dfa_camera1.c \
+					dfa_camera2.c \
+					dfa_camera3.c \
 					diffuse_light.c \
 					fill_scene.c \
 					follow_ray.c \

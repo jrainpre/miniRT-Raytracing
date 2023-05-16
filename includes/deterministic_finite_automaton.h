@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   deterministic_finite_automaton.h                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frafal <frafal@student.42vienna.com>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/16 13:03:21 by frafal            #+#    #+#             */
+/*   Updated: 2023/05/16 13:03:22 by frafal           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef DETERMINISTIC_FINITE_AUTOMATON_H
 # define DETERMINISTIC_FINITE_AUTOMATON_H
 
@@ -273,6 +285,19 @@ t_a_state	ambient_light_transition_1(t_a_state state, char c);
 t_a_state	ambient_light_transition_2(t_a_state state, char c);
 t_a_state	ambient_light_transition_3(t_a_state state, char c);
 t_a_state	ambient_light_transition_4(t_a_state state, char c);
+t_c_state	camera_transition(t_c_state state, char c);
+t_c_state	camera_transition_1(t_c_state state, char c);
+t_c_state	camera_transition_2(t_c_state state, char c);
+t_c_state	camera_transition_3(t_c_state state, char c);
+t_c_state	camera_transition_4(t_c_state state, char c);
+t_c_state	camera_transition_5(t_c_state state, char c);
+t_c_state	camera_transition_6(t_c_state state, char c);
+t_c_state	camera_transition_7(t_c_state state, char c);
+t_c_state	camera_transition_8(t_c_state state, char c);
+t_c_state	camera_transition_9(t_c_state state, char c);
+t_c_state	camera_transition_10(t_c_state state, char c);
+t_c_state	camera_transition_11(t_c_state state, char c);
+t_c_state	camera_transition_12(t_c_state state, char c);
 t_s_state	sphere_transition(t_s_state state, char c);
 t_l_state	light_transition(t_l_state state, char c);
 t_cy_state	cylinder_transition(t_cy_state state, char c);
