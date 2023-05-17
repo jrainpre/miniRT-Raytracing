@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   closest_hit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frafal <frafal@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: frafal <frafal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 23:12:51 by frafal            #+#    #+#             */
-/*   Updated: 2023/05/16 23:12:52 by frafal           ###   ########.fr       */
+/*   Updated: 2023/05/17 10:22:00 by frafal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ float_t	get_distance_t(t_lst *object, t_ray ray, t_hit_info *hit_info)
 	t_cylinder		*cylinder;
 
 	type = object->type;
+	hit_info->is_inside_hit = 0;
 	if (type == SPHERE)
 		return (get_sphere_distance_t(object, ray, hit_info));
 	else if (type == PLANE)
