@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frafal <frafal@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: frafal <frafal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 23:13:16 by frafal            #+#    #+#             */
-/*   Updated: 2023/05/16 23:13:17 by frafal           ###   ########.fr       */
+/*   Updated: 2023/05/17 10:03:16 by frafal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_data	*init_data(void)
 	data->scene_lines = NULL;
 	data->img = NULL;
 	data->win = (t_resolution){720, 720};
+	data->slected_obj = NULL;
 	return (data);
 }
 
