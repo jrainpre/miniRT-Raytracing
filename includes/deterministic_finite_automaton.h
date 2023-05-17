@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   deterministic_finite_automaton.h                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frafal <frafal@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: frafal <frafal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:03:21 by frafal            #+#    #+#             */
-/*   Updated: 2023/05/16 23:10:23 by frafal           ###   ########.fr       */
+/*   Updated: 2023/05/17 10:11:04 by frafal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -295,6 +295,8 @@ int			is_valid_light(char *line);
 int			is_valid_plane(char *line);
 int			is_valid_sphere(char *line);
 int			is_valid_light(char *line);
+int			is_valid_ratio(float_t ratio);
+int			is_valid_color(t_color color);
 t_a_state	ambient_light_transition(t_a_state state, char c);
 t_a_state	ambient_light_transition_1(t_a_state state, char c);
 t_a_state	ambient_light_transition_2(t_a_state state, char c);

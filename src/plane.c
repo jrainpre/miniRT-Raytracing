@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frafal <frafal@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: frafal <frafal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 23:15:18 by frafal            #+#    #+#             */
-/*   Updated: 2023/05/16 23:15:19 by frafal           ###   ########.fr       */
+/*   Updated: 2023/05/17 09:56:23 by frafal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ int	add_plane(t_lst_ref *objects, char *line)
 		free_values_plane(&param, &point, &normal_vec, &color);
 		return (-1);
 	}
-	free_values_plane(&param, &point, &normal_vec, &color);
 	plane->reflect_factor = get_reflect_factor_from_str(param[4]);
+	free_values_plane(&param, &point, &normal_vec, &color);
 	add_plane_list(objects, plane);
 	return (0);
 }
