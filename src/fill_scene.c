@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frafal <frafal@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: jrainpre <jrainpre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 23:13:40 by frafal            #+#    #+#             */
-/*   Updated: 2023/05/16 23:13:41 by frafal           ###   ########.fr       */
+/*   Updated: 2023/05/17 13:49:13 by jrainpre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	fill_cam_light(t_scene *scene, t_lst *runner, t_resolution win, char *line)
 
 int	fill_obj(t_scene *scene, t_lst *runner, t_resolution win, char *line)
 {
+	(void)win;
 	if (runner->type == SPHERE)
 	{
 		if (add_sphere(scene->objects, line) == -1)

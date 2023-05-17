@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   specular_light_helper.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frafal <frafal@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: jrainpre <jrainpre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 23:16:10 by frafal            #+#    #+#             */
-/*   Updated: 2023/05/16 23:18:33 by frafal           ###   ########.fr       */
+/*   Updated: 2023/05/17 13:49:55 by jrainpre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ t_vec3	reflect_vec_cyl(t_hit_info *hit_info, t_cylinder *cyl, t_scene *scene)
 	t_vec3	to_light;
 	t_vec3	reflect;
 
+	(void)cyl;
 	to_light = unit_vec3(vec_sub(scene->light->orig, hit_info->hitpoint));
 	reflect = vec_sub(vec_mult(hit_info->normal, 2
 				* scalar_prod(hit_info->normal, to_light)), to_light);
