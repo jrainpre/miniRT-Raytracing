@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light_angle_obj.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frafal <frafal@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: jrainpre <jrainpre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 23:14:33 by frafal            #+#    #+#             */
-/*   Updated: 2023/05/16 23:14:35 by frafal           ###   ########.fr       */
+/*   Updated: 2023/05/17 13:49:36 by jrainpre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ float_t	get_light_angle_cyl(t_hit_info *hit_info, t_cylinder *cyl, \
 	t_vec3	unit_light;
 	float_t	angle;
 
+	(void)cyl;
 	unit_light = unit_vec3(scene->light->orig);
 	angle = scalar_prod(hit_info->normal, unit_light);
 	angle = fmax(angle, 0.0f);

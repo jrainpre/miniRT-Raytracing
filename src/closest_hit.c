@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   closest_hit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frafal <frafal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jrainpre <jrainpre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 23:12:51 by frafal            #+#    #+#             */
-/*   Updated: 2023/05/17 10:22:00 by frafal           ###   ########.fr       */
+/*   Updated: 2023/05/17 13:48:44 by jrainpre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	get_closest_hit(t_scene *scene, t_ray ray, t_hit_info *hit_info)
 {
 	t_lst		*list;
-	t_lst		*closest_hit;
 	float_t		closest_t;
 	float_t		distance_t;
 
@@ -38,7 +37,6 @@ void	get_closest_hit(t_scene *scene, t_ray ray, t_hit_info *hit_info)
 
 int	is_in_fornt_of_light(t_scene *scene, t_ray ray, float_t distance_t)
 {
-	t_vec3	hit_to_light;
 	t_vec3	light_direction;
 	float_t	dist_obj_light;
 
@@ -104,7 +102,7 @@ t_color	get_color_hitpoint(t_scene *scene, t_lst *object, t_hit_info *hit_info)
 	t_color	result;
 
 	if (object->is_slected)
-		return ((t_color){1.0f, 0.0f, 0.0f});
+		return ((t_color){1.0f, 0.0f, 0.0f, 1.0f});
 	ambient = ambient_light_obj(scene, object);
 	diffuse = diffuse_light_obj(scene, object, hit_info);
 	specular = specular_light_obj(scene, object, hit_info);

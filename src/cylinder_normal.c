@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder_normal.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frafal <frafal@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: jrainpre <jrainpre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 23:13:08 by frafal            #+#    #+#             */
-/*   Updated: 2023/05/16 23:13:09 by frafal           ###   ########.fr       */
+/*   Updated: 2023/05/17 13:48:58 by jrainpre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	normal_cyl_proj(t_hit_info *hit_info, t_cylinder *cylinder)
 {
 	float_t	projection;
 	t_vec3	projected_point;
-	t_lst	object;
 	float_t	distance_t;
 	t_vec3	temp;
 

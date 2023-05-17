@@ -2,7 +2,7 @@ NAME			:= miniRT
 NAMEBONUS		:= miniRT_bonus
 CC				:= cc
 RM		    	:= rm -f
-FLAGS			:= 
+FLAGS			:= -Wall -Wextra -Werror
 DEBUG			:= -g
 
 HEADDIR			:= ./includes/
