@@ -184,7 +184,7 @@ fclean:			clean
 re:				fclean all
 
 test:			all
-				./${NAME} scenes/reflectiontest5.rt
+				./${NAME} scenes/mult_objects.rt 
 
 val:			all
 				valgrind \
