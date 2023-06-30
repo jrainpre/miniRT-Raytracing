@@ -6,7 +6,7 @@
 /*   By: frafal <frafal@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 23:16:00 by frafal            #+#    #+#             */
-/*   Updated: 2023/05/16 23:16:02 by frafal           ###   ########.fr       */
+/*   Updated: 2023/06/30 09:47:57 by frafal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,9 @@ void	render_scene(t_data *data)
 {
 	t_ray		ray;
 	t_it		it;
-	t_lst		*runner;
 	t_color		act_color;
 	int			color;
 
-	runner = data->scene->objects->head;
 	it.j = 0;
 	while (it.j < data->win.height)
 	{
