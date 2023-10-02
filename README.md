@@ -14,7 +14,7 @@
 
 <ul>
     <li><strong>Customizable Scenes</strong>: Create scenes from scratch or modify existing ones.</li>
-    <li><strong>Input validation for with DFA </strong>: eterministic Finite Automaton used for validating the user input.</li>
+    <li><strong>Input validation for with DFA </strong>: Deterministic Finite Automaton used for validating the user input.</li>
   </ul>
 
 ## 🎥 Render Engine
