@@ -1,6 +1,6 @@
 <div align='center'>
 
-<h1>miniRT - Ray Tracing Engin</h1>
+<h1>miniRT - Ray Tracing Engine</h1>
 <p>Welcome to the repository for miniRT. Dive deep into the world of computer graphics and explore the intricacies of ray tracing with this project.</p>
 
 <h4> <span> </span> <a href="https://github.com/jrainpre/miniRT/issues"> Report Bug </a> <span> · </span> <a href="https://github.com/jrainpre/miniRT/issues"> Request Feature </a> </h4>
