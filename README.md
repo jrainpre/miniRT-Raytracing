@@ -36,7 +36,7 @@
 
 
 ### :bangbang: Prerequisites
-- Only run on linux machines because of the mlx graphics libary
+- Only runs on Linux machines because of the mlx graphics libary
 
 
 ### :gear: Usage
@@ -56,8 +56,8 @@ execution
 
   <ul>
     <li>
-      <img src="https://github.com/francisrafal.png?size=50" width="50" height="50" alt="JakobKlocker's avatar">
-      <a href="https://github.com/francisrafal">JakobKlocker</a>
+      <img src="https://github.com/francisrafal.png?size=50" width="50" height="50" alt="francisrafal's avatar">
+      <a href="https://github.com/francisrafal">francisrafal</a>
     </li>
     <li>
       <img src="https://github.com/jrainpre.png?size=50" width="50" height="50" alt="jrainpre's avatar">
